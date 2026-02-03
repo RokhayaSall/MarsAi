@@ -8,14 +8,15 @@ export default {
             },
 
             colors: {
-                blue: '#246BAD',
+                'blue-coton': '#246BAD',
                 white: '#ffffff',
                 coral: '#ff5845',
                 'old-black': '#282828',
                 'white-gray': '#f2f3f5',
                 'navy-blue': '#0e172a',
-                gray: '#64748b',
+                'gray': '#64748b',
             },
         },
-    }
+    },
+    plugins: [],
 };
