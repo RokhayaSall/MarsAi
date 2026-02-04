@@ -2,10 +2,12 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { login, register } from "../services/authService"
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true)
+  const [showPassword, setShowPassword] = useState(false)
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -75,15 +77,29 @@ export default function Auth() {
           <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
             Mot de passe
           </label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            className="w-full p-3 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            required
-          />
+
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full p-3 pr-12 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+              autoComplete={isLogin ? "current-password" : "new-password"}
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+              aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+            >
+              {showPassword ? <FaEye className="text-gray-500" /> : <FaEyeSlash className="text-gray-500" />}
+            </button>
+          </div>
         </div>
+
 
         {!isLogin && (
           <>
