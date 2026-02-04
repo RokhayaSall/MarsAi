@@ -4,7 +4,7 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
 import FormDirector from './pages/FormDirector';
- import Auth from './pages/Auth';
+import Auth from './pages/Auth';
 // import Registration from './pages/Register';
 // import Login from './pages/Login';
 
@@ -19,7 +19,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/gallery" element={<Movies />} />
           <Route path="/form-director" element={<FormDirector />} />
-           <Route path='/auth' element={<Auth/>} />
+          <Route path="/auth" element={<Auth />} />
 
           {/* <Route path='/registration' element={<Registration/>} />
       <Route path='/login' element={<Login/>} /> */}
