@@ -52,13 +52,13 @@ export default function Auth() {
   }
 
   return (
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+  <div className="min-h-screen flex items-center justify-center m-10 md:m-15 md:mb-30">
     <div className="w-full max-w-md bg-gray-50 p-8 rounded shadow-sm border">
       <h2 className="text-2xl font-semibold text-center mb-6 uppercase tracking-wide">
         {isLogin ? "Connexion" : "Inscription"}
       </h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
         <div className="mb-5">
           <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
             Adresse e-mail
