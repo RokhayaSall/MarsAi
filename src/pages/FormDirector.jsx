@@ -1,18 +1,12 @@
 import { useState } from 'react';
-import {
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-  FaEnvelope,
-  FaUser,
-  FaMapMarkerAlt,
-  FaGlobe,
-  FaPhone,
-  FaBriefcase,
-} from 'react-icons/fa';
+import { useNavigate } from "react-router-dom";
+import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { WiStars } from "react-icons/wi";
 
-export default function Formulaire() {
+
+export default function FormDirector() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -30,26 +24,12 @@ export default function Formulaire() {
     twitter: '',
     linkedin: '',
     instagram: '',
-    collaborateurRole: '',
-    collaborateurNom: '',
   });
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
 
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log({ formData, collaborateurs });
-    alert('Formulaire envoyé !');
-  };
-
-  const ajouterCollaborateur = () =>
-    setCollaborateurs([...collaborateurs, { nom: '', role: '' }]);
-
-  const supprimerCollaborateur = () =>
-    setCollaborateurs(collaborateurs.slice(0, -1));
 
   const handleChangeCollaborateur = (index, e) => {
     const { name, value } = e.target;
@@ -58,334 +38,156 @@ export default function Formulaire() {
     setCollaborateurs(newCollabs);
   };
 
+  const ajouterCollaborateur = () =>
+    setCollaborateurs([...collaborateurs, { nom: '', role: '' }]);
+
+  const supprimerCollaborateur = () =>
+    setCollaborateurs(collaborateurs.slice(0, -1));
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch('http://localhost:3001/api/form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ formData, collaborateurs })
+      });
+
+      const data = await res.json();
+      console.log(data);
+      alert('Formulaire envoyé ! 🚀');
+    } catch (err) {
+      console.error(err);
+      alert('Erreur lors de l’envoi du formulaire');
+    }
+  };
+
+  const inputClass =
+    "w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase";
+  const labelClass = "text-sm font-bold tracking-wider text-slate-700 uppercase";
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-md space-y-6"
-    >
-      <h2 className="text-4xl font-bold text-gray-800 text-center">
-        Formulaire réalisateur
-      </h2>
+    <div className="min-h-screen bg-slate-100 py-12 px-4">
+      <div className="max-w-4xl mx-auto mb-8 text-center">
+        <WiStars className="w-20 h-20 text-red-400 mx-auto" />
+        <h2 className="text-3xl text-red-500 mt-5">Appel à projets 2026</h2>
+        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">Formulaire du réalisateur</h1>
+        <h3 className="text-xl text-slate-500 mt-2">Veuillez remplir les informations ci-dessous.</h3>
+      </div>
 
-      <section className="space-y-4">
-        <fieldset className="relative">
-          <FaUser className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400 text-2xl" />
-          <label
-            htmlFor="nom"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Nom
-          </label>
-          <input
-            id="nom"
-            type="text"
-            name="nom"
-            value={formData.nom}
-            onChange={handleChange}
-            placeholder="Nom"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </fieldset>
-
-        <fieldset className="relative">
-          <FaUser className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400 text-2xl" />
-          <label
-            htmlFor="prenom"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Prénom
-          </label>
-          <input
-            id="prenom"
-            type="text"
-            name="prenom"
-            value={formData.prenom}
-            onChange={handleChange}
-            placeholder="Prénom"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </fieldset>
-
-        <fieldset className="relative">
-          <FaEnvelope className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400 text-2xl" />
-          <label
-            htmlFor="email"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </fieldset>
-
-        <fieldset>
-          <label
-            htmlFor="genre"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Genre
-          </label>
-          <select
-            id="genre"
-            name="genre"
-            value={formData.genre}
-            onChange={handleChange}
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Sélectionner le genre</option>
-            <option value="homme">Homme</option>
-            <option value="femme">Femme</option>
-            <option value="autre">Autre</option>
-          </select>
-        </fieldset>
-      </section>
-
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <fieldset className="relative">
-          <FaMapMarkerAlt className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400 text-2xl" />
-          <label
-            htmlFor="cp"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Code postal
-          </label>
-          <input
-            id="cp"
-            type="text"
-            name="cp"
-            value={formData.cp}
-            onChange={handleChange}
-            placeholder="Code postal"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3"
-          />
-        </fieldset>
-
-        <fieldset className="relative">
-          <FaMapMarkerAlt className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400 text-2xl" />
-          <label
-            htmlFor="ville"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Ville
-          </label>
-          <input
-            id="ville"
-            type="text"
-            name="ville"
-            value={formData.ville}
-            onChange={handleChange}
-            placeholder="Ville"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3"
-          />
-        </fieldset>
-      </section>
-
-      <section>
-        <fieldset>
-          <label
-            htmlFor="biographie"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Biographie
-          </label>
-          <textarea
-            id="biographie"
-            name="biographie"
-            value={formData.biographie}
-            onChange={handleChange}
-            placeholder="Biographie"
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 h-24"
-          />
-        </fieldset>
-      </section>
-
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <fieldset>
-          <label
-            htmlFor="region"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Région
-          </label>
-          <input
-            id="region"
-            type="text"
-            name="region"
-            value={formData.region}
-            onChange={handleChange}
-            placeholder="Région"
-            className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2"
-          />
-        </fieldset>
-
-        <fieldset className="relative">
-          <FaGlobe className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400  text-2xl" />
-          <label
-            htmlFor="pays"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Pays
-          </label>
-          <input
-            id="pays"
-            type="text"
-            name="pays"
-            value={formData.pays}
-            onChange={handleChange}
-            placeholder="Pays"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3"
-          />
-        </fieldset>
-      </section>
-
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <fieldset className="relative">
-          <FaPhone className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400 text-2xl" />
-          <label
-            htmlFor="telephone"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Téléphone
-          </label>
-          <input
-            id="telephone"
-            type="tel"
-            name="telephone"
-            value={formData.telephone}
-            onChange={handleChange}
-            placeholder="Téléphone"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3"
-          />
-        </fieldset>
-
-        <fieldset className="relative">
-          <FaBriefcase className="absolute left-3 bottom-0 -translate-y-1/2 text-gray-400  text-2xl " />
-          <label
-            htmlFor="metier"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Métier actuel
-          </label>
-          <input
-            id="metier"
-            type="text"
-            name="metier"
-            value={formData.metier}
-            onChange={handleChange}
-            placeholder="Métier actuel"
-            className="mt-1 w-full pl-10 rounded-lg border border-gray-300 py-2 px-3"
-          />
-        </fieldset>
-      </section>
-
-      <section>
-        <h3 className="text-lg font-semibold text-gray-800">Réseaux sociaux</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-          <fieldset className="relative">
-            <FaFacebook className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600  text-2xl" />
-            <input
-              type="url"
-              name="facebook"
-              placeholder="Facebook"
-              value={formData.facebook}
-              onChange={handleChange}
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+      <form onSubmit={handleSubmit} className="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-md space-y-6">
+        
+        <section className="space-y-4">
+          <fieldset>
+            <label htmlFor="nom" className={labelClass}>Nom</label>
+            <input id="nom" name="nom" type="text" value={formData.nom} onChange={handleChange} className={inputClass} />
           </fieldset>
-
-          <fieldset className="relative">
-            <FaTwitter className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400  text-2xl" />
-            <input
-              type="url"
-              name="twitter"
-              placeholder="Twitter"
-              value={formData.twitter}
-              onChange={handleChange}
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <fieldset>
+            <label htmlFor="prenom" className={labelClass}>Prénom</label>
+            <input id="prenom" name="prenom" type="text" value={formData.prenom} onChange={handleChange} className={inputClass} />
           </fieldset>
-
-          <fieldset className="relative">
-            <FaLinkedin className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-700 text-2xl" />
-            <input
-              type="url"
-              name="linkedin"
-              placeholder="LinkedIn"
-              value={formData.linkedin}
-              onChange={handleChange}
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+          <fieldset>
+            <label htmlFor="email" className={labelClass}>Email</label>
+            <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} className={inputClass} />
           </fieldset>
-
-          <fieldset className="relative">
-            <FaInstagram className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500  text-2xl" />
-            <input
-              type="url"
-              name="instagram"
-              placeholder="Instagram"
-              value={formData.instagram}
-              onChange={handleChange}
-              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400"
-            />
+          <fieldset>
+            <label htmlFor="genre" className={labelClass}>Genre</label>
+            <select id="genre" name="genre" value={formData.genre} onChange={handleChange} className={inputClass}>
+              <option value="">Sélectionner le genre</option>
+              <option value="homme">Homme</option>
+              <option value="femme">Femme</option>
+              <option value="autre">Autre</option>
+            </select>
           </fieldset>
-        </div>
-      </section>
+        </section>
 
-      <section>
-        <h3 className="text-lg font-semibold text-gray-800">Collaborateurs</h3>
-        {collaborateurs.map((collab, index) => (
-          <fieldset key={index} className="flex gap-4 mb-2">
-            <input
-              type="text"
-              name="nom"
-              value={collab.nom}
-              onChange={e => handleChangeCollaborateur(index, e)}
-              placeholder="Nom"
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
-            />
-            <input
-              type="text"
-              name="role"
-              value={collab.role}
-              onChange={e => handleChangeCollaborateur(index, e)}
-              placeholder="Rôle"
-              className="flex-1 border border-gray-300 rounded-lg px-3 py-2"
-            />
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <fieldset>
+            <label htmlFor="cp" className={labelClass}>Code postal</label>
+            <input id="cp" name="cp" type="text" value={formData.cp} onChange={handleChange} className={inputClass} />
           </fieldset>
-        ))}
-        <div className="flex gap-4">
-          <button
-            type="button"
-            onClick={ajouterCollaborateur}
-            className="mt-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-blue-700 transition"
-          >
-            + Ajouter un collaborateur
-          </button>
-          <button
-            type="button"
-            onClick={supprimerCollaborateur}
-            className="mt-2 px-4 py-2 bg-red-400 text-white rounded-lg"
-          >
-            Suppiimer un collaborateur
+          <fieldset>
+            <label htmlFor="ville" className={labelClass}>Ville</label>
+            <input id="ville" name="ville" type="text" value={formData.ville} onChange={handleChange} className={inputClass} />
+          </fieldset>
+        </section>
+
+        <section>
+          <fieldset>
+            <label htmlFor="biographie" className={labelClass}>Biographie</label>
+            <textarea id="biographie" name="biographie" value={formData.biographie} onChange={handleChange} className={`${inputClass} h-24 resize-none`} />
+          </fieldset>
+        </section>
+
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <fieldset>
+            <label htmlFor="region" className={labelClass}>Région</label>
+            <input id="region" name="region" type="text" value={formData.region} onChange={handleChange} className={inputClass} />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="pays" className={labelClass}>Pays</label>
+            <input id="pays" name="pays" type="text" value={formData.pays} onChange={handleChange} className={inputClass} />
+          </fieldset>
+        </section>
+
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <fieldset>
+            <label htmlFor="telephone" className={labelClass}>Téléphone</label>
+            <input id="telephone" name="telephone" type="tel" value={formData.telephone} onChange={handleChange} className={inputClass} />
+          </fieldset>
+          <fieldset>
+            <label htmlFor="metier" className={labelClass}>Métier actuel</label>
+            <input id="metier" name="metier" type="text" value={formData.metier} onChange={handleChange} className={inputClass} />
+          </fieldset>
+        </section>
+
+        <section>
+          <h3 className="text-lg font-semibold text-gray-800">Réseaux sociaux</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <fieldset className="relative">
+              <FaFacebook className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600 text-2xl" />
+              <input type="url" name="facebook" value={formData.facebook} onChange={handleChange} placeholder="Facebook" className={`${inputClass} pl-10`} />
+            </fieldset>
+            <fieldset className="relative">
+              <FaTwitter className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl" />
+              <input type="url" name="twitter" value={formData.twitter} onChange={handleChange} placeholder="Twitter" className={`${inputClass} pl-10`} />
+            </fieldset>
+            <fieldset className="relative">
+              <FaLinkedin className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-700 text-2xl" />
+              <input type="url" name="linkedin" value={formData.linkedin} onChange={handleChange} placeholder="LinkedIn" className={`${inputClass} pl-10`} />
+            </fieldset>
+            <fieldset className="relative">
+              <FaInstagram className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-2xl" />
+              <input type="url" name="instagram" value={formData.instagram} onChange={handleChange} placeholder="Instagram" className={`${inputClass} pl-10`} />
+            </fieldset>
+          </div>
+        </section>
+
+        <section>
+          <h3 className="text-lg font-semibold text-gray-800">Collaborateurs</h3>
+          {collaborateurs.map((c, i) => (
+            <div key={i} className="flex gap-4 mb-2">
+              <input name="nom" value={c.nom} onChange={e => handleChangeCollaborateur(i, e)} placeholder="Nom" className={inputClass} />
+              <input name="role" value={c.role} onChange={e => handleChangeCollaborateur(i, e)} placeholder="Rôle" className={inputClass} />
+            </div>
+          ))}
+          <div className="flex gap-4">
+            <button type="button" onClick={ajouterCollaborateur} className="mt-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-blue-700 transition">+ Ajouter un collaborateur</button>
+            <button type="button" onClick={supprimerCollaborateur} className="mt-2 px-4 py-2 bg-red-400 text-white rounded-lg">Supprimer un collaborateur</button>
+          </div>
+        </section>
+
+        <section>
+          <button type="submit" className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">Envoyer</button>
+        </section>
+
+        <div className="flex justify-end mt-6">
+          <button type="button" onClick={() => navigate("/submitMovie")} className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition-colors shadow-lg">
+            Étape suivante
           </button>
         </div>
-      </section>
-
-      <section>
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-        >
-          Envoyer
-        </button>
-      </section>
-    </form>
+      </form>
+    </div>
   );
 }
