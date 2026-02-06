@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Movies from './pages/Movies';
 import FormDirector from './pages/FormDirector';
 import Auth from './pages/Auth';
+import DashbordAdmin from './pages/DashbordAdmin';
 
 import './App.css';
 
@@ -18,6 +19,8 @@ function App() {
           <Route path="/gallery" element={<Movies />} />
           <Route path="/form-director" element={<FormDirector />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/admin" element={<DashbordAdmin />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </main>
       <Footer />
