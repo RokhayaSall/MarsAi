@@ -8,13 +8,13 @@ function Header() {
       <nav aria-label="Barre de navigation">
         <ul className="flex gap-7 items-center ">
           <li className="bg-[#2b71b1] text-white font-bold white rounded py-2 px-5 ">
-            <Link to="/home">MARS.AI</Link>
+            <Link to="/">MARS.AI</Link>
           </li>
           <li className="ml-auto font-bold text-[#282828]">
             <Link to="/gallery">Galerie</Link>
           </li>
           <li className="font-bold text-[#282828]">
-            <Link to="/home">Programme & infos</Link>
+            <Link to="/">Programme & infos</Link>
           </li>
           <li className="font-bold text-[#282828]">
             <Link to="/jury">Jury</Link>
@@ -22,7 +22,7 @@ function Header() {
           <li className="bg-[#2b71b1] text-white font-bold white rounded py-2 px-4 ml-auto">
             <Link to="/form-director">Soumettre</Link>
           </li>
-          <li className="">
+          <li >
             <FaGlobe className="text-[#2b71b1]  w-10 h-10" />
           </li>
           <li className="">
