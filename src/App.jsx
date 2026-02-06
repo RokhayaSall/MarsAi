@@ -6,7 +6,7 @@ import Movies from './pages/Movies';
 import FormDirector from './pages/FormDirector';
 import SubmitMovie from './pages/SubmitMovie';
 // import Registration from './pages/Register';
-// import Login from './pages/Login';
+import Auth from './pages/Auth';
 
 import './App.css';
 
@@ -22,8 +22,9 @@ function App() {
         <Route path="/form-director" element={<FormDirector />} />
         <Route path="/submitMovie" element={<SubmitMovie />} />
         {/* <Route path="/registration" element={<Registration />} /> */}
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/auth" element={<Auth />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
