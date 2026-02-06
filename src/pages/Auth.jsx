@@ -5,6 +5,8 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true);
+  const [success, setSuccess] = useState('');
+
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
     email: '',
@@ -38,10 +40,24 @@ export default function Auth() {
 
       if (res.token) {
         localStorage.setItem('token', res.token);
-        navigate('/');
+
+        setSuccess(
+          isLogin
+            ? 'Vous êtes connecté avec succès'
+            : 'Vous êtes inscrit avec succès'
+        );
+
+        setTimeout(() => {
+          navigate('/');
+        }, 800);
+      } else {
+        // REGISTER
+        setSuccess('Inscription réussie, Vous pouvez vous connecter');
+        setIsLogin(true);
       }
     } catch (err) {
       setError(err.message);
+      setSuccess('');
     } finally {
       setLoading(false);
     }
@@ -54,6 +70,12 @@ export default function Auth() {
           {isLogin ? 'Connexion' : 'Inscription'}
         </h2>
 
+        {success && (
+          <div className="mb-4 rounded-xl bg-gradient-to-r from-green-50 to-green-100 px-5 py-3 text-green-800 text-sm shadow-sm">
+            {success}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
@@ -63,6 +85,7 @@ export default function Auth() {
               type="email"
               name="email"
               value={form.email}
+              autoComplete="email"
               onChange={handleChange}
               className="w-full p-3 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
@@ -88,6 +111,7 @@ export default function Auth() {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
+                tabIndex={-1}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 aria-label={
                   showPassword
