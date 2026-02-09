@@ -14,10 +14,10 @@ const OwnershipCertificate = () => {
         </header>
 
         <p className="w-full border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed text-slate-700">
-          En soumettant ce dossier, vous certifiez sur l&apos;honneur être l&apos;auteur
-          original de l&apos;œuvre et détenir l&apos;intégralité des droits de diffusion.
-          Vous acceptez que MARS.A.I utilise ces éléments pour la promotion du
-          festival.
+          En soumettant ce dossier, vous certifiez sur l&apos;honneur être
+          l&apos;auteur original de l&apos;œuvre et détenir l&apos;intégralité
+          des droits de diffusion. Vous acceptez que MARS.A.I utilise ces
+          éléments pour la promotion du festival.
         </p>
       </article>
     </section>

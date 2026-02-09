@@ -1,6 +1,7 @@
 import { ButtonParticipate, ButtonMore } from '../components/ui/Buttons.jsx';
-import { Card } from '../components/ui/Card.jsx';
+import { Card, CardMovie } from '../components/ui/Cards.jsx';
 import { cardsData } from '../components/ui/CardsData.jsx';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -41,6 +42,32 @@ function Home() {
             />
           ))}
         </div>
+      </section>
+
+      <section className="p-10 md:p-15 md:pt-20">
+        <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-70 ">
+          FILMS EN
+          <span className="text-[#2b71b1]"> COMPÉTITION</span>
+        </h2>
+        <p className="">
+          Découvrez une sélection d&apos;œuvres pionnières qui explorent les
+          nouvelles frontières de l&apos;imaginaire assisté par
+          l&apos;Intelligence Artificielle.
+        </p>
+        <div
+          className="flex flex-col items-center mb-15 md:flex-row justify-between  "
+          aria-label="Aperçu de film"
+        >
+          <CardMovie />
+          <CardMovie />
+          <CardMovie />
+        </div>
+        <Link
+          className="block w-fit mx-auto bg-[#2b71b1] text-white rounded-xl p-4 px-8 font-bold text-2xl cursor-pointer md:p-3 md:px-5 md:text-lg"
+          to="/gallery"
+        >
+          Voir toute la selection
+        </Link>
       </section>
     </>
   );
