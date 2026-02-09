@@ -13,7 +13,7 @@ function Footer() {
       >
         <div aria-label="Information et réseaux sociaux">
           <Link
-            to="/home"
+            to="/"
             className="bg-[#2b71b1] font-bold rounded py-2 px-4 w-25"
           >
             MARS.AI
