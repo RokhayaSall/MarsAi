@@ -3,9 +3,16 @@ import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { FaGlobe } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next'; // <-- import i18n
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const { t, i18n } = useTranslation(); // <-- hook i18n
+
+  // Fonction pour changer la langue
+  const toggleLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr');
+  };
 
   return (
     <header className="px-8 py-6">
@@ -30,32 +37,34 @@ function Header() {
         </div>
 
         <ul
-          className={`${isNavOpen ? 'flex' : 'hidden'} flex-col  md:flex md:flex-row  md:items-center gap-4 mt-6 md:mt-0`}
+          className={`${isNavOpen ? 'flex' : 'hidden'} flex-col md:flex md:flex-row md:items-center gap-4 mt-6 md:mt-0`}
         >
           <li className="font-bold text-[#282828]">
             <Link to="/gallery" onClick={() => setIsNavOpen(false)}>
-              GALERIE
+              {t('nav.gallery')}
             </Link>
           </li>
           <li className="font-bold text-[#282828]">
             <Link to="/" onClick={() => setIsNavOpen(false)}>
-              PROGRAMME & INFOS
+              {t('nav.program')}
             </Link>
           </li>
           <li className="font-bold text-[#282828]">
             <Link to="/jury" onClick={() => setIsNavOpen(false)}>
-              JURY
+              {t('nav.jury')}
             </Link>
           </li>
           <li className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center w-40 md:w-auto">
             <Link to="/form-director" onClick={() => setIsNavOpen(false)}>
-              SOUMETTRE
+              {t('nav.submit')}
             </Link>
           </li>
           <li className="flex gap-6 items-center">
+            {/* Bouton pour changer la langue */}
             <FaGlobe
               className="text-[#2b71b1] w-10 h-10 cursor-pointer"
               aria-label="Traduire le site"
+              onClick={toggleLanguage}
             />
             <Link to="/auth" aria-label="Page de connexion">
               <CgProfile

@@ -4,6 +4,7 @@ import { FaInstagramSquare } from 'react-icons/fa';
 import { FaYoutubeSquare } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 
+
 function Footer() {
   return (
     <footer className=" bg-[#282828] p-15 md:p-25 text-white">
