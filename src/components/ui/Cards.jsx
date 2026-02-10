@@ -20,11 +20,15 @@ export function CardMovie({ title, director, country, duration }) {
           title={title}
           allowFullScreen
         ></iframe>
-        
+
         {/* Badges IA en haut à gauche */}
         <div className="absolute top-3 left-3 flex gap-2">
-          <span className="bg-white/20 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-full font-bold uppercase">Sora</span>
-          <span className="bg-white/20 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-full font-bold uppercase">ChatGPT</span>
+          <span className="bg-white/20 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-full font-bold uppercase">
+            Sora
+          </span>
+          <span className="bg-white/20 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-full font-bold uppercase">
+            ChatGPT
+          </span>
         </div>
       </figure>
 
@@ -40,11 +44,15 @@ export function CardMovie({ title, director, country, duration }) {
 
         <div className="flex justify-between items-end uppercase">
           <div>
-            <p className="text-[10px] text-gray-400 font-bold tracking-widest">Réalisateur</p>
+            <p className="text-[10px] text-gray-400 font-bold tracking-widest">
+              Réalisateur
+            </p>
             <p className="text-sm font-black text-[#282828]">{director}</p>
           </div>
           <div className="text-right">
-            <p className="text-[10px] text-gray-400 font-bold tracking-widest text-[8px]">Origine</p>
+            <p className="text-[10px] text-gray-400 font-bold tracking-widest text-[8px]">
+              Origine
+            </p>
             <div className="flex items-center gap-1 justify-end">
               <Globe size={14} className="text-blue-500" />
               <p className="text-sm font-black text-[#282828]">{country}</p>
