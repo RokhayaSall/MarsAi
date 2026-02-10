@@ -23,7 +23,7 @@ export function ButtonMore() {
 export function ButtonGalery() {
   return (
     <Link
-      className="block mx-auto bg-[#2b71b1] text-white  rounded-xl p-4 px-8 font-bold text-2xl cursor-pointer md:p-3 md:px-5 md:text-lg"
+      className="block w-fit mx-auto bg-[#2b71b1] text-white rounded-xl p-4 px-8 font-bold text-2xl cursor-pointer md:p-3 md:px-5 md:text-lg"
       to="/gallery"
     >
       Voir toute la selection

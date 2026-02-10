@@ -1,13 +1,16 @@
-import { ButtonParticipate, ButtonMore } from '../components/ui/Buttons.jsx';
-import { Card, CardMovie } from '../components/ui/Cards.jsx';
-import { cardsData } from '../components/ui/CardsData.jsx';
-import { Link } from 'react-router-dom';
+import {
+  ButtonParticipate,
+  ButtonMore,
+  ButtonGalery,
+} from '../components/ui/Buttons.jsx';
+import { Card, CardMovie, CardFestival } from '../components/ui/Cards.jsx';
+import { cardsData, cardsFestivalData } from '../components/ui/CardsData.jsx';
 
 function Home() {
   return (
     <>
       <section className="relative text-center bg-[url(src/assets/sunset.jpg)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-45">
-        <h1 className="text-white font-bold text-5xl text-shadow-lg/70   md:w-full ">
+        <h1 className="text-white font-bold text-5xl text-shadow-lg/70  uppercase md:w-full ">
           IMAGINEZ DES
           <span className="text-[#ff5845] "> FUTURS</span> SOUHAITABLES
         </h1>
@@ -21,7 +24,7 @@ function Home() {
       </section>
 
       <section className="p-20 md:p-15 md:pt-20 bg-[#EFEFEF] ">
-        <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-max">
+        <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-max uppercase">
           LE PROJET MARS.A.I
         </h2>
         <p className="w-80 md:w-200">
@@ -45,11 +48,11 @@ function Home() {
       </section>
 
       <section className="p-10 md:p-15 md:pt-20">
-        <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-70 ">
+        <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-70 uppercase">
           FILMS EN
           <span className="text-[#2b71b1]"> COMPÉTITION</span>
         </h2>
-        <p className="">
+        <p className="md:text-xl md:w-200">
           Découvrez une sélection d&apos;œuvres pionnières qui explorent les
           nouvelles frontières de l&apos;imaginaire assisté par
           l&apos;Intelligence Artificielle.
@@ -62,12 +65,27 @@ function Home() {
           <CardMovie />
           <CardMovie />
         </div>
-        <Link
-          className="block w-fit mx-auto bg-[#2b71b1] text-white rounded-xl p-4 px-8 font-bold text-2xl cursor-pointer md:p-3 md:px-5 md:text-lg"
-          to="/gallery"
+        <ButtonGalery />
+      </section>
+
+      <section className="p-10 md:p-15 md:pt-20 bg-[#282828]">
+        <h2 className="font-bold text-4xl w-70 mb-5 text-white uppercase md:text-5xl md:w-90 ">
+          OBJECTIFS DU
+          <span className="text-[#FF5845]"> FESTIVAL</span>
+        </h2>
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-15 mt-10 "
+          aria-label="Obectifs du festival"
         >
-          Voir toute la selection
-        </Link>
+          {cardsFestivalData.map(card => (
+            <CardFestival
+              key={card.id}
+              icon={card.icon}
+              title={card.title}
+              text={card.text}
+            />
+          ))}
+        </div>
       </section>
     </>
   );
