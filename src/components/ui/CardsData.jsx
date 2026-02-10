@@ -57,9 +57,9 @@ export const cardsFestivalData = [
 export const cardsSelectionData = [
   {
     id: 1,
-    title: "2 mois",
-    text: "Appel à projet",
-    description: "Candidatures ouvertes aux créateurs du monde entier.",
+    title: '2 mois',
+    text: 'Appel à projet',
+    description: 'Candidatures ouvertes aux créateurs du monde entier.',
   },
   {
     id: 2,
@@ -70,14 +70,13 @@ export const cardsSelectionData = [
   {
     id: 3,
     title: 'Web & RS',
-    text: "Diffusion digitale",
-    description: "Visibilité mondiale via les réseaux et plateformes.",
+    text: 'Diffusion digitale',
+    description: 'Visibilité mondiale via les réseaux et plateformes.',
   },
   {
     id: 4,
     title: 'Festival',
-    text: "Salles de cinéma",
-    description: "Projection sur grand écran pour une immersion totale.",
+    text: 'Salles de cinéma',
+    description: 'Projection sur grand écran pour une immersion totale.',
   },
 ];
-

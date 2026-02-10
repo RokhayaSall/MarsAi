@@ -43,7 +43,7 @@ export function CardFestival({ icon: Icon, title, text }) {
   );
 }
 
-export function CardSelection({title, text, description }) {
+export function CardSelection({ title, text, description }) {
   return (
     <article className=" bg-white border border-[#D5DAE1] rounded-4xl p-8  ">
       <h3 className="font-bold text-[#246BAD] text-2xl uppercase w-full">

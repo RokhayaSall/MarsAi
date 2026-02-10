@@ -3,8 +3,17 @@ import {
   ButtonMore,
   ButtonGalery,
 } from '../components/ui/Buttons.jsx';
-import { Card, CardMovie, CardFestival, CardSelection } from '../components/ui/Cards.jsx';
-import { cardsData, cardsFestivalData, cardsSelectionData } from '../components/ui/CardsData.jsx';
+import {
+  Card,
+  CardMovie,
+  CardFestival,
+  CardSelection,
+} from '../components/ui/Cards.jsx';
+import {
+  cardsData,
+  cardsFestivalData,
+  cardsSelectionData,
+} from '../components/ui/CardsData.jsx';
 
 function Home() {
   return (
@@ -91,7 +100,9 @@ function Home() {
         <h2 className="font-bold text-4xl mb-5 text-center text-[#282828] md:text-5xl uppercase">
           Format de la seléction
         </h2>
-        <p className="text-center uppercase  text-[#6B6B6B]">Le parcours des oeuvres</p>
+        <p className="text-center uppercase  text-[#6B6B6B]">
+          Le parcours des oeuvres
+        </p>
         <div
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-15 mt-10   "
           aria-label="Format de la sélection"
@@ -105,9 +116,8 @@ function Home() {
             />
           ))}
         </div>
-        <ButtonParticipate className={`block w-fit mx-auto`}  />
+        <ButtonParticipate className={`block w-fit mx-auto`} />
       </section>
-
     </>
   );
 }
