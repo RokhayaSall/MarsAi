@@ -26,7 +26,7 @@ function Header() {
             <FaGlobe className="text-[#2b71b1]  w-10 h-10" />
           </li>
           <li className="">
-            <Link to="/login">
+            <Link to="/auth">
               {' '}
               <CgProfile className="text-[#2b71b1] w-10 h-10" />
             </Link>

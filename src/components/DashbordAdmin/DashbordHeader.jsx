@@ -1,7 +1,6 @@
-
 export default function DashbordHeader() {
   return (
-    <header className="bg-darkblue text-white px-6 py-4 flex justify-between items-center">
+    <header className="bg-darkblue text-black px-6 py-4 flex justify-between items-center">
       <div>
         <h2 className="text-lg font-semibold">BACK-OFFICE OFFICIEL</h2>
         <p className="text-xs opacity-70">ADMIN MANAGEMENT</p>
@@ -14,5 +13,5 @@ export default function DashbordHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }
