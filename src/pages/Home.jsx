@@ -3,8 +3,8 @@ import {
   ButtonMore,
   ButtonGalery,
 } from '../components/ui/Buttons.jsx';
-import { Card, CardMovie, CardFestival } from '../components/ui/Cards.jsx';
-import { cardsData, cardsFestivalData } from '../components/ui/CardsData.jsx';
+import { Card, CardMovie, CardFestival, CardSelection } from '../components/ui/Cards.jsx';
+import { cardsData, cardsFestivalData, cardsSelectionData } from '../components/ui/CardsData.jsx';
 
 function Home() {
   return (
@@ -23,7 +23,7 @@ function Home() {
         <ButtonMore />
       </section>
 
-      <section className="p-20 md:p-15 md:pt-20 bg-[#EFEFEF] ">
+      <section className="p-15 md:p-15 md:pt-20 bg-[#EFEFEF] ">
         <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-max uppercase">
           LE PROJET MARS.A.I
         </h2>
@@ -31,9 +31,8 @@ function Home() {
           Un événement hybride unique en France, réunissant la fine fleur de
           l&apos;IA générative et de la création cinématographique.
         </p>
-
         <div
-          className="flex flex-col items-center gap-6 mt-8 mb-8 md: md:flex-row justify-around  "
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-15 mt-10  "
           aria-label="Description projet MarsAI"
         >
           {cardsData.map(card => (
@@ -47,7 +46,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="p-10 md:p-15 md:pt-20">
+      <section className="p-15 md:p-15 md:pt-20">
         <h2 className="font-bold text-4xl w-50 mb-5 text-[#282828] md:text-5xl md:w-70 uppercase">
           FILMS EN
           <span className="text-[#2b71b1]"> COMPÉTITION</span>
@@ -58,7 +57,7 @@ function Home() {
           l&apos;Intelligence Artificielle.
         </p>
         <div
-          className="flex flex-col items-center mb-15 md:flex-row justify-between  "
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-15   "
           aria-label="Aperçu de film"
         >
           <CardMovie />
@@ -68,7 +67,7 @@ function Home() {
         <ButtonGalery />
       </section>
 
-      <section className="p-10 md:p-15 md:pt-20 bg-[#282828]">
+      <section className="p-15 md:p-15 md:pt-20 bg-[#282828]">
         <h2 className="font-bold text-4xl w-70 mb-5 text-white uppercase md:text-5xl md:w-90 ">
           OBJECTIFS DU
           <span className="text-[#FF5845]"> FESTIVAL</span>
@@ -87,6 +86,28 @@ function Home() {
           ))}
         </div>
       </section>
+
+      <section className="p-15 md:p-15 md:pt-20 bg-[#EFEFEF] ">
+        <h2 className="font-bold text-4xl mb-5 text-center text-[#282828] md:text-5xl uppercase">
+          Format de la seléction
+        </h2>
+        <p className="text-center uppercase  text-[#6B6B6B]">Le parcours des oeuvres</p>
+        <div
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-15 mt-10   "
+          aria-label="Format de la sélection"
+        >
+          {cardsSelectionData.map(card => (
+            <CardSelection
+              key={card.id}
+              title={card.title}
+              text={card.text}
+              description={card.description}
+            />
+          ))}
+        </div>
+        <ButtonParticipate className={`block w-fit mx-auto`}  />
+      </section>
+
     </>
   );
 }

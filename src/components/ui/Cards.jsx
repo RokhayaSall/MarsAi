@@ -1,9 +1,9 @@
 export function Card({ icon: Icon, title, text }) {
   return (
-    <article className=" bg-white border border-[#D5DAE1] rounded-4xl p-6 w-70 h-55 ">
+    <article className=" bg-white border border-[#D5DAE1] rounded-4xl p-6 ">
       <Icon className="text-[#ff5845] text-4xl" />
 
-      <h3 className="font-bold text-[#282828] text-2xl mt-2">{title}</h3>
+      <h3 className="font-bold text-[#282828] text-2xl mt-2 ">{title}</h3>
       <p className="mt-2  text-xl">{text}</p>
     </article>
   );
@@ -39,6 +39,18 @@ export function CardFestival({ icon: Icon, title, text }) {
         {title}
       </h3>
       <p className="mt-5 text-xl text-[#b4bfce]  w-full">{text}</p>
+    </article>
+  );
+}
+
+export function CardSelection({title, text, description }) {
+  return (
+    <article className=" bg-white border border-[#D5DAE1] rounded-4xl p-8  ">
+      <h3 className="font-bold text-[#246BAD] text-2xl uppercase w-full">
+        {title}
+      </h3>
+      <p className="mt-2 font-semibold w-full">{text}</p>
+      <p className="mt-2 font-semibold  text-[#64748B] w-full">{description}</p>
     </article>
   );
 }

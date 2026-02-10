@@ -53,3 +53,31 @@ export const cardsFestivalData = [
     text: "Mettre à profit la puissance de l'IA pour illustrer un thème : Imaginez des futurs souhaitables.",
   },
 ];
+
+export const cardsSelectionData = [
+  {
+    id: 1,
+    title: "2 mois",
+    text: "Appel à projet",
+    description: "Candidatures ouvertes aux créateurs du monde entier.",
+  },
+  {
+    id: 2,
+    title: '50 Films',
+    text: 'Sélection officielle',
+    description: "Courts-métrages d'une minute retenus pour la compétition.",
+  },
+  {
+    id: 3,
+    title: 'Web & RS',
+    text: "Diffusion digitale",
+    description: "Visibilité mondiale via les réseaux et plateformes.",
+  },
+  {
+    id: 4,
+    title: 'Festival',
+    text: "Salles de cinéma",
+    description: "Projection sur grand écran pour une immersion totale.",
+  },
+];
+
