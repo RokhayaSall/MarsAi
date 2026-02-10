@@ -4,6 +4,7 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
 import FormDirector from './pages/FormDirector';
+import SubmitMovie from './pages/SubmitMovie';
 import Auth from './pages/Auth';
 import DashbordAdmin from './pages/DashbordAdminPage/DashbordAdmin';
 import AdminJury from './pages/DashbordAdminPage/AdminJury';
