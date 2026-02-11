@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login, register } from '../services/authService';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 export default function Auth() {
+  const { t } = useTranslation();
+
   const [isLogin, setIsLogin] = useState(true);
   const [success, setSuccess] = useState('');
-
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
     email: '',
@@ -43,16 +45,15 @@ export default function Auth() {
 
         setSuccess(
           isLogin
-            ? 'Vous êtes connecté avec succès'
-            : 'Vous êtes inscrit avec succès'
+            ? t('auth.successLogin')
+            : t('auth.successRegister')
         );
 
         setTimeout(() => {
           navigate('/');
         }, 800);
       } else {
-        // REGISTER
-        setSuccess('Inscription réussie, Vous pouvez vous connecter');
+        setSuccess(t('auth.registered'));
         setIsLogin(true);
       }
     } catch (err) {
@@ -67,7 +68,7 @@ export default function Auth() {
     <div className="min-h-screen flex items-center justify-center m-10 md:m-15 md:mb-30">
       <div className="w-full max-w-md bg-gray-50 p-8 rounded shadow-sm border">
         <h2 className="text-2xl font-semibold text-center mb-6 uppercase tracking-wide">
-          {isLogin ? 'Connexion' : 'Inscription'}
+          {isLogin ? t('auth.loginTitle') : t('auth.registerTitle')}
         </h2>
 
         {success && (
@@ -79,7 +80,7 @@ export default function Auth() {
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
-              Adresse e-mail
+              {t('auth.email')}
             </label>
             <input
               type="email"
@@ -94,7 +95,7 @@ export default function Auth() {
 
           <div className="mb-5">
             <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
-              Mot de passe
+              {t('auth.password')}
             </label>
 
             <div className="relative">
@@ -115,15 +116,11 @@ export default function Auth() {
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 aria-label={
                   showPassword
-                    ? 'Masquer le mot de passe'
-                    : 'Afficher le mot de passe'
+                    ? t('auth.hidePassword')
+                    : t('auth.showPassword')
                 }
               >
-                {showPassword ? (
-                  <FaEye className="text-gray-500" />
-                ) : (
-                  <FaEyeSlash className="text-gray-500" />
-                )}
+                {showPassword ? <FaEye /> : <FaEyeSlash />}
               </button>
             </div>
           </div>
@@ -132,7 +129,7 @@ export default function Auth() {
             <>
               <div className="mb-5">
                 <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
-                  Prénom
+                  {t('auth.firstname')}
                 </label>
                 <input
                   type="text"
@@ -146,7 +143,7 @@ export default function Auth() {
 
               <div className="mb-5">
                 <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
-                  Nom
+                  {t('auth.lastname')}
                 </label>
                 <input
                   type="text"
@@ -168,10 +165,10 @@ export default function Auth() {
             disabled={loading}
           >
             {loading
-              ? 'Chargement...'
+              ? t('auth.loading')
               : isLogin
-                ? 'Se connecter'
-                : "S'inscrire"}
+                ? t('auth.loginButton')
+                : t('auth.registerButton')}
           </button>
         </form>
 
@@ -180,8 +177,8 @@ export default function Auth() {
           className="mt-6 block text-center text-gray-600 hover:underline"
         >
           {isLogin
-            ? 'Pas de compte ? Inscrivez-vous'
-            : 'Déjà un compte ? Connectez-vous'}
+            ? t('auth.noAccount')
+            : t('auth.hasAccount')}
         </button>
       </div>
     </div>

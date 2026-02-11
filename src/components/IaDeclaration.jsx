@@ -1,7 +1,9 @@
 import { FiFilm } from 'react-icons/fi';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const IaDeclaration = () => {
+  const { t } = useTranslation();
   const [classification, setClassification] = useState('');
 
   return (
@@ -12,14 +14,14 @@ const IaDeclaration = () => {
             <FiFilm className="w-6 h-6 text-slate-500" />
           </div>
           <h2 className="text-xl font-bold tracking-widest text-slate-500 uppercase">
-            02. Déclaration usage de l&apos;IA
+            {t('ia_declaration.step')} 02. {t('ia_declaration.title')}
           </h2>
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
           <section className="space-y-4">
             <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
-              Classification de l&apos;oeuvre : * choix exclusif
+              {t('ia_declaration.classification_label')}
             </label>
 
             <div className="flex gap-4">
@@ -29,7 +31,7 @@ const IaDeclaration = () => {
                 className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all
                   ${classification === 'hybride' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
               >
-                Production hybride
+                {t('ia_declaration.hybrid')}
               </button>
 
               <button
@@ -38,7 +40,7 @@ const IaDeclaration = () => {
                 className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all
                   ${classification === '100ia' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
               >
-                100% IA
+                {t('ia_declaration.full_ia')}
               </button>
             </div>
           </section>
@@ -46,24 +48,23 @@ const IaDeclaration = () => {
           <section className="md:col-span-2 space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
-                Stack technologique *
+                {t('ia_declaration.tech_stack')}
               </label>
             </div>
             <textarea
-              placeholder="Listez les outils utilisés (ex: MidJourney pour les visuels, ElevenLabs pour les voix, Runway pour l'animation...)"
+              placeholder={t('ia_declaration.tech_stack_placeholder')}
               className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
             />
           </section>
 
-          {/* Méthodologie créative */}
           <section className="md:col-span-2 space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
-                Méthodologie créative *
+                {t('ia_declaration.creative_methodology')}
               </label>
             </div>
             <textarea
-              placeholder="Décrivez l'interaction entre l'humain et la machine dans ce processus... Qui a fait quoi ? Comment les outils d'IA ont été utilisés ? À quel moment du processus de création ?"
+              placeholder={t('ia_declaration.creative_methodology_placeholder')}
               className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
             />
           </section>
