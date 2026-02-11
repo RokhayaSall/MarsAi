@@ -13,7 +13,6 @@ export function Card({ icon: Icon, title, text }) {
 export function CardMovie({ title, director, country, duration }) {
   return (
     <article className="bg-[#F8F9FA] rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-
       <figure className="relative aspect-video w-full">
         <iframe
           className="w-full h-full"
@@ -23,7 +22,7 @@ export function CardMovie({ title, director, country, duration }) {
           referrerPolicy="strict-origin-when-cross-origin"
           allowFullScreen
         ></iframe>
-        
+
         <div className="absolute top-3 left-3 flex gap-1.5 pointer-events-none">
           <span className="bg-white/20 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-full font-bold uppercase tracking-wider">
             Sora
@@ -37,24 +36,32 @@ export function CardMovie({ title, director, country, duration }) {
       <figcaption className="p-6">
         <div className="flex justify-between items-start mb-4">
           <h3 className="font-black text-[#282828] text-2xl uppercase tracking-tighter">
-            {title || "TITRE DU FILM"}
+            {title || 'TITRE DU FILM'}
           </h3>
           <span className="bg-[#FFE5E5] text-[#FF5845] text-[10px] px-2 py-0.5 rounded font-black">
-            {duration || "60S"}
+            {duration || '60S'}
           </span>
         </div>
 
         <div className="flex justify-between items-end uppercase">
           <div>
-            <p className="text-[10px] text-[#A0A0A0] font-bold tracking-widest">Réalisateur</p>
-            <p className="text-sm font-black text-[#282828]">{director || "Nom du réalisateur"}</p>
+            <p className="text-[10px] text-[#A0A0A0] font-bold tracking-widest">
+              Réalisateur
+            </p>
+            <p className="text-sm font-black text-[#282828]">
+              {director || 'Nom du réalisateur'}
+            </p>
           </div>
 
           <div className="text-right">
-            <p className="text-[10px] text-[#A0A0A0] font-bold tracking-widest text-[8px]">Origine</p>
+            <p className="text-[10px] text-[#A0A0A0] font-bold tracking-widest text-[8px]">
+              Origine
+            </p>
             <div className="flex items-center gap-1.5 justify-end">
               <Globe size={14} className="text-[#3b82f6]" />
-              <p className="text-sm font-black text-[#282828]">{country || "Pays"}</p>
+              <p className="text-sm font-black text-[#282828]">
+                {country || 'Pays'}
+              </p>
             </div>
           </div>
         </div>

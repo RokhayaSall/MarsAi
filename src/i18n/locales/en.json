@@ -6,8 +6,7 @@
     "submit": "SUBMIT"
   },
 
-  
-  "home":{
+  "home": {
     "title": "IMAGINE DESIRABLE FUTURES",
     "subtitle": "The 60-second short film festival made by AI. 2 days of immersion in Marseille.",
     "projectTitle": "THE MARS.A.I PROJECT",
@@ -17,8 +16,5 @@
     "festivalGoalsTitle": "FESTIVAL OBJECTIVES",
     "selectionFormatTitle": "SELECTION FORMAT",
     "selectionFormatText": "The path of the works"
-   
-
-}
-
+  }
 }
