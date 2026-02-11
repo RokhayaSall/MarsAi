@@ -4,5 +4,21 @@
     "program": "PROGRAM & INFO",
     "jury": "JURY",
     "submit": "SUBMIT"
-  }
+  },
+
+  
+  "home":{
+    "title": "IMAGINE DESIRABLE FUTURES",
+    "subtitle": "The 60-second short film festival made by AI. 2 days of immersion in Marseille.",
+    "projectTitle": "THE MARS.A.I PROJECT",
+    "projectText": "A unique hybrid event in France, bringing together the best of generative AI and film creation.",
+    "competitionTitle": "FILMS IN COMPETITION",
+    "competitionText": "Discover a selection of pioneering works exploring new frontiers of AI-assisted imagination.",
+    "festivalGoalsTitle": "FESTIVAL OBJECTIVES",
+    "selectionFormatTitle": "SELECTION FORMAT",
+    "selectionFormatText": "The path of the works"
+   
+
+}
+
 }

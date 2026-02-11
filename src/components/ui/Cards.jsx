@@ -13,7 +13,7 @@ export function Card({ icon: Icon, title, text }) {
 export function CardMovie({ title, director, country, duration }) {
   return (
     <article className="bg-[#F8F9FA] rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-      {/* Figure avec iframe et Badges flottants */}
+
       <figure className="relative aspect-video w-full">
         <iframe
           className="w-full h-full"
@@ -24,7 +24,6 @@ export function CardMovie({ title, director, country, duration }) {
           allowFullScreen
         ></iframe>
         
-        {/* Badges IA (Sora / ChatGPT) */}
         <div className="absolute top-3 left-3 flex gap-1.5 pointer-events-none">
           <span className="bg-white/20 backdrop-blur-md text-[10px] text-white px-3 py-1 rounded-full font-bold uppercase tracking-wider">
             Sora
@@ -35,7 +34,6 @@ export function CardMovie({ title, director, country, duration }) {
         </div>
       </figure>
 
-      {/* Figcaption avec ton style de texte fusionné */}
       <figcaption className="p-6">
         <div className="flex justify-between items-start mb-4">
           <h3 className="font-black text-[#282828] text-2xl uppercase tracking-tighter">
@@ -47,13 +45,11 @@ export function CardMovie({ title, director, country, duration }) {
         </div>
 
         <div className="flex justify-between items-end uppercase">
-          {/* Section Réalisateur */}
           <div>
             <p className="text-[10px] text-[#A0A0A0] font-bold tracking-widest">Réalisateur</p>
             <p className="text-sm font-black text-[#282828]">{director || "Nom du réalisateur"}</p>
           </div>
 
-          {/* Section Origine */}
           <div className="text-right">
             <p className="text-[10px] text-[#A0A0A0] font-bold tracking-widest text-[8px]">Origine</p>
             <div className="flex items-center gap-1.5 justify-end">

@@ -136,9 +136,9 @@ export default function FormDirector() {
               className={inputClass}
             >
               <option value="">Sélectionner le genre</option>
-              <option value="homme">Homme</option>
-              <option value="femme">Femme</option>
-              <option value="autre">Autre</option>
+              <option value="M">Homme</option>
+              <option value="F">Femme</option>
+              <option value="X">Autre</option>
             </select>
           </fieldset>
         </section>
@@ -349,7 +349,7 @@ export default function FormDirector() {
         <div className="flex justify-end mt-6">
           <button
             type="button"
-            onClick={() => navigate('/submitMovie')}
+            onClick={() => navigate('/submit-movie')}
             className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition-colors shadow-lg"
           >
             Étape suivante

@@ -4,5 +4,17 @@
     "program": "PROGRAMME & INFOS",
     "jury": "JURY",
     "submit": "SOUMETTRE"
+  },
+
+  "home": {
+    "title": "IMAGINEZ DES FUTURS SOUHAITABLES",
+    "subtitle": "Le festival de courts-métrages de 60 secondes réalisés par IA. 2 jours d'immersion au cœur de Marseille.",
+    "projectTitle": "LE PROJET MARS.A.I",
+    "projectText": "Un événement hybride unique en France, réunissant la fine fleur de l'IA générative et de la création cinématographique.",
+    "competitionTitle": "FILMS EN COMPÉTITION",
+    "competitionText": "Découvrez une sélection d'œuvres pionnières qui explorent les nouvelles frontières de l'imaginaire assisté par l'Intelligence Artificielle.",
+    "festivalGoalsTitle": "OBJECTIFS DU FESTIVAL",
+    "selectionFormatTitle": "FORMAT DE LA SÉLECTION",
+    "selectionFormatText": "Le parcours des oeuvres"
   }
 }
