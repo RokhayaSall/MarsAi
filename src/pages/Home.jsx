@@ -8,6 +8,7 @@ import {
   CardMovie,
   CardFestival,
   CardSelection,
+  CardCalender,
 } from '../components/ui/Cards.jsx';
 import {
   cardsData,
@@ -67,7 +68,7 @@ function Home() {
           l&apos;Intelligence Artificielle.
         </p>
         <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-15   "
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-15 mt-10   "
           aria-label="Aperçu de film"
         >
           <CardMovie />
@@ -138,6 +139,19 @@ function Home() {
             />
           ))}
         </div>
+      </section>
+
+      <section className="relative bg-[url(src/assets/marsai-night.avif)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around ">
+        <div className="" aria-label="Prendre mon pass">
+          <h2 className="text-white font-bold text-4xl uppercase w-70 md:text-7xl">
+            Mars.A.I night
+          </h2>
+          <p className="text-white text-xl mt-5 mb-15 md:w-100 md:mb-6">
+            Fête mêlant IA et futurs souhaitables. Une expérience immersive
+            sonore et visuelle.
+          </p>
+        </div>
+        <CardCalender />
       </section>
     </>
   );
