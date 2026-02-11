@@ -41,8 +41,8 @@ export default function GalerieFilms() {
         </h1>
 
         <p>
-          Explorez l'intégralité de la sélection officielle. Des visions
-          uniques, des courts-métrages pionniers créés avec l'Intelligence
+          Explorez l&apos;intégralité de la sélection officielle. Des visions
+          uniques, des courts-métrages pionniers créés avec l&apos;Intelligence
           Artificielle.
         </p>
       </div>

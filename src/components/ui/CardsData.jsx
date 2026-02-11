@@ -5,6 +5,8 @@ import { IoBook } from 'react-icons/io5';
 import { TbTargetArrow } from 'react-icons/tb';
 import { IoFlashSharp } from 'react-icons/io5';
 import { IoRocketSharp } from 'react-icons/io5';
+import { FaAward, FaHandHoldingHeart } from 'react-icons/fa';
+import { MdEventAvailable } from 'react-icons/md';
 
 export const cardsData = [
   {
@@ -78,5 +80,32 @@ export const cardsSelectionData = [
     title: 'Festival',
     text: 'Salles de cinéma',
     description: 'Projection sur grand écran pour une immersion totale.',
+  },
+];
+
+export const cardsInfos = [
+  {
+    id: 1,
+    icon: FaHandHoldingHeart,
+    title: 'Le coeur du festival',
+    text: "Débats engagés sur l'éthique et le futur.",
+  },
+  {
+    id: 2,
+    icon: MdLocalMovies,
+    title: 'Projections',
+    text: 'Films en compétition et hors-compétition sur grand écran.',
+  },
+  {
+    id: 3,
+    icon: MdEventAvailable,
+    title: 'Workshops',
+    text: "Scénario, création et post-prod avec des experts de l'IA.",
+  },
+  {
+    id: 4,
+    icon: FaAward,
+    title: 'Remise des prix',
+    text: "Cinéastes, acteurs et créateurs renommés pour récompenser l'excellence.",
   },
 ];

@@ -13,6 +13,7 @@ import {
   cardsData,
   cardsFestivalData,
   cardsSelectionData,
+  cardsInfos,
 } from '../components/ui/CardsData.jsx';
 
 function Home() {
@@ -117,6 +118,26 @@ function Home() {
           ))}
         </div>
         <ButtonParticipate className={`block w-fit mx-auto`} />
+      </section>
+
+      <section className="p-15 md:p-15 md:pt-20 bg-[#282828]">
+        <h2 className="font-bold text-4xl  text-white md:text-5xl uppercase w-77 md:w-150">
+          Deux journées de
+          <span className="text-[#FF5845]"> conférences</span> gratuites
+        </h2>
+        <div
+          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-15 mt-15   "
+          aria-label="Le coeur du festival"
+        >
+          {cardsInfos.map(card => (
+            <CardFestival
+              key={card.id}
+              icon={card.icon}
+              title={card.title}
+              text={card.text}
+            />
+          ))}
+        </div>
       </section>
     </>
   );
