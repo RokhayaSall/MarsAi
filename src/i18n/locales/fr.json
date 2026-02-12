@@ -4,5 +4,168 @@
     "program": "PROGRAMME & INFOS",
     "jury": "JURY",
     "submit": "SOUMETTRE"
+  },
+
+  "home": {
+    "title": "IMAGINEZ DES FUTURS SOUHAITABLES",
+    "subtitle": "Le festival de courts-métrages de 60 secondes réalisés par IA. 2 jours d'immersion au cœur de Marseille.",
+    "projectTitle": "LE PROJET MARS.A.I",
+    "projectText": "Un événement hybride unique en France, réunissant la fine fleur de l'IA générative et de la création cinématographique.",
+    "competitionTitle": "FILMS EN COMPÉTITION",
+    "competitionText": "Découvrez une sélection d'œuvres pionnières qui explorent les nouvelles frontières de l'imaginaire assisté par l'Intelligence Artificielle.",
+    "festivalGoalsTitle": "OBJECTIFS DU FESTIVAL",
+    "selectionFormatTitle": "FORMAT DE LA SÉLECTION",
+    "selectionFormatText": "Le parcours des oeuvres"
+  },
+
+  "form": {
+    "appel_projets_2026": "Appel à projets 2026",
+    "formulaire_realisateur": "Formulaire du réalisateur",
+    "remplir_informations": "Veuillez remplir les informations ci-dessous.",
+    "nom": "Nom",
+    "prenom": "Prénom",
+    "email": "Email",
+    "genre": "Genre",
+    "selectionner_genre": "Sélectionner le genre",
+    "homme": "Homme",
+    "femme": "Femme",
+    "autre": "Autre",
+    "code_postal": "Code postal",
+    "ville": "Ville",
+    "biographie": "Biographie",
+    "region": "Région",
+    "pays": "Pays",
+    "telephone": "Téléphone",
+    "metier": "Métier actuel",
+    "reseaux_sociaux": "Réseaux sociaux",
+    "collaborateurs": "Collaborateurs",
+    "role": "Rôle",
+    "ajouter_collaborateur": "+ Ajouter un collaborateur",
+    "supprimer_collaborateur": "Supprimer un collaborateur",
+    "envoyer": "Envoyer",
+    "etape_suivante": "Étape suivante",
+    "formulaire_envoye": "Formulaire envoyé ! 🚀",
+    "erreur_envoi": "Erreur lors de l’envoi du formulaire"
+  },
+
+  "movies": {
+    "back_home": "Retour Accueil",
+    "gallery_title": "LA GALERIE\nDES FILMS",
+    "gallery_title_span": "DES FILMS",
+    "gallery_description": "Explorez l'intégralité de la sélection officielle. Des visions uniques, des courts-métrages pionniers créés avec l'Intelligence Artificielle.",
+    "page_info": "Page {{currentPage}} sur {{totalPages}} - {{totalMovies}} films trouvés"
+  },
+  
+  "cards": {
+    "default_card_title": "Titre",
+    "default_card_text": "Description du contenu",
+    "default_movie_title": "TITRE DU FILM",
+    "default_movie_duration": "60S",
+    "default_director_label": "Réalisateur",
+    "default_director_name": "Nom du réalisateur",
+    "default_country_label": "Origine",
+    "default_country_name": "Pays",
+    "default_festival_title": "Titre du festival",
+    "default_festival_text": "Description du festival",
+    "default_selection_title": "Titre de la sélection",
+    "default_selection_text": "Texte de la sélection",
+    "default_selection_description": "Description détaillée"
+  },
+
+  "submit_movie": {
+    "appel_projets_2026": "Appel à projets 2026",
+    "submit_film": "Soumettre un film",
+    "fill_info": "Veuillez remplir les informations ci-dessous.",
+    "finalize_submission": "Finaliser ma soumission",
+    "form_submitted": "Formulaire envoyé !"
+  },
+
+  
+  "film_identity": {
+    "step": "Étape",
+    "title": "Identité du film",
+    "original_title": "Titre original*",
+    "original_title_placeholder": "TITRE ORIGINAL",
+    "english_title": "Traduction anglaise*",
+    "english_title_placeholder": "TRADUCTION ANGLAISE",
+    "duration": "Durée exacte (en secondes)*",
+    "duration_placeholder": "EX: 60",
+    "language": "Langue parlée/principale du film*",
+    "language_placeholder": "LANGUE",
+    "synopsis_original": "Synopsis langue originale* (max. 300 caractères)",
+    "synopsis_original_placeholder": "RÉSUMEZ L'INTENTION DE VOTRE FILM EN QUELQUES LIGNES...",
+    "synopsis_english": "Synopsis anglais* (max. 300 caractères)",
+    "synopsis_english_placeholder": "SUMMARIZE YOUR FILM'S INTENTION IN A FEW LINES..."
+  
+},
+
+"ia_declaration": {
+    "step": "Étape",
+    "title": "Déclaration usage de l'IA",
+    "classification_label": "Classification de l'oeuvre : * choix exclusif",
+    "hybrid": "Production hybride",
+    "full_ia": "100% IA",
+    "tech_stack": "Stack technologique *",
+    "tech_stack_placeholder": "Listez les outils utilisés (ex: MidJourney pour les visuels, ElevenLabs pour les voix, Runway pour l'animation...)",
+    "creative_methodology": "Méthodologie créative *",
+    "creative_methodology_placeholder": "Décrivez l'interaction entre l'humain et la machine dans ce processus... Qui a fait quoi ? Comment les outils d'IA ont été utilisés ? À quel moment du processus de création ?"
+  },
+
+  "livrables": {
+    "step": "Étape",
+    "title": "Livrables & Collaborateurs",
+    "youtube_label": "Lien youtube*",
+    "youtube_placeholder": "HTTPS://YOUTUBE.COM/...",
+    "subtitles_label": "Sous-titres (.srt)",
+    "subtitles_text": "Voix ou textes nécessitant des sous-titres",
+    "thumbnail_label": "Vignette officielle (16:9)",
+    "thumbnail_text": "PNG ou JPG – Max 15 Mo",
+    "gallery_label": "Galerie Médias (max 3)",
+    "collaborators_title": "Collaborateurs",
+    "collaborator_name": "Nom",
+    "collaborator_role": "Rôle",
+    "add": "+ Ajouter",
+    "remove": "Supprimer"
+  },
+
+  "ownership": {
+    "title": "Certificat de Propriété",
+    "text": "En soumettant ce dossier, vous certifiez sur l'honneur être l'auteur original de l'œuvre et détenir l'intégralité des droits de diffusion. Vous acceptez que MARS.A.I utilise ces éléments pour la promotion du festival."
+  },
+
+  "footer": {
+    "ariaLabel": "Bas de page",
+    "infoAriaLabel": "Information et réseaux sociaux",
+    "description": "Une co-création de l’école du numérique La Plateforme et le Mobile Film Festival. Ensemble pour dessiner les nouveaux horizons du cinéma.",
+    "facebook": "Lien Facebook",
+    "instagram": "Lien Instagram",
+    "youtube": "Lien Youtube",
+    "x": "Lien X",
+    "newsletterTitle": "Restez connectés",
+    "newsletterLabel": "Inscription newsletter",
+    "newsletterPlaceholder": "Votre@email.com",
+    "newsletterButton": "S'inscrire",
+    "legalNotice": "Mentions légales",
+    "privacyPolicy": "Politique de confidentialité"
+  },
+
+  "auth": {
+    "loginTitle": "Connexion",
+    "registerTitle": "Inscription",
+    "email": "Adresse e-mail",
+    "password": "Mot de passe",
+    "firstname": "Prénom",
+    "lastname": "Nom",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "loading": "Chargement...",
+    "loginButton": "Se connecter",
+    "registerButton": "S'inscrire",
+    "noAccount": "Pas de compte ? Inscrivez-vous",
+    "hasAccount": "Déjà un compte ? Connectez-vous",
+    "successLogin": "Vous êtes connecté avec succès",
+    "successRegister": "Vous êtes inscrit avec succès",
+    "registered": "Inscription réussie, vous pouvez vous connecter"
   }
+
 }
