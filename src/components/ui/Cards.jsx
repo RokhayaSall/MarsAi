@@ -132,3 +132,15 @@ export function CardPlace() {
     </article>
   );
 }
+
+export function CardPartner({ src, alt }) {
+  return (
+    <li className="bg-white border border-[#D5DAE1] rounded-4xl p-6 flex justify-center md:items-center aspect-square ">
+      <img
+        className="hover:grayscale duration-600 object-contain"
+        src={src}
+        alt={alt}
+      />
+    </li>
+  );
+}

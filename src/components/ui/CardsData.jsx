@@ -10,6 +10,10 @@ import { MdEventAvailable } from 'react-icons/md';
 import { GiFilmSpool } from 'react-icons/gi';
 import { FaGlobe } from 'react-icons/fa';
 
+const images = import.meta.glob('../../assets/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+});
+
 export const cardsData = [
   {
     id: 1,
@@ -139,5 +143,68 @@ export const cardsNumber = [
     icon: GiFilmSpool,
     title: '+600',
     text: 'Films soumis',
+  },
+];
+
+export const cardsPartner = [
+  {
+    id: 1,
+    src: images['../../assets/plateforme.png'].default,
+    alt: 'Logo la plateforme',
+  },
+  {
+    id: 2,
+    src: images['../../assets/mobile.png'].default,
+    alt: 'Logo mobile festival',
+  },
+  {
+    id: 3,
+    src: images['../../assets/undp.png'].default,
+    alt: 'Logo undp',
+  },
+  {
+    id: 4,
+    src: images['../../assets/psl.png'].default,
+    alt: 'Logo psl',
+  },
+  {
+    id: 5,
+    src: images['../../assets/cnc.png'].default,
+    alt: 'Logo cnc',
+  },
+  {
+    id: 6,
+    src: images['../../assets/action.png'].default,
+    alt: 'Logo action campaign',
+  },
+  {
+    id: 7,
+    src: images['../../assets/unric.png'].default,
+    alt: 'Logo unric',
+  },
+  {
+    id: 8,
+    src: images['../../assets/sacd.png'].default,
+    alt: 'Logo sacd',
+  },
+  {
+    id: 9,
+    src: images['../../assets/agence.png'].default,
+    alt: "Logo l'agence cu court métrage",
+  },
+  {
+    id: 10,
+    src: images['../../assets/extra.png'].default,
+    alt: 'Logo extra court',
+  },
+  {
+    id: 11,
+    src: images['../../assets/unesco.jpg'].default,
+    alt: 'Logo unesco',
+  },
+  {
+    id: 12,
+    src: images['../../assets/global.png'].default,
+    alt: 'Logo global youth biodiversity network',
   },
 ];

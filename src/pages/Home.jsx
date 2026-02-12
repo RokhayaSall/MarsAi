@@ -10,6 +10,7 @@ import {
   CardSelection,
   CardCalender,
   CardPlace,
+  CardPartner,
 } from '../components/ui/Cards.jsx';
 import {
   cardsData,
@@ -18,8 +19,10 @@ import {
   cardsInfos,
   cardsPlaces,
   cardsNumber,
+  cardsPartner,
 } from '../components/ui/CardsData.jsx';
 import { FaMapMarkerAlt } from 'react-icons/fa';
+import { FaHandshakeSimple } from 'react-icons/fa6';
 
 function Home() {
   return (
@@ -30,7 +33,7 @@ function Home() {
           <span className="text-[#ff5845] "> FUTURS</span> SOUHAITABLES
         </h1>
 
-        <p className="text-white text-xl font-bold text-shadow-lg/70 m-8 mb-15 md:mb-6 md:text-2xl">
+        <p className="text-white text-xl font-semibold text-shadow-lg/90 mt-8 mb-15 md:mb-6 md:text-2xl">
           Le festival de courts-métrages de 60 secondes réalisés par IA. 2 jours
           d&apos;immersion au cœur de Marseille.
         </p>
@@ -126,7 +129,7 @@ function Home() {
         <ButtonParticipate className={`block w-fit mx-auto`} />
       </section>
 
-      <section className="p-15 md:p-15 md:pt-20 bg-[#282828]">
+      <section id="buttonMore" className="p-15 md:p-15 md:pt-20 bg-[#282828]">
         <h2 className="font-bold text-4xl  text-white md:text-5xl uppercase w-77 md:w-150">
           Deux journées de
           <span className="text-[#FF5845]"> conférences</span> gratuites
@@ -160,7 +163,7 @@ function Home() {
       </section>
 
       <section className="p-15 md:p-15 md:pt-15 bg-[#EFEFEF] ">
-        <p className="flex items-center font-semibold text-[#282828] text-xl uppercase gap-3">
+        <p className="flex items-center font-semibold text-[#195d9c] text-xl uppercase gap-3">
           <FaMapMarkerAlt />
           Le lieu
         </p>
@@ -215,6 +218,24 @@ function Home() {
             />
           ))}
         </div>
+      </section>
+
+      <section className="p-15 md:p-15 md:pt-15 bg-[#EFEFEF] ">
+        <p className="flex items-center font-semibold text-[#195d9c] text-xl uppercase gap-3">
+          <FaHandshakeSimple /> Nos partenaires
+        </p>
+        <h2 className="font-bold text-4xl mb-3 mt-5 text-[#282828] w-80 md:text-5xl md:w-full uppercase">
+          Ils soutiennent
+          <span className="text-[#2b71b1]"> le futur</span>
+        </h2>
+        <ul
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10 mt-15"
+          aria-label="Nos partenaires"
+        >
+          {cardsPartner.map(card => (
+            <CardPartner key={card.id} src={card.src} alt={card.alt} />
+          ))}
+        </ul>
       </section>
     </>
   );
