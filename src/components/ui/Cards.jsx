@@ -1,12 +1,12 @@
 import { Globe } from 'lucide-react';
 import { MdEvent } from 'react-icons/md';
 
-export function Card({ icon: Icon, title, text }) {
+export function Card({ icon: Icon, title, text, className }) {
   return (
-    <article className="bg-white border border-[#D5DAE1] rounded-4xl p-6">
-      <Icon className="text-[#ff5845] text-4xl" />
+    <article className={`border border-[#D5DAE1] rounded-4xl p-6 ${className}`}>
+      <Icon className="text-[#ff5845] text-5xl" />
       <h3 className="font-bold text-[#282828] text-2xl mt-2">{title}</h3>
-      <p className="mt-2 text-xl">{text}</p>
+      <p className="mt-2 text-xl  ">{text}</p>
     </article>
   );
 }

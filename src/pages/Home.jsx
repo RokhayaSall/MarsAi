@@ -17,6 +17,7 @@ import {
   cardsSelectionData,
   cardsInfos,
   cardsPlaces,
+  cardsNumber,
 } from '../components/ui/CardsData.jsx';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
@@ -55,6 +56,7 @@ function Home() {
               icon={card.icon}
               title={card.title}
               text={card.text}
+              className={`bg-white text-[#64748B]`}
             />
           ))}
         </div>
@@ -186,6 +188,33 @@ function Home() {
           ))}
         </div>
         <CardPlace />
+      </section>
+
+      <section className="bg-white p-15 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around ">
+        <div aria-label="Chiffres projetés ">
+          <h2 className="text- font-bold text-4xl uppercase w-70 ">
+            Chiffres <span className="text-[#2b71b1]">projetés</span>
+          </h2>
+          <p className="text-xl text-[#6B6B6B] font-semibold mt-5 mb-15 md:w-90 md:mb-6">
+            Basé sur l&apos;expertise du Mobile Film Festival et le rayonnement
+            de La Plateforme.
+          </p>
+        </div>
+
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10    "
+          aria-label="Chiffres projetés"
+        >
+          {cardsNumber.map(card => (
+            <Card
+              key={card.id}
+              icon={card.icon}
+              title={card.title}
+              text={card.text}
+              className={`bg-[#EFEFEF]  md:p-10`}
+            />
+          ))}
+        </div>
       </section>
     </>
   );

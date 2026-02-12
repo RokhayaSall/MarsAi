@@ -7,6 +7,8 @@ import { IoFlashSharp } from 'react-icons/io5';
 import { IoRocketSharp } from 'react-icons/io5';
 import { FaAward, FaHandHoldingHeart } from 'react-icons/fa';
 import { MdEventAvailable } from 'react-icons/md';
+import { GiFilmSpool } from 'react-icons/gi';
+import { FaGlobe } from 'react-icons/fa';
 
 export const cardsData = [
   {
@@ -122,5 +124,20 @@ export const cardsPlaces = [
     title: 'Salle plaza',
     description:
       "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants.",
+  },
+];
+
+export const cardsNumber = [
+  {
+    id: 1,
+    icon: FaGlobe,
+    title: '+120',
+    text: 'Pays représentés',
+  },
+  {
+    id: 2,
+    icon: GiFilmSpool,
+    title: '+600',
+    text: 'Films soumis',
   },
 ];
