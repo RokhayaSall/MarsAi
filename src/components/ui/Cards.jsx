@@ -102,7 +102,7 @@ export function CardSelection({ title, text, description }) {
 
 export function CardCalender() {
   return (
-    <article className="bg-white border border-[#D5DAE1] rounded-4xl py-15 text-center md:p-20">
+    <article className="bg-[#F8F9FA] border border-[#D5DAE1] rounded-4xl py-15 text-center md:p-20 md:px-16">
       <MdEvent className="text-[#246BAD] text-5xl text-center mx-auto" />
       <h3 className="font-bold text-[#282828] text-4xl mt-2 uppercase ">
         13 Juin
@@ -116,6 +116,19 @@ export function CardCalender() {
       >
         Prendre mon pass
       </button>
+    </article>
+  );
+}
+
+export function CardPlace() {
+  return (
+    <article className="relative bg-[url(src/assets/port-marseille.jpg)] bg-cover bg-center bg-gray-400 bg-blend-multiply rounded-4xl p-10 pt-60 flex flex-col ">
+      <p className="text-white text-xl font-semibold mb-3 uppercase text-shadow-lg/90 md:w-100">
+        Marseille, France
+      </p>
+      <h2 className="text-white font-bold text-3xl text-shadow-lg/90  uppercase w-60 md:text-4xl md:w-full">
+        Centre Événementiel La Plateforme
+      </h2>
     </article>
   );
 }

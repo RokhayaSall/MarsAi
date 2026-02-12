@@ -109,3 +109,18 @@ export const cardsInfos = [
     text: "Cinéastes, acteurs et créateurs renommés pour récompenser l'excellence.",
   },
 ];
+
+export const cardsPlaces = [
+  {
+    id: 1,
+    title: 'Salle des sucres',
+    description:
+      'Futur salle des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie.',
+  },
+  {
+    id: 2,
+    title: 'Salle plaza',
+    description:
+      "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants.",
+  },
+];

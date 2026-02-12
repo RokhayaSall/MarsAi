@@ -9,18 +9,21 @@ import {
   CardFestival,
   CardSelection,
   CardCalender,
+  CardPlace,
 } from '../components/ui/Cards.jsx';
 import {
   cardsData,
   cardsFestivalData,
   cardsSelectionData,
   cardsInfos,
+  cardsPlaces,
 } from '../components/ui/CardsData.jsx';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
 function Home() {
   return (
     <>
-      <section className="relative text-center bg-[url(src/assets/sunset.jpg)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-45">
+      <section className="relative text-center bg-[url(src/assets/ville.jpg)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-45">
         <h1 className="text-white font-bold text-5xl text-shadow-lg/70  uppercase md:w-full ">
           IMAGINEZ DES
           <span className="text-[#ff5845] "> FUTURS</span> SOUHAITABLES
@@ -141,17 +144,48 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative bg-[url(src/assets/marsai-night.avif)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around ">
+      <section className="relative bg-[url(src/assets/marsai-night.avif)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">
         <div className="" aria-label="Prendre mon pass">
-          <h2 className="text-white font-bold text-4xl uppercase w-70 md:text-7xl">
+          <h2 className="text-white font-bold text-4xl text-shadow-lg/70  uppercase w-70 md:text-7xl">
             Mars.A.I night
           </h2>
-          <p className="text-white text-xl mt-5 mb-15 md:w-100 md:mb-6">
+          <p className="text-white text-xl text-shadow-lg/70  mt-5 mb-15 md:w-100 md:mb-6">
             Fête mêlant IA et futurs souhaitables. Une expérience immersive
             sonore et visuelle.
           </p>
         </div>
         <CardCalender />
+      </section>
+
+      <section className="p-15 md:p-15 md:pt-15 bg-[#EFEFEF] ">
+        <p className="flex items-center font-semibold text-[#282828] text-xl uppercase gap-3">
+          <FaMapMarkerAlt />
+          Le lieu
+        </p>
+        <h2 className="font-bold text-4xl mb-3 mt-5 text-[#282828] w-70 md:text-5xl  md:w-full uppercase">
+          La
+          <span className="text-[#2b71b1]"> plateforme</span>{' '}
+        </h2>
+        <h3 className="font-bold text-2xl uppercase text-[#6B6B6B] md:text-xl ">
+          (Ex dock des suds)
+        </h3>
+        <p className="text-[#6B6B6B] font-semibold text-xl mt-8">
+          4 000 m² d&apos;espaces modulables dans le centre de Marseille, au
+          cœur de l&apos;écosystème numérique.
+        </p>
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 mt-10   "
+          aria-label="Salles du centre la plateforme"
+        >
+          {cardsPlaces.map(card => (
+            <CardSelection
+              key={card.id}
+              title={card.title}
+              description={card.description}
+            />
+          ))}
+        </div>
+        <CardPlace />
       </section>
     </>
   );
