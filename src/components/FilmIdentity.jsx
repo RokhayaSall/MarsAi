@@ -2,7 +2,7 @@ import React from 'react';
 import { FiFilm } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 
-const FilmIdentityForm = () => {
+const FilmIdentityForm = ({ formData, update }) => {
   const { t } = useTranslation();
 
   return (
@@ -18,6 +18,7 @@ const FilmIdentityForm = () => {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+          {/* ORIGINAL TITLE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.original_title')}
@@ -25,10 +26,13 @@ const FilmIdentityForm = () => {
             <input
               type="text"
               placeholder={t('film_identity.original_title_placeholder')}
+              value={formData.original_title}
+              onChange={(e) => update({ original_title: e.target.value })}
               className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase"
             />
           </div>
 
+          {/* ENGLISH TITLE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.english_title')}
@@ -36,10 +40,13 @@ const FilmIdentityForm = () => {
             <input
               type="text"
               placeholder={t('film_identity.english_title_placeholder')}
+              value={formData.english_title}
+              onChange={(e) => update({ english_title: e.target.value })}
               className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase"
             />
           </div>
 
+          {/* DURATION */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.duration')}
@@ -47,10 +54,13 @@ const FilmIdentityForm = () => {
             <input
               type="text"
               placeholder={t('film_identity.duration_placeholder')}
+              value={formData.duration || ''}
+              onChange={(e) => update({ duration: e.target.value })}
               className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all"
             />
           </div>
 
+          {/* LANGUAGE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.language')}
@@ -58,30 +68,34 @@ const FilmIdentityForm = () => {
             <input
               type="text"
               placeholder={t('film_identity.language_placeholder')}
+              value={formData.language}
+              onChange={(e) => update({ language: e.target.value })}
               className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase"
             />
           </div>
 
+          {/* SYNOPSIS ORIGINAL */}
           <section className="md:col-span-2 space-y-2">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
-                {t('film_identity.synopsis_original')}
-              </label>
-            </div>
+            <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
+              {t('film_identity.synopsis_original')}
+            </label>
             <textarea
               placeholder={t('film_identity.synopsis_original_placeholder')}
+              value={formData.original_synopsis}
+              onChange={(e) => update({ original_synopsis: e.target.value })}
               className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
             />
           </section>
 
+          {/* SYNOPSIS ENGLISH */}
           <section className="md:col-span-2 space-y-2">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
-                {t('film_identity.synopsis_english')}
-              </label>
-            </div>
+            <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
+              {t('film_identity.synopsis_english')}
+            </label>
             <textarea
               placeholder={t('film_identity.synopsis_english_placeholder')}
+              value={formData.english_synopsis}
+              onChange={(e) => update({ english_synopsis: e.target.value })}
               className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
             />
           </section>

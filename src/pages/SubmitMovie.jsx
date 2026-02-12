@@ -10,7 +10,7 @@ import axios from 'axios';
 
 // 🔥 CONFIG CLOUDINARY
 const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/djkgizajl/upload";
-const UPLOAD_PRESET = "unsigned_preset";
+const UPLOAD_PRESET = "marsai";
 
 const SubmitMovie = () => {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ const SubmitMovie = () => {
     original_title: '',
     english_title: '',
     youtube_url: '',
-    duration: '',
+    duration: null,
     is_hybrid: false,
     language: '',
     original_synopsis: '',
@@ -32,7 +32,6 @@ const SubmitMovie = () => {
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
   const [images, setImages] = useState([]); 
-  // images = [{ preview, url, uploading }]
 
   const updateField = (updatedFields) => {
     setFormData(prev => ({ ...prev, ...updatedFields }));
@@ -42,7 +41,6 @@ const SubmitMovie = () => {
   const { getRootProps, getInputProps } = useDropzone({
     accept: { "image/*": [] },
     onDrop: async (acceptedFiles) => {
-
       const newImages = acceptedFiles.map(file => ({
         file,
         preview: URL.createObjectURL(file),
@@ -53,33 +51,22 @@ const SubmitMovie = () => {
       setImages(prev => [...prev, ...newImages]);
 
       for (let img of newImages) {
-        const data = new FormData();
-        data.append("file", img.file);
-        data.append("upload_preset", UPLOAD_PRESET);
+        const formDataCloud = new FormData();
+        formDataCloud.append("file", img.file);
+        formDataCloud.append("upload_preset", UPLOAD_PRESET);
 
         try {
-          const res = await axios.post(CLOUDINARY_URL, data);
+          const res = await axios.post(CLOUDINARY_URL, formDataCloud, {
+            headers: { "Content-Type": "multipart/form-data" }
+          });
 
-          console.log("Cloudinary response:", res.data);
-
-          if (res.data.secure_url) {
-            setImages(prev =>
-              prev.map(item =>
-                item.preview === img.preview
-                  ? { ...item, url: res.data.secure_url, uploading: false }
-                  : item
-              )
-            );
-          } else {
-            console.error("Pas de secure_url reçu !");
-            setImages(prev =>
-              prev.map(item =>
-                item.preview === img.preview
-                  ? { ...item, uploading: false }
-                  : item
-              )
-            );
-          }
+          setImages(prev =>
+            prev.map(item =>
+              item.preview === img.preview
+                ? { ...item, url: res.data.secure_url, uploading: false }
+                : item
+            )
+          );
 
         } catch (err) {
           console.error("Erreur upload Cloudinary :", err.response?.data || err);
@@ -99,8 +86,20 @@ const SubmitMovie = () => {
     setImages(prev => prev.filter((_, i) => i !== index));
   };
 
+  // 🔥 HANDLE SUBMIT AVEC VALIDATION
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 🔹 Vérification des champs obligatoires avant envoi
+    const requiredFields = ['original_title', 'english_title', 'duration', 'language'];
+    const missingFields = requiredFields.filter(f => {
+      const value = formData[f];
+      return value === null || value === undefined || (typeof value === 'string' && value.trim() === '');
+    });
+
+    if (missingFields.length > 0) {
+      return alert(`Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`);
+    }
 
     const uploadedUrls = images
       .filter(img => img.url)
@@ -112,7 +111,7 @@ const SubmitMovie = () => {
     };
 
     try {
-      const response = await fetch('http://127.0.0.1:3001/api/submit', {
+      const response = await fetch('http://localhost:3001/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ formData: finalData, collaborateurs }),
@@ -122,8 +121,25 @@ const SubmitMovie = () => {
 
       if (response.ok) {
         alert(t('submit_movie.success_message') || 'Formulaire enregistré avec succès !');
+        // 🔹 Réinitialiser le formulaire
+        setFormData({
+          original_title: '',
+          english_title: '',
+          youtube_url: '',
+          duration: null,
+          is_hybrid: false,
+          language: '',
+          original_synopsis: '',
+          english_synopsis: '',
+          creative_process: '',
+          ia_tools: '',
+          has_subs: false,
+          images: []
+        });
+        setImages([]);
+        setCollaborateurs([{ nom: '', role: '' }]);
       } else {
-        alert(result.error);
+        alert(result.error || 'Une erreur est survenue');
       }
 
     } catch (error) {
@@ -160,7 +176,6 @@ const SubmitMovie = () => {
         />
         <OwnershipCertificate formData={formData} update={updateField} />
 
-        {/* 🔥 ZONE DRAG & DROP */}
         <div className="max-w-4xl mx-auto mt-10">
           <h3 className="text-slate-700 font-semibold mb-3">
             Upload images
@@ -174,7 +189,6 @@ const SubmitMovie = () => {
             <p>Glisse ou clique pour uploader des images</p>
           </div>
 
-          {/* 🔥 PREVIEW */}
           <div className="flex flex-wrap gap-4 mt-6">
             {images.map((img, index) => (
               <div key={index} className="relative">
