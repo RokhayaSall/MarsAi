@@ -110,7 +110,6 @@ export default function FormDirector() {
           </fieldset>
         ))}
 
-        {/* Genre */}
         <fieldset>
           <label htmlFor="genre" className={labelClass}>
             {t('form.genre')}
@@ -129,7 +128,6 @@ export default function FormDirector() {
           </select>
         </fieldset>
 
-        {/* Réseaux sociaux */}
         <h3 className="text-lg font-semibold text-gray-800">{t('form.reseaux_sociaux')}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
           {[
@@ -152,7 +150,6 @@ export default function FormDirector() {
           ))}
         </div>
 
-        {/* Collaborateurs */}
         <h3 className="text-lg font-semibold text-gray-800 mt-4">{t('form.collaborateurs')}</h3>
         {collaborateurs.map((c, i) => (
           <div key={i} className="flex gap-4 mb-2">
@@ -189,7 +186,6 @@ export default function FormDirector() {
           </button>
         </div>
 
-        {/* Boutons */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"

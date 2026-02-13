@@ -6,8 +6,8 @@ import en from './locales/en.json';
 import fr from './locales/fr.json';
 
 i18n
-  .use(LanguageDetector) // détecte automatiquement la langue du navigateur
-  .use(initReactI18next) // passe i18n à React
+  .use(LanguageDetector) // c ca qui détecte automatiquement la langue du navigateur
+  .use(initReactI18next) //  ca va passer le i18n à Reactpour qu'il soit fonctionnel
   .init({
     resources: {
       en: { translation: en },
@@ -15,7 +15,7 @@ i18n
     },
     fallbackLng: 'fr', // langue par défaut si non détectée
     interpolation: {
-      escapeValue: false, // React échappe déjà
+      escapeValue: false, 
     },
   });
 

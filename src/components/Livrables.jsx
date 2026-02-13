@@ -7,7 +7,6 @@ import { useDropzone } from 'react-dropzone';
 const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
   const { t } = useTranslation();
 
-  // --- LOGIQUE COLLABORATEURS ---
   const ajouterCollaborateur = () =>
     updateCollabs([...collaborateurs, { nom: '', role: '' }]);
 
@@ -24,18 +23,16 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
     updateCollabs(newCollabs);
   };
 
-  // --- LOGIQUE VIGNETTE ---
   const onDropVignette = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (file) {
-      // On crée une propriété preview pour l'affichage
       Object.assign(file, { preview: URL.createObjectURL(file) });
       update({ thumbnail: file });
     }
   };
 
   const removeVignette = (e) => {
-    e.stopPropagation(); // Empêche d'ouvrir la fenêtre de choix de fichier
+    e.stopPropagation(); 
     update({ thumbnail: null });
   };
 
@@ -45,13 +42,11 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
     multiple: false
   });
 
-  // --- LOGIQUE GALERIE ---
   const onDropGallery = (acceptedFiles) => {
     const currentGallery = formData.gallery || [];
     const newFiles = acceptedFiles.map(file => 
       Object.assign(file, { preview: URL.createObjectURL(file) })
     );
-    // On limite à 3 images au total
     update({ gallery: [...currentGallery, ...newFiles].slice(0, 3) });
   };
 
@@ -74,7 +69,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
     <section className="flex justify-center items-center bg-gray-50 p-6">
       <div className="w-full max-w-5xl bg-white rounded-3xl p-8 md:p-12">
         
-        {/* HEADER */}
         <header className="flex items-center gap-4 mb-10 border-b pb-6">
           <div className="flex items-center justify-center p-2 border border-slate-300 rounded-md">
             <FiFilm className="w-6 h-6 text-slate-700" />
@@ -86,7 +80,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
           
-          {/* LIEN YOUTUBE */}
           <div className="flex flex-col">
             <label className={labelStyle}>Lien Youtube*</label>
             <input
@@ -98,7 +91,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             />
           </div>
 
-          {/* SOUS-TITRES */}
           <div className="flex flex-col">
             <label className={labelStyle}>Sous-titres (.srt)</label>
             <div className="flex flex-col gap-2">
@@ -118,7 +110,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             </div>
           </div>
 
-          {/* VIGNETTE OFFICIELLE */}
           <div className="flex flex-col">
             <label className={labelStyle}>Vignette Officielle (16:9)</label>
             <div 
@@ -146,7 +137,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             </div>
           </div>
 
-          {/* GALERIE MÉDIAS */}
           <div className="flex flex-col">
             <label className={labelStyle}>Galerie Médias (Max 3)</label>
             <div 
@@ -155,7 +145,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             >
               <input {...getInputGallery()} />
               
-              {/* Si la galerie est vide, on affiche les icônes par défaut */}
               {(!formData.gallery || formData.gallery.length === 0) ? (
                 <div className="flex gap-6">
                   <LuImagePlus className="w-12 h-12 text-slate-400" />
@@ -175,7 +164,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
                       </button>
                     </div>
                   ))}
-                  {/* Petit bouton "+" si on a moins de 3 images */}
                   {formData.gallery.length < 3 && (
                     <div className="flex-1 border-2 border-dashed border-slate-300 rounded-md flex items-center justify-center">
                        <LuImagePlus className="text-slate-400" size={24} />
@@ -186,7 +174,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             </div>
           </div>
 
-          {/* COLLABORATEURS */}
           <div className="md:col-span-2 mt-4">
             <label className={labelStyle}>Collaborateurs</label>
             {collaborateurs.map((collab, index) => (

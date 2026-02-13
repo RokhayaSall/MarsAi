@@ -18,7 +18,6 @@ const FilmIdentityForm = ({ formData, update }) => {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
-          {/* ORIGINAL TITLE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.original_title')}
@@ -32,7 +31,6 @@ const FilmIdentityForm = ({ formData, update }) => {
             />
           </div>
 
-          {/* ENGLISH TITLE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.english_title')}
@@ -46,7 +44,6 @@ const FilmIdentityForm = ({ formData, update }) => {
             />
           </div>
 
-          {/* DURATION */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.duration')}
@@ -60,7 +57,6 @@ const FilmIdentityForm = ({ formData, update }) => {
             />
           </div>
 
-          {/* LANGUAGE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.language')}
@@ -74,7 +70,6 @@ const FilmIdentityForm = ({ formData, update }) => {
             />
           </div>
 
-          {/* SYNOPSIS ORIGINAL */}
           <section className="md:col-span-2 space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.synopsis_original')}
@@ -87,7 +82,6 @@ const FilmIdentityForm = ({ formData, update }) => {
             />
           </section>
 
-          {/* SYNOPSIS ENGLISH */}
           <section className="md:col-span-2 space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.synopsis_english')}
