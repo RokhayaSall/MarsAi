@@ -6,7 +6,7 @@ import { FaSquareXTwitter } from 'react-icons/fa6';
 
 function Footer() {
   return (
-    <footer className=" bg-[#282828] p-15 md:p-25 text-white">
+    <footer className=" bg-[#282828] p-15 text-white">
       <div
         aria-label="Bas de page"
         className="flex flex-col md:flex-row justify-between gap-10 items-center"
