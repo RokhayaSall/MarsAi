@@ -44,9 +44,7 @@ export default function Auth() {
         localStorage.setItem('token', res.token);
 
         setSuccess(
-          isLogin
-            ? t('auth.successLogin')
-            : t('auth.successRegister')
+          isLogin ? t('auth.successLogin') : t('auth.successRegister')
         );
 
         setTimeout(() => {
@@ -115,9 +113,7 @@ export default function Auth() {
                 tabIndex={-1}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
                 aria-label={
-                  showPassword
-                    ? t('auth.hidePassword')
-                    : t('auth.showPassword')
+                  showPassword ? t('auth.hidePassword') : t('auth.showPassword')
                 }
               >
                 {showPassword ? <FaEye /> : <FaEyeSlash />}
@@ -176,9 +172,7 @@ export default function Auth() {
           onClick={() => setIsLogin(!isLogin)}
           className="mt-6 block text-center text-gray-600 hover:underline"
         >
-          {isLogin
-            ? t('auth.noAccount')
-            : t('auth.hasAccount')}
+          {isLogin ? t('auth.noAccount') : t('auth.hasAccount')}
         </button>
       </div>
     </div>

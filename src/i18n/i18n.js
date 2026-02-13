@@ -15,7 +15,7 @@ i18n
     },
     fallbackLng: 'fr', // langue par défaut si non détectée
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
   });
 

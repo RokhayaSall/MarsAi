@@ -5,6 +5,14 @@ import { IoBook } from 'react-icons/io5';
 import { TbTargetArrow } from 'react-icons/tb';
 import { IoFlashSharp } from 'react-icons/io5';
 import { IoRocketSharp } from 'react-icons/io5';
+import { FaAward, FaHandHoldingHeart } from 'react-icons/fa';
+import { MdEventAvailable } from 'react-icons/md';
+import { GiFilmSpool } from 'react-icons/gi';
+import { FaGlobe } from 'react-icons/fa';
+
+const images = import.meta.glob('../../assets/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+});
 
 export const cardsData = [
   {
@@ -78,5 +86,125 @@ export const cardsSelectionData = [
     title: 'Festival',
     text: 'Salles de cinéma',
     description: 'Projection sur grand écran pour une immersion totale.',
+  },
+];
+
+export const cardsInfos = [
+  {
+    id: 1,
+    icon: FaHandHoldingHeart,
+    title: 'Le coeur du festival',
+    text: "Débats engagés sur l'éthique et le futur.",
+  },
+  {
+    id: 2,
+    icon: MdLocalMovies,
+    title: 'Projections',
+    text: 'Films en compétition et hors-compétition sur grand écran.',
+  },
+  {
+    id: 3,
+    icon: MdEventAvailable,
+    title: 'Workshops',
+    text: "Scénario, création et post-prod avec des experts de l'IA.",
+  },
+  {
+    id: 4,
+    icon: FaAward,
+    title: 'Remise des prix',
+    text: "Cinéastes, acteurs et créateurs renommés pour récompenser l'excellence.",
+  },
+];
+
+export const cardsPlaces = [
+  {
+    id: 1,
+    title: 'Salle des sucres',
+    description:
+      'Futur salle des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie.',
+  },
+  {
+    id: 2,
+    title: 'Salle plaza',
+    description:
+      "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants.",
+  },
+];
+
+export const cardsNumber = [
+  {
+    id: 1,
+    icon: FaGlobe,
+    title: '+120',
+    text: 'Pays représentés',
+  },
+  {
+    id: 2,
+    icon: GiFilmSpool,
+    title: '+600',
+    text: 'Films soumis',
+  },
+];
+
+export const cardsPartner = [
+  {
+    id: 1,
+    src: images['../../assets/plateforme.png'].default,
+    alt: 'Logo la plateforme',
+  },
+  {
+    id: 2,
+    src: images['../../assets/mobile.png'].default,
+    alt: 'Logo mobile festival',
+  },
+  {
+    id: 3,
+    src: images['../../assets/undp.png'].default,
+    alt: 'Logo undp',
+  },
+  {
+    id: 4,
+    src: images['../../assets/psl.png'].default,
+    alt: 'Logo psl',
+  },
+  {
+    id: 5,
+    src: images['../../assets/cnc.png'].default,
+    alt: 'Logo cnc',
+  },
+  {
+    id: 6,
+    src: images['../../assets/action.png'].default,
+    alt: 'Logo action campaign',
+  },
+  {
+    id: 7,
+    src: images['../../assets/unric.png'].default,
+    alt: 'Logo unric',
+  },
+  {
+    id: 8,
+    src: images['../../assets/sacd.png'].default,
+    alt: 'Logo sacd',
+  },
+  {
+    id: 9,
+    src: images['../../assets/agence.png'].default,
+    alt: "Logo l'agence cu court métrage",
+  },
+  {
+    id: 10,
+    src: images['../../assets/extra.png'].default,
+    alt: 'Logo extra court',
+  },
+  {
+    id: 11,
+    src: images['../../assets/unesco.jpg'].default,
+    alt: 'Logo unesco',
+  },
+  {
+    id: 12,
+    src: images['../../assets/global.png'].default,
+    alt: 'Logo global youth biodiversity network',
   },
 ];

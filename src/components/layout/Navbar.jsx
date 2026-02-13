@@ -41,7 +41,8 @@ function Header() {
         >
           <li className="font-bold text-[#282828]">
             <Link to="/gallery" onClick={() => setIsNavOpen(false)}>
-              {t('nav.gallery')} {/* <-- <-- C'est ici que j'utilise la fonction t pour traduire le texte du lien de navigation */}
+              {t('nav.gallery')}{' '}
+              {/* <-- <-- C'est ici que j'utilise la fonction t pour traduire le texte du lien de navigation */}
             </Link>
           </li>
           <li className="font-bold text-[#282828]">
@@ -64,7 +65,7 @@ function Header() {
             <FaGlobe
               className="text-[#2b71b1] w-10 h-10 cursor-pointer"
               aria-label="Traduire le site"
-              onClick={toggleLanguage} 
+              onClick={toggleLanguage}
             />
             <Link to="/auth" aria-label="Page de connexion">
               <CgProfile
