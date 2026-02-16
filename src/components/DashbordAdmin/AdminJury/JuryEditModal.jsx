@@ -22,7 +22,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/admin/jury/${jury.id}`,
+        `${import.meta.env.VITE_API_URL}/api/admin/jury/${jury.id}`,
         {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
       onClose();
     } catch (err) {
       console.error(err);
-      alert('Impossible de modifier le juré');
+      alert('Impossible de modifier le jury');
     }
   };
 
@@ -49,35 +49,35 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
       <form
         onSubmit={handleSubmit}
-        className="bg-white rounded-xl p-6 w-full max-w-md shadow-lg"
+        className="bg-gray-50 rounded-xl p-6 w-full max-w-md shadow-lg"
       >
         <h3 className="text-lg font-semibold mb-4">Modifier le jury</h3>
 
-        <label className="block mb-2">
+        <label className="block mb-3">
           Prénom
           <input
-            className="w-full border rounded-md p-2 mt-1"
+            className="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
             value={form.firstname}
             onChange={e => setForm({ ...form, firstname: e.target.value })}
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="block mb-3">
           Nom
           <input
-            className="w-full border rounded-md p-2 mt-1"
+            className="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
             value={form.lastname}
             onChange={e => setForm({ ...form, lastname: e.target.value })}
             required
           />
         </label>
 
-        <label className="block mb-2">
+        <label className="block mb-3">
           Email
           <input
             type="email"
-            className="w-full border rounded-md p-2 mt-1"
+            className="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
             value={form.email}
             onChange={e => setForm({ ...form, email: e.target.value })}
             required
@@ -85,10 +85,17 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
         </label>
 
         <div className="flex justify-end gap-3 mt-4">
-          <button type="button" onClick={onClose} className="text-gray-600">
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-200 transition"
+          >
             Annuler
           </button>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-md">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+          >
             Enregistrer
           </button>
         </div>

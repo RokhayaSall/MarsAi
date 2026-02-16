@@ -1,13 +1,25 @@
-export default function Card({ title, value, subtitle, children }) {
+
+
+export default function Card({ title, value, subtitle, icon: Icon, children }) {
   return (
-    <div className="bg-white rounded-lg shadow p-5">
-      <p className="text-sm text-gray-500">{title}</p>
+    <div
+      className="relative bg-white border border-gray-200 rounded-xl p-6 
+    shadow-sm hover:shadow-md transition-shadow duration-200"
+    >
+      {/* Icon (optionnelle) */}
+      {Icon && (
+        <div className="absolute top-5 right-5 text-gray-300">
+          <Icon size={18} />
+        </div>
+      )}
 
-      <p className="text-3xl font-bold mt-1">{value}</p>
+      <p className="text-sm text-gray-500 font-medium tracking-wide">{title}</p>
 
-      {subtitle && <p className="text-xs text-blue-400 mt-1">{subtitle}</p>}
+      <p className="text-3xl font-semibold text-gray-900 mt-2">{value}</p>
 
-      {children && <div className="mt-3">{children}</div>}
+      {subtitle && <p className="text-xs text-gray-400 mt-1">{subtitle}</p>}
+
+      {children && <div className="mt-4">{children}</div>}
     </div>
   );
 }

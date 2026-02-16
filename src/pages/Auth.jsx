@@ -48,7 +48,7 @@ export default function Auth() {
         );
 
         setTimeout(() => {
-          navigate('/');
+          navigate('/admin');
         }, 800);
       } else {
         setSuccess(t('auth.registered'));

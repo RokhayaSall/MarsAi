@@ -1,34 +1,69 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
-import DashbordHeader from '../../components/DashbordAdmin/DashbordHeader';
 import JuryList from '../../components/DashbordAdmin/AdminJury/JuryList';
 import JuryForm from '../../components/DashbordAdmin/AdminJury/JuryForm';
 import JuryEditModal from '../../components/DashbordAdmin/AdminJury/JuryEditModal';
+import {
+  getJury,
+  createJury,
+  updateJury,
+  deleteJury,
+} from '../../services/juryService';
 
 export default function AdminJury() {
   const [jury, setJury] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [editingJury, setEditingJury] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:3000/api/admin/jury')
-      .then(res => res.json())
-      .then(setJury);
-  }, []);
+  const token = localStorage.getItem('token');
 
-  const handleDelete = id => {
-    fetch(`http://localhost:3000/api/admin/jury/${id}`, {
-      method: 'DELETE',
-    }).then(() => setJury(prev => prev.filter(j => j.id !== id)));
+  // Charger la liste des jurés
+      useEffect(() => {
+        const fetchJury = async () => {
+          const token = localStorage.getItem('token'); 
+          if (!token) return;
+          try {
+            const data = await getJury({ token });
+            setJury(data);
+          } catch (err) {
+            console.error('Erreur fetch jury:', err);
+          }
+        };
+        fetchJury();
+      }, []); 
+
+
+  // Supprimer un juré
+  const handleDelete = async id => {
+    try {
+      await deleteJury(id, { token });
+      setJury(prev => prev.filter(j => j.id !== id));
+    } catch (err) {
+      console.error('Erreur suppression jury:', err);
+    }
   };
 
-  const handleCreate = newJury => {
-    setJury(prev => [...prev, newJury]);
-    setShowForm(false);
+  //  Ajouter un juré
+  const handleCreate = async newJury => {
+    console.log('Création jury payload:', newJury);
+    try {
+      const created = await createJury(newJury, { token });
+      setJury(prev => [...prev, created]);
+      setShowForm(false);
+    } catch (err) {
+      console.error('Erreur création jury:', err);
+    }
   };
 
-  const handleUpdate = updatedJury => {
-    setJury(prev => prev.map(j => (j.id === updatedJury.id ? updatedJury : j)));
+  // Mettre à jour un juré
+  const handleUpdate = async updatedJury => {
+    try {
+      const updated = await updateJury(updatedJury.id, updatedJury, { token });
+      setJury(prev => prev.map(j => (j.id === updated.id ? updated : j)));
+      setEditingJury(null);
+    } catch (err) {
+      console.error('Erreur mise à jour jury:', err);
+    }
   };
 
   return (
@@ -36,8 +71,6 @@ export default function AdminJury() {
       <Sidebar />
 
       <main className="flex-1 p-8">
-        <DashbordHeader />
-
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Gestion des jurés</h2>
           <button
