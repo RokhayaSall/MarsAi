@@ -70,11 +70,15 @@ export default function FormDirector() {
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <WiStars className="w-20 h-20 text-red-400 mx-auto" />
-        <h2 className="text-3xl text-red-500 mt-5">{t('form.appel_projets_2026')}</h2>
+        <h2 className="text-3xl text-red-500 mt-5">
+          {t('form.appel_projets_2026')}
+        </h2>
         <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">
           {t('form.formulaire_realisateur')}
         </h1>
-        <h3 className="text-xl text-slate-500 mt-2">{t('form.remplir_informations')}</h3>
+        <h3 className="text-xl text-slate-500 mt-2">
+          {t('form.remplir_informations')}
+        </h3>
       </div>
 
       <form
@@ -82,7 +86,18 @@ export default function FormDirector() {
         className="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-md space-y-6"
       >
         {/* Champs de base */}
-        {['nom','prenom','email','cp','ville','biographie','region','pays','telephone','metier'].map(field => (
+        {[
+          'nom',
+          'prenom',
+          'email',
+          'cp',
+          'ville',
+          'biographie',
+          'region',
+          'pays',
+          'telephone',
+          'metier',
+        ].map(field => (
           <fieldset key={field}>
             <label htmlFor={field} className={labelClass}>
               {t(`form.${field}`)}
@@ -128,13 +143,35 @@ export default function FormDirector() {
           </select>
         </fieldset>
 
-        <h3 className="text-lg font-semibold text-gray-800">{t('form.reseaux_sociaux')}</h3>
+        <h3 className="text-lg font-semibold text-gray-800">
+          {t('form.reseaux_sociaux')}
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
           {[
-            { name: 'facebook', icon: <FaFacebook className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600 text-2xl" /> },
-            { name: 'twitter', icon: <FaTwitter className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl" /> },
-            { name: 'linkedin', icon: <FaLinkedin className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-700 text-2xl" /> },
-            { name: 'instagram', icon: <FaInstagram className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-2xl" /> }
+            {
+              name: 'facebook',
+              icon: (
+                <FaFacebook className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-600 text-2xl" />
+              ),
+            },
+            {
+              name: 'twitter',
+              icon: (
+                <FaTwitter className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400 text-2xl" />
+              ),
+            },
+            {
+              name: 'linkedin',
+              icon: (
+                <FaLinkedin className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-700 text-2xl" />
+              ),
+            },
+            {
+              name: 'instagram',
+              icon: (
+                <FaInstagram className="absolute left-3 top-1/2 -translate-y-1/2 text-pink-500 text-2xl" />
+              ),
+            },
           ].map(social => (
             <fieldset key={social.name} className="relative">
               {social.icon}
@@ -143,14 +180,18 @@ export default function FormDirector() {
                 name={social.name}
                 value={formData[social.name]}
                 onChange={handleChange}
-                placeholder={social.name.charAt(0).toUpperCase() + social.name.slice(1)}
+                placeholder={
+                  social.name.charAt(0).toUpperCase() + social.name.slice(1)
+                }
                 className={`${inputClass} pl-10`}
               />
             </fieldset>
           ))}
         </div>
 
-        <h3 className="text-lg font-semibold text-gray-800 mt-4">{t('form.collaborateurs')}</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mt-4">
+          {t('form.collaborateurs')}
+        </h3>
         {collaborateurs.map((c, i) => (
           <div key={i} className="flex gap-4 mb-2">
             <input

@@ -30,6 +30,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/gallery" element={<Movies />} />
           <Route path="/form-director" element={<FormDirector />} />
+          <Route path="/submitMovie" element={<SubmitMovie />} />
+
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<DashbordAdmin />} />
           <Route path="/admin/jury" element={<AdminJury />} />

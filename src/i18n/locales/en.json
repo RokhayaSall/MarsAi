@@ -48,7 +48,6 @@
     "erreur_envoi": "Error submitting the form"
   },
 
-
   "movies": {
     "back_home": "Back to Home",
     "gallery_title": "THE GALLERY\nOF MOVIES",
@@ -98,7 +97,6 @@
     "synopsis_english_placeholder": "SUMMARIZE THE INTENTION OF YOUR FILM IN A FEW LINES..."
   },
 
-  
   "ia_declaration": {
     "step": "Step",
     "title": "AI Usage Declaration",
@@ -109,10 +107,9 @@
     "tech_stack_placeholder": "List the tools used (e.g., MidJourney for visuals, ElevenLabs for voices, Runway for animation...)",
     "creative_methodology": "Creative Methodology *",
     "creative_methodology_placeholder": "Describe the human-machine interaction in this process... Who did what? How were AI tools used? At which stage of the creative process?"
-  
-},
+  },
 
-"livrables": {
+  "livrables": {
     "step": "Step",
     "title": "Deliverables & Collaborators",
     "youtube_label": "YouTube Link*",
@@ -129,7 +126,7 @@
     "remove": "Remove"
   },
 
-   "ownership": {
+  "ownership": {
     "title": "Ownership Certificate",
     "text": "By submitting this file, you certify on your honor that you are the original author of the work and hold all distribution rights. You agree that MARS.A.I may use these materials for festival promotion."
   },
@@ -150,7 +147,6 @@
     "privacyPolicy": "Privacy Policy"
   },
 
-  
   "auth": {
     "loginTitle": "Login",
     "registerTitle": "Register",
@@ -169,7 +165,4 @@
     "successRegister": "Successfully registered",
     "registered": "Registration successful, you can login"
   }
-
-
-
 }

@@ -12,10 +12,11 @@ i18n
     resources: {
       en: { translation: en },
       fr: { translation: fr },
+      
     },
     fallbackLng: 'fr', // langue par défaut si non détectée
     interpolation: {
-      escapeValue: false, 
+      escapeValue: false,
     },
   });
 

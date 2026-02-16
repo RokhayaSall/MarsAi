@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
-import { FaFacebookSquare, FaInstagramSquare, FaYoutubeSquare } from 'react-icons/fa';
+import {
+  FaFacebookSquare,
+  FaInstagramSquare,
+  FaYoutubeSquare,
+} from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
 
@@ -7,7 +11,7 @@ function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#282828] p-15 md:p-25 text-white">
+    <footer className=" bg-[#282828] p-15 text-white">
       <div
         aria-label={t('footer.ariaLabel')}
         className="flex flex-col md:flex-row justify-between gap-10 items-center"
@@ -19,14 +23,13 @@ function Footer() {
           >
             MARS.A.I
           </Link>
-          <p className="py-6 w-70 pt-8 md:w-90 ">
-            {t('footer.description')}
-          </p>
+          <p className="py-6 w-70 pt-8 md:w-90 ">{t('footer.description')}</p>
           <ul className="flex gap-6 pt-5 ">
             <li>
               <a
                 href="https://www.facebook.com/?locale=fr_FR"
                 target="_blank"
+                rel="noreferrer"
                 aria-label={t('footer.facebook')}
               >
                 <FaFacebookSquare className="w-13 h-13 md:w-10 md:h-10 " />
@@ -37,6 +40,7 @@ function Footer() {
               <a
                 href="http://instagram.com/"
                 target="_blank"
+                rel="noreferrer"
                 aria-label={t('footer.instagram')}
               >
                 <FaInstagramSquare className="w-13 h-13 md:w-10 md:h-10" />
@@ -47,6 +51,7 @@ function Footer() {
               <a
                 href="https://www.youtube.com/"
                 target="_blank"
+                rel="noreferrer"
                 aria-label={t('footer.youtube')}
               >
                 <FaYoutubeSquare className="w-13 h-13 md:w-10 md:h-10" />
@@ -57,6 +62,7 @@ function Footer() {
               <a
                 href="https://x.com/?lang=fr"
                 target="_blank"
+                rel="noreferrer"
                 aria-label={t('footer.x')}
               >
                 <FaSquareXTwitter className="w-13 h-13 md:w-10 md:h-10" />

@@ -55,7 +55,7 @@
     "gallery_description": "Explorez l'intégralité de la sélection officielle. Des visions uniques, des courts-métrages pionniers créés avec l'Intelligence Artificielle.",
     "page_info": "Page {{currentPage}} sur {{totalPages}} - {{totalMovies}} films trouvés"
   },
-  
+
   "cards": {
     "default_card_title": "Titre",
     "default_card_text": "Description du contenu",
@@ -80,7 +80,6 @@
     "form_submitted": "Formulaire envoyé !"
   },
 
-  
   "film_identity": {
     "step": "Étape",
     "title": "Identité du film",
@@ -96,10 +95,9 @@
     "synopsis_original_placeholder": "RÉSUMEZ L'INTENTION DE VOTRE FILM EN QUELQUES LIGNES...",
     "synopsis_english": "Synopsis anglais* (max. 300 caractères)",
     "synopsis_english_placeholder": "SUMMARIZE YOUR FILM'S INTENTION IN A FEW LINES..."
-  
-},
+  },
 
-"ia_declaration": {
+  "ia_declaration": {
     "step": "Étape",
     "title": "Déclaration usage de l'IA",
     "classification_label": "Classification de l'oeuvre : * choix exclusif",
@@ -167,5 +165,4 @@
     "successRegister": "Vous êtes inscrit avec succès",
     "registered": "Inscription réussie, vous pouvez vous connecter"
   }
-
 }
