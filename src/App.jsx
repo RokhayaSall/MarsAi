@@ -14,7 +14,7 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 
-import { AuthProvider } from './contexts/AuthProvider'; 
+import { AuthProvider } from './context/AuthProvider'; 
 
 import './App.css';
 
