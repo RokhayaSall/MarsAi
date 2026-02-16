@@ -1,12 +1,9 @@
 import React from 'react';
 import { FiFilm, FiX } from 'react-icons/fi';
 import { LuImagePlus } from 'react-icons/lu';
-// import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
 
 const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUpload }) => {
-  // const { t } = useTranslation();
-
   const ajouterCollaborateur = () =>
     updateCollabs([...collaborateurs, { nom: '', role: '' }]);
 
@@ -30,7 +27,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
       uploading: true,
     });
     update({ thumbnail: file });
-    handleUpload && handleUpload(file); // ⚡ Upload Cloudinary
+    handleUpload && handleUpload(file);
   };
 
   const removeVignette = e => {
@@ -91,7 +88,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
 
           {/* YouTube URL */}
-          <div className="flex flex-col">
+          <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Lien Youtube*</label>
             <input
               type="text"
@@ -103,7 +100,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
           </div>
 
           {/* Sous-titres */}
-          <div className="flex flex-col">
+          <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Sous-titres (.srt)</label>
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2 text-sm cursor-pointer mb-2">
@@ -126,8 +123,41 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             </div>
           </div>
 
-          {/* Galerie Médias */}
-          <div className="flex flex-col md:col-span-2">
+          {/* 🔹 Vignette Officielle à gauche */}
+          <div className="flex flex-col md:col-span-1 mt-4">
+            <label className={labelStyle}>Vignette Officielle (16:9)</label>
+            <div
+              {...getRootVignette()}
+              className="bg-[#F1F3F6] rounded-lg h-40 relative flex flex-col items-center justify-center border-2 border-dashed border-transparent hover:border-slate-300 transition-all cursor-pointer overflow-hidden"
+            >
+              <input {...getInputVignette()} />
+              {formData.thumbnail ? (
+                <>
+                  <img
+                    src={formData.thumbnail.url || formData.thumbnail.preview}
+                    alt="Preview"
+                    className="w-full h-full object-cover"
+                  />
+                  <button
+                    onClick={removeVignette}
+                    className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-colors"
+                  >
+                    <FiX size={18} />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <LuImagePlus className="w-12 h-12 text-slate-400 mb-2" />
+                  <span className="text-xs font-bold text-slate-400 uppercase">
+                    PNG ou JPG – Max 15 Mo
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* 🔹 Galerie Médias à droite */}
+          <div className="flex flex-col md:col-span-2 mt-4">
             <label className={labelStyle}>Galerie Médias (Max 3)</label>
             <div
               {...getRootGallery()}
@@ -167,41 +197,8 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             </div>
           </div>
 
-          {/* Vignette Officielle */}
-          <div className="flex flex-col md:col-span-1 mt-4">
-            <label className={labelStyle}>Vignette Officielle (16:9)</label>
-            <div
-              {...getRootVignette()}
-              className="bg-[#F1F3F6] rounded-lg h-40 relative flex flex-col items-center justify-center border-2 border-dashed border-transparent hover:border-slate-300 transition-all cursor-pointer overflow-hidden"
-            >
-              <input {...getInputVignette()} />
-              {formData.thumbnail ? (
-                <>
-                  <img
-                    src={formData.thumbnail.url || formData.thumbnail.preview}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
-                  />
-                  <button
-                    onClick={removeVignette}
-                    className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition-colors"
-                  >
-                    <FiX size={18} />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <LuImagePlus className="w-12 h-12 text-slate-400 mb-2" />
-                  <span className="text-xs font-bold text-slate-400 uppercase">
-                    PNG ou JPG – Max 15 Mo
-                  </span>
-                </>
-              )}
-            </div>
-          </div>
-
           {/* Collaborateurs */}
-          <div className="md:col-span-2 mt-4">
+          <div className="md:col-span-3 mt-4">
             <label className={labelStyle}>Collaborateurs</label>
             {collaborateurs.map((collab, index) => (
               <div key={index} className="flex gap-4 mb-4">
