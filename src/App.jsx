@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AdminRoute from './routes/AdminRoutes';
+
 import Header from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Movies from './pages/Movies';
 import FormDirector from './pages/FormDirector';
-import SubmitMovie from './pages/SubmitMovie';
 import Auth from './pages/Auth';
 import DashbordAdmin from './pages/DashbordAdminPage/DashbordAdmin';
 import AdminJury from './pages/DashbordAdminPage/AdminJury';
@@ -13,41 +14,83 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 
-// import AdminFilms from './pages/AdminFilms';
-// import AdminJury from './pages/AdminJury';
-// import AdminCountries from './pages/AdminCountries';
-// import AdminWorkshops from './pages/AdminWorkshops';
-// import AdminDirectors from './pages/AdminDirectors';
+import { AuthProvider } from './contexts/AuthProvider'; 
 
 import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/gallery" element={<Movies />} />
-          <Route path="/form-director" element={<FormDirector />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/admin" element={<DashbordAdmin />} />
-          <Route path="/admin/jury" element={<AdminJury />} />
-          <Route path="/admin/config" element={<AdminConfig />} />
-          <Route path="/admin/events" element={<AdminEvents />} />
-          <Route path="/admin/films" element={<AdminMovies />} />
-          <Route path="/admin/results" element={<AdminMoviesResult />} />
+    <AuthProvider> {/* Envelopper toute l'application */}
+      <BrowserRouter>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/gallery" element={<Movies />} />
+            <Route path="/form-director" element={<FormDirector />} />
+            <Route path="/auth" element={<Auth />} />
 
-          {/* <Route path="/admin/notefilms" element={<AdminFilms />} />
-          <Route path="/admin/notejury" element={<AdminJury />} />
-          <Route path="/admin/countries" element={<AdminCountries />} />
-          <Route path="/admin/workshops" element={<AdminWorkshops />} />
-          <Route path="/admin/accountrealisateurs" element={<AdminDirectors />} /> */}
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </main>
-      <Footer />
-    </BrowserRouter>
+            {/* ROUTES ADMIN PROTÉGÉES */}
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <DashbordAdmin />
+                </AdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/jury"
+              element={
+                <AdminRoute>
+                  <AdminJury />
+                </AdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/config"
+              element={
+                <AdminRoute>
+                  <AdminConfig />
+                </AdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/events"
+              element={
+                <AdminRoute>
+                  <AdminEvents />
+                </AdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/films"
+              element={
+                <AdminRoute>
+                  <AdminMovies />
+                </AdminRoute>
+              }
+            />
+
+            <Route
+              path="/admin/results"
+              element={
+                <AdminRoute>
+                  <AdminMoviesResult />
+                </AdminRoute>
+              }
+            />
+
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 

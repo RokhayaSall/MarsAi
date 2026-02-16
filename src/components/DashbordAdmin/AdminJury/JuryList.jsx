@@ -2,7 +2,11 @@ import JuryRow from './JuryRow';
 
 export default function JuryList({ jury, onDelete, onEdit }) {
   if (!jury.length) {
-    return <p className="text-gray-500 text-center py-10">Aucun juré.</p>;
+    return (
+      <p className="text-gray-500 text-center py-10 bg-gray-50 rounded-lg shadow-sm">
+        Aucun juré.
+      </p>
+    );
   }
 
   return (

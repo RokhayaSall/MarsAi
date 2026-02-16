@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-
+import { apiFetch } from '../../services/api';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
-import DashbordHeader from '../../components/DashbordAdmin/DashbordHeader';
+
 import Card from '../../components/DashbordAdmin/Card';
 import ProgressBar from '../../components/DashbordAdmin/ProgressBar';
+import { Film, Users, Globe, Clipboard } from 'lucide-react';
 
 export default function DashbordAdmin() {
   const [stats, setStats] = useState(null);
@@ -13,16 +14,10 @@ export default function DashbordAdmin() {
   useEffect(() => {
     const fetchDashboard = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/dashboard');
-
-        if (!res.ok) {
-          throw new Error(`HTTP error ${res.status}`);
-        }
-
-        const data = await res.json();
+        const data = await apiFetch('/api/dashboard');
         setStats(data);
       } catch (err) {
-        console.error('Dashboard fetch error:', err);
+        console.error(err);
         setError('Impossible de charger le dashboard');
       } finally {
         setLoading(false);
@@ -32,42 +27,49 @@ export default function DashbordAdmin() {
     fetchDashboard();
   }, []);
 
-  // 🔄 Loading
   if (loading) {
     return (
-      <div className="p-10 text-gray-500 animate-pulse">
+      <div className="p-10 text-gray-500 animate-pulse bg-gray-50 min-h-screen">
         Chargement du dashboard…
       </div>
     );
   }
 
-  // ❌ Error
   if (error) {
-    return <div className="p-10 text-red-600">{error}</div>;
+    return (
+      <div className="p-10 text-red-600 bg-gray-50 min-h-screen">{error}</div>
+    );
   }
 
   return (
-    <div className="flex">
-      <Sidebar />
-
-      <main className="flex-1 bg-black-100 min-h-screen">
-        <DashbordHeader />
-
+    <div className="flex bg-gray-50 min-h-screen text-gray-900">
+      {/* Sidebar */}
+      <Sidebar light /> {/* Passer prop light pour version claire */}
+      {/* Main */}
+      <main className="flex-1">
+        {/* Dashboard Cards */}
         <section className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card
             title="Films évalués par le Jury"
             value={stats?.movies?.count ?? 0}
+            subtitle={`${stats?.movies?.today ?? 0} aujourd’hui`}
+            icon={Film}
           >
-            <ProgressBar percent={0} />
+            <ProgressBar percent={stats?.movies?.progress ?? 0} light />
           </Card>
 
           <Card
             title="Jurés ayant finalisé leur lots"
             value={stats?.jury?.finishedJury ?? 0}
+            icon={Users}
           />
 
-          <Card title="Pays représentés" value={stats?.countries?.count ?? 0}>
-            <p className="text-sm text-gray-400">
+          <Card
+            title="Pays représentés"
+            value={stats?.countries?.count ?? 0}
+            icon={Globe}
+          >
+            <p className="text-sm text-gray-500 mt-1">
               Zone dominante : {stats?.countries?.topZone ?? '—'}
             </p>
           </Card>
@@ -75,18 +77,17 @@ export default function DashbordAdmin() {
           <Card
             title="Taux d'occupation workshops"
             value={`${stats?.workshops?.occupancy ?? 0}%`}
+            icon={Clipboard}
           >
-            <ProgressBar percent={stats?.workshops?.occupancy ?? 0} />
+            <ProgressBar percent={stats?.workshops?.occupancy ?? 0} light />
           </Card>
 
           <Card
             title="Comptes Réalisateurs actifs"
             value={stats?.directors?.activeCount ?? 0}
-          >
-            <p className="text-sm text-gray-400">
-              +{stats?.directors?.todayIncrease ?? 0} aujourd’hui
-            </p>
-          </Card>
+            subtitle={`+${stats?.directors?.todayIncrease ?? 0} aujourd’hui`}
+            icon={Users}
+          />
         </section>
       </main>
     </div>
