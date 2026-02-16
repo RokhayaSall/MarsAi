@@ -3,13 +3,13 @@ import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { FaGlobe } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next'; // <-- import i18n
+import { useTranslation } from 'react-i18next'; // <-- import i18n Etape 3
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const { t, i18n } = useTranslation(); // <-- hook i18n
+  const { t, i18n } = useTranslation(); // <-- hook i18n Etape 4
 
-  // Fonction pour changer la langue
+  // Fonction pour detecter la langue pour changer une autre langue
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr');
   };
@@ -41,7 +41,8 @@ function Header() {
         >
           <li className="font-bold text-[#282828]">
             <Link to="/gallery" onClick={() => setIsNavOpen(false)}>
-              {t('nav.gallery')}
+              {t('nav.gallery')}{' '}
+              {/* <-- <-- C'est ici que j'utilise la fonction t pour traduire le texte du lien de navigation */}
             </Link>
           </li>
           <li className="font-bold text-[#282828]">
@@ -60,7 +61,7 @@ function Header() {
             </Link>
           </li>
           <li className="flex gap-6 items-center">
-            {/* Bouton pour changer la langue */}
+            {/* Icon du monde pour changer la langue!!!!!! */}
             <FaGlobe
               className="text-[#2b71b1] w-10 h-10 cursor-pointer"
               aria-label="Traduire le site"

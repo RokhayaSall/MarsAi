@@ -4,5 +4,165 @@
     "program": "PROGRAM & INFO",
     "jury": "JURY",
     "submit": "SUBMIT"
+  },
+
+  "home": {
+    "title": "IMAGINE DESIRABLE FUTURES",
+    "subtitle": "The 60-second short film festival made with AI. 2 days of immersion in the heart of Marseille.",
+    "projectTitle": "THE MARS.A.I PROJECT",
+    "projectText": "A unique hybrid event in France, bringing together the best of generative AI and cinematic creation.",
+    "competitionTitle": "FILMS IN COMPETITION",
+    "competitionText": "Discover a selection of pioneering works exploring the new frontiers of AI-assisted imagination.",
+    "festivalGoalsTitle": "FESTIVAL GOALS",
+    "selectionFormatTitle": "SELECTION FORMAT",
+    "selectionFormatText": "The journey of the works"
+  },
+
+  "form": {
+    "appel_projets_2026": "Call for projects 2026",
+    "formulaire_realisateur": "Director's Form",
+    "remplir_informations": "Please fill in the information below.",
+    "nom": "Last Name",
+    "prenom": "First Name",
+    "email": "Email",
+    "genre": "Gender",
+    "selectionner_genre": "Select gender",
+    "homme": "Male",
+    "femme": "Female",
+    "autre": "Other",
+    "code_postal": "Postal Code",
+    "ville": "City",
+    "biographie": "Biography",
+    "region": "Region",
+    "pays": "Country",
+    "telephone": "Phone",
+    "metier": "Current Job",
+    "reseaux_sociaux": "Social Networks",
+    "collaborateurs": "Collaborators",
+    "role": "Role",
+    "ajouter_collaborateur": "+ Add a collaborator",
+    "supprimer_collaborateur": "Remove a collaborator",
+    "envoyer": "Submit",
+    "etape_suivante": "Next Step",
+    "formulaire_envoye": "Form submitted! 🚀",
+    "erreur_envoi": "Error submitting the form"
+  },
+
+  "movies": {
+    "back_home": "Back to Home",
+    "gallery_title": "THE GALLERY\nOF MOVIES",
+    "gallery_title_span": "OF MOVIES",
+    "gallery_description": "Explore the full official selection. Unique visions, pioneering short films created with Artificial Intelligence.",
+    "page_info": "Page {{currentPage}} of {{totalPages}} - {{totalMovies}} movies found"
+  },
+
+  "cards": {
+    "default_card_title": "Title",
+    "default_card_text": "Content description",
+    "default_movie_title": "MOVIE TITLE",
+    "default_movie_duration": "60S",
+    "default_director_label": "Director",
+    "default_director_name": "Director Name",
+    "default_country_label": "Country",
+    "default_country_name": "Country",
+    "default_festival_title": "Festival Title",
+    "default_festival_text": "Festival Description",
+    "default_selection_title": "Selection Title",
+    "default_selection_text": "Selection Text",
+    "default_selection_description": "Detailed Description"
+  },
+
+  "submit_movie": {
+    "appel_projets_2026": "Call for Projects 2026",
+    "submit_film": "Submit a Film",
+    "fill_info": "Please fill in the information below.",
+    "finalize_submission": "Finalize my submission",
+    "form_submitted": "Form submitted!"
+  },
+
+  "film_identity": {
+    "step": "Step",
+    "title": "Film Identity",
+    "original_title": "Original Title*",
+    "original_title_placeholder": "ORIGINAL TITLE",
+    "english_title": "English Translation*",
+    "english_title_placeholder": "ENGLISH TRANSLATION",
+    "duration": "Exact Duration (seconds)*",
+    "duration_placeholder": "EX: 60",
+    "language": "Spoken/Main Language*",
+    "language_placeholder": "LANGUAGE",
+    "synopsis_original": "Original Language Synopsis* (max. 300 characters)",
+    "synopsis_original_placeholder": "SUMMARIZE THE INTENTION OF YOUR FILM IN A FEW LINES...",
+    "synopsis_english": "English Synopsis* (max. 300 characters)",
+    "synopsis_english_placeholder": "SUMMARIZE THE INTENTION OF YOUR FILM IN A FEW LINES..."
+  },
+
+  "ia_declaration": {
+    "step": "Step",
+    "title": "AI Usage Declaration",
+    "classification_label": "Work Classification: * exclusive choice",
+    "hybrid": "Hybrid Production",
+    "full_ia": "100% AI",
+    "tech_stack": "Technology Stack *",
+    "tech_stack_placeholder": "List the tools used (e.g., MidJourney for visuals, ElevenLabs for voices, Runway for animation...)",
+    "creative_methodology": "Creative Methodology *",
+    "creative_methodology_placeholder": "Describe the human-machine interaction in this process... Who did what? How were AI tools used? At which stage of the creative process?"
+  },
+
+  "livrables": {
+    "step": "Step",
+    "title": "Deliverables & Collaborators",
+    "youtube_label": "YouTube Link*",
+    "youtube_placeholder": "HTTPS://YOUTUBE.COM/...",
+    "subtitles_label": "Subtitles (.srt)",
+    "subtitles_text": "Voices or texts requiring subtitles",
+    "thumbnail_label": "Official Thumbnail (16:9)",
+    "thumbnail_text": "PNG or JPG – Max 15 MB",
+    "gallery_label": "Media Gallery (max 3)",
+    "collaborators_title": "Collaborators",
+    "collaborator_name": "Name",
+    "collaborator_role": "Role",
+    "add": "+ Add",
+    "remove": "Remove"
+  },
+
+  "ownership": {
+    "title": "Ownership Certificate",
+    "text": "By submitting this file, you certify on your honor that you are the original author of the work and hold all distribution rights. You agree that MARS.A.I may use these materials for festival promotion."
+  },
+
+  "footer": {
+    "ariaLabel": "Footer",
+    "infoAriaLabel": "Information and social networks",
+    "description": "A co-creation of La Plateforme digital school and the Mobile Film Festival. Together to shape the new horizons of cinema.",
+    "facebook": "Facebook link",
+    "instagram": "Instagram link",
+    "youtube": "Youtube link",
+    "x": "X link",
+    "newsletterTitle": "Stay connected",
+    "newsletterLabel": "Newsletter subscription",
+    "newsletterPlaceholder": "Your@email.com",
+    "newsletterButton": "Subscribe",
+    "legalNotice": "Legal Notice",
+    "privacyPolicy": "Privacy Policy"
+  },
+
+  "auth": {
+    "loginTitle": "Login",
+    "registerTitle": "Register",
+    "email": "Email address",
+    "password": "Password",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "loading": "Loading...",
+    "loginButton": "Login",
+    "registerButton": "Register",
+    "noAccount": "No account? Register",
+    "hasAccount": "Already have an account? Login",
+    "successLogin": "Successfully logged in",
+    "successRegister": "Successfully registered",
+    "registered": "Registration successful, you can login"
   }
 }
