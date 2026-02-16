@@ -34,10 +34,9 @@ const SubmitMovie = () => {
   const updateField = updatedFields =>
     setFormData(prev => ({ ...prev, ...updatedFields }));
 
-  // 🔹 Upload Cloudinary
   const handleUpload = async file => {
     const form = new FormData();
-    form.append('file', file); // fichier brut
+    form.append('file', file); 
     form.append('upload_preset', UPLOAD_PRESET);
 
     try {
@@ -45,7 +44,6 @@ const SubmitMovie = () => {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
-      // Met à jour thumbnail ou gallery
       setFormData(prev => {
         let newGallery = prev.gallery.map(img =>
           img.preview === file.preview
@@ -92,7 +90,6 @@ const SubmitMovie = () => {
       return alert("Merci d'attendre la fin des uploads avant de soumettre le formulaire !");
     }
 
-    // Prépare données pour le backend
     const finalData = {
       ...formData,
       thumbnail: formData.thumbnail ? { url: formData.thumbnail.url } : null,

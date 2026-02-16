@@ -20,7 +20,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
     updateCollabs(newCollabs);
   };
 
-  // 🔹 Vignette Officielle
   const onDropVignette = acceptedFiles => {
     const file = Object.assign(acceptedFiles[0], {
       preview: URL.createObjectURL(acceptedFiles[0]),
@@ -42,7 +41,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
       multiple: false,
     });
 
-  // 🔹 Galerie Médias (max 3)
   const onDropGallery = acceptedFiles => {
     const currentGallery = formData.gallery || [];
     const filesToAdd = acceptedFiles.slice(0, 3 - currentGallery.length);
@@ -87,7 +85,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
 
-          {/* YouTube URL */}
           <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Lien Youtube*</label>
             <input
@@ -99,7 +96,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             />
           </div>
 
-          {/* Sous-titres */}
           <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Sous-titres (.srt)</label>
             <div className="flex flex-col gap-2">
@@ -123,7 +119,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             </div>
           </div>
 
-          {/* 🔹 Vignette Officielle à gauche */}
           <div className="flex flex-col md:col-span-1 mt-4">
             <label className={labelStyle}>Vignette Officielle (16:9)</label>
             <div
@@ -156,7 +151,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             </div>
           </div>
 
-          {/* 🔹 Galerie Médias à droite */}
           <div className="flex flex-col md:col-span-2 mt-4">
             <label className={labelStyle}>Galerie Médias (Max 3)</label>
             <div
@@ -197,7 +191,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             </div>
           </div>
 
-          {/* Collaborateurs */}
           <div className="md:col-span-3 mt-4">
             <label className={labelStyle}>Collaborateurs</label>
             {collaborateurs.map((collab, index) => (
