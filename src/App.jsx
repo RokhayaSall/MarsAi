@@ -15,6 +15,7 @@ import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 import SubmitMovie from './pages/SubmitMovie';
 import { AuthProvider } from './context/AuthProvider'; 
+import MovieDetail from './pages/MovieDetail';
 
 import './App.css';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/form-director" element={<FormDirector />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
+            <Route path="/movie-detail" element={<MovieDetail />} />
 
 
 
