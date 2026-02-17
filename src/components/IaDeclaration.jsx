@@ -1,10 +1,10 @@
 import { FiFilm } from 'react-icons/fi';
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const IaDeclaration = () => {
+const IaDeclaration = ({ formData, update }) => {
   const { t } = useTranslation();
-  const [classification, setClassification] = useState('');
+
+  const setClassification = value => update({ is_hybrid: value === 'hybride' });
 
   return (
     <section className="flex justify-center items-center bg-gray-100 p-6">
@@ -19,6 +19,7 @@ const IaDeclaration = () => {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+          {/* Choix Hybride / 100% IA */}
           <section className="space-y-4">
             <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
               {t('ia_declaration.classification_label')}
@@ -29,7 +30,7 @@ const IaDeclaration = () => {
                 type="button"
                 onClick={() => setClassification('hybride')}
                 className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all
-                  ${classification === 'hybride' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+                  ${formData.is_hybrid ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
               >
                 {t('ia_declaration.hybrid')}
               </button>
@@ -38,13 +39,14 @@ const IaDeclaration = () => {
                 type="button"
                 onClick={() => setClassification('100ia')}
                 className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all
-                  ${classification === '100ia' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+                  ${!formData.is_hybrid ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
               >
                 {t('ia_declaration.full_ia')}
               </button>
             </div>
           </section>
 
+          {/* Stack Technologie */}
           <section className="md:col-span-2 space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
@@ -52,11 +54,14 @@ const IaDeclaration = () => {
               </label>
             </div>
             <textarea
+              value={formData.ia_tools || ''}
+              onChange={e => update({ ia_tools: e.target.value })}
               placeholder={t('ia_declaration.tech_stack_placeholder')}
               className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
             />
           </section>
 
+          {/* Méthodologie créative */}
           <section className="md:col-span-2 space-y-2">
             <div className="flex justify-between items-center">
               <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
@@ -64,6 +69,8 @@ const IaDeclaration = () => {
               </label>
             </div>
             <textarea
+              value={formData.creative_process || ''}
+              onChange={e => update({ creative_process: e.target.value })}
               placeholder={t('ia_declaration.creative_methodology_placeholder')}
               className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
             />
