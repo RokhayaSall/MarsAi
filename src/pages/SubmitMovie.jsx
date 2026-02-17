@@ -5,10 +5,8 @@ import IaDeclaration from '../components/IaDeclaration';
 import Livrables from '../components/Livrables';
 import OwnershipCertificate from '../components/OwnershipCertificate';
 import { WiStars } from 'react-icons/wi';
-import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 
-// 🔥 CONFIG CLOUDINARY
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djkgizajl/upload';
 const UPLOAD_PRESET = 'marsai';
 
@@ -27,98 +25,75 @@ const SubmitMovie = () => {
     creative_process: '',
     ia_tools: '',
     has_subs: false,
-    images: [],
+    thumbnail: null,
+    gallery: []
   });
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
-  const [images, setImages] = useState([]);
 
-  const updateField = updatedFields => {
+  const updateField = updatedFields =>
     setFormData(prev => ({ ...prev, ...updatedFields }));
-  };
 
-  // 🔥 DROPZONE + UPLOAD Cloudinary
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: { 'image/*': [] },
-    onDrop: async acceptedFiles => {
-      const newImages = acceptedFiles.map(file => ({
-        file,
-        preview: URL.createObjectURL(file),
-        url: null,
-        uploading: true,
+  const handleUpload = async file => {
+    const form = new FormData();
+    form.append('file', file); 
+    form.append('upload_preset', UPLOAD_PRESET);
+
+    try {
+      const res = await axios.post(CLOUDINARY_URL, form, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      setFormData(prev => {
+        let newGallery = prev.gallery.map(img =>
+          img.preview === file.preview
+            ? { ...img, url: res.data.secure_url, uploading: false }
+            : img
+        );
+
+        let newThumbnail =
+          prev.thumbnail?.preview === file.preview
+            ? { ...prev.thumbnail, url: res.data.secure_url, uploading: false }
+            : prev.thumbnail;
+
+        return { ...prev, gallery: newGallery, thumbnail: newThumbnail };
+      });
+    } catch (err) {
+      console.error('Erreur upload Cloudinary:', err);
+      setFormData(prev => ({
+        ...prev,
+        gallery: prev.gallery.map(img =>
+          img.preview === file.preview ? { ...img, uploading: false } : img
+        ),
+        thumbnail:
+          prev.thumbnail?.preview === file.preview
+            ? { ...prev.thumbnail, uploading: false }
+            : prev.thumbnail,
       }));
-
-      setImages(prev => [...prev, ...newImages]);
-
-      for (let img of newImages) {
-        const formDataCloud = new FormData();
-        formDataCloud.append('file', img.file);
-        formDataCloud.append('upload_preset', UPLOAD_PRESET);
-
-        try {
-          const res = await axios.post(CLOUDINARY_URL, formDataCloud, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-          });
-
-          setImages(prev =>
-            prev.map(item =>
-              item.preview === img.preview
-                ? { ...item, url: res.data.secure_url, uploading: false }
-                : item
-            )
-          );
-        } catch (err) {
-          console.error(
-            'Erreur upload Cloudinary :',
-            err.response?.data || err
-          );
-          setImages(prev =>
-            prev.map(item =>
-              item.preview === img.preview
-                ? { ...item, uploading: false }
-                : item
-            )
-          );
-        }
-      }
-    },
-  });
-
-  const removeImage = index => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    }
   };
 
-  // 🔥 HANDLE SUBMIT AVEC VALIDATION
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // 🔹 Vérification des champs obligatoires avant envoi
-    const requiredFields = [
-      'original_title',
-      'english_title',
-      'duration',
-      'language',
-    ];
-    const missingFields = requiredFields.filter(f => {
-      const value = formData[f];
-      return (
-        value === null ||
-        value === undefined ||
-        (typeof value === 'string' && value.trim() === '')
-      );
-    });
-
+    // Vérifie champs obligatoires
+    const requiredFields = ['original_title', 'english_title', 'duration', 'language'];
+    const missingFields = requiredFields.filter(
+      f => !formData[f] || (typeof formData[f] === 'string' && formData[f].trim() === '')
+    );
     if (missingFields.length > 0) {
-      return alert(
-        `Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`
-      );
+      return alert(`Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`);
     }
 
-    const uploadedUrls = images.filter(img => img.url).map(img => img.url);
+    // Vérifie si des images sont encore en upload
+    if ((formData.thumbnail?.uploading) || formData.gallery.some(img => img.uploading)) {
+      return alert("Merci d'attendre la fin des uploads avant de soumettre le formulaire !");
+    }
 
     const finalData = {
       ...formData,
-      images: uploadedUrls,
+      thumbnail: formData.thumbnail ? { url: formData.thumbnail.url } : null,
+      gallery: formData.gallery.map(img => ({ url: img.url }))
     };
 
     try {
@@ -131,11 +106,7 @@ const SubmitMovie = () => {
       const result = await response.json();
 
       if (response.ok) {
-        alert(
-          t('submit_movie.success_message') ||
-            'Formulaire enregistré avec succès !'
-        );
-        // 🔹 Réinitialiser le formulaire
+        alert('Formulaire enregistré avec succès !');
         setFormData({
           original_title: '',
           english_title: '',
@@ -148,34 +119,26 @@ const SubmitMovie = () => {
           creative_process: '',
           ia_tools: '',
           has_subs: false,
-          images: [],
+          thumbnail: null,
+          gallery: []
         });
-        setImages([]);
         setCollaborateurs([{ nom: '', role: '' }]);
       } else {
         alert(result.error || 'Une erreur est survenue');
       }
-    } catch (error) {
-      console.error('Erreur réseau :', error);
+    } catch (err) {
+      console.error(err);
       alert('Impossible de contacter le serveur.');
     }
   };
 
   return (
     <div className="min-h-screen bg-slate-100 py-12 px-4">
-      <div className="max-w-4xl mx-auto mb-8">
-        <div className="flex flex-row items-center justify-center gap-3">
-          <WiStars className="w-20 h-20 text-red-400" />
-          <h2 className="text-3xl text-red-500 mt-5 text-center">
-            {t('submit_movie.appel_projets_2026')}
-          </h2>
-        </div>
-        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 text-center uppercase">
-          {t('submit_movie.submit_film')}
-        </h1>
-        <h3 className="text-slate-500 mt-2 text-center">
-          {t('submit_movie.fill_info')}
-        </h3>
+      <div className="max-w-4xl mx-auto mb-8 text-center">
+        <WiStars className="w-20 h-20 text-red-400 mx-auto" />
+        <h2 className="text-3xl text-red-500 mt-5">{t('submit_movie.appel_projets_2026')}</h2>
+        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">{t('submit_movie.submit_film')}</h1>
+        <h3 className="text-slate-500 mt-2">{t('submit_movie.fill_info')}</h3>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -186,46 +149,9 @@ const SubmitMovie = () => {
           update={updateField}
           collaborateurs={collaborateurs}
           updateCollabs={setCollaborateurs}
+          handleUpload={handleUpload}
         />
         <OwnershipCertificate formData={formData} update={updateField} />
-
-        <div className="max-w-4xl mx-auto mt-10">
-          <h3 className="text-slate-700 font-semibold mb-3">Upload images</h3>
-
-          <div
-            {...getRootProps()}
-            className="border-2 border-dashed border-gray-400 p-8 text-center cursor-pointer rounded-md hover:border-gray-600 transition"
-          >
-            <input {...getInputProps()} capture="environment" />
-            <p>Glisse ou clique pour uploader des images</p>
-          </div>
-
-          <div className="flex flex-wrap gap-4 mt-6">
-            {images.map((img, index) => (
-              <div key={index} className="relative">
-                <img
-                  src={img.preview}
-                  alt="preview"
-                  className="w-28 h-28 object-cover rounded-md shadow"
-                />
-
-                {img.uploading && (
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-xs rounded-md">
-                    Uploading...
-                  </div>
-                )}
-
-                <button
-                  type="button"
-                  onClick={() => removeImage(index)}
-                  className="absolute top-1 right-1 bg-black text-white text-xs px-2 py-1 rounded-full"
-                >
-                  ✕
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <div className="max-w-4xl mx-auto mt-10 flex justify-end">
           <button

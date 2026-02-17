@@ -13,7 +13,7 @@ import AdminConfig from './pages/DashbordAdminPage/AdminConfig';
 import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
-
+import SubmitMovie from './pages/SubmitMovie';
 import { AuthProvider } from './context/AuthProvider'; 
 
 import './App.css';
@@ -29,6 +29,9 @@ function App() {
             <Route path="/gallery" element={<Movies />} />
             <Route path="/form-director" element={<FormDirector />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/submit-movie" element={<SubmitMovie />} />
+
+
 
             {/* ROUTES ADMIN PROTÉGÉES */}
             <Route

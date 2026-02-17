@@ -1,12 +1,9 @@
 import React from 'react';
 import { FiFilm, FiX } from 'react-icons/fi';
 import { LuImagePlus } from 'react-icons/lu';
-import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
 
-const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
-  const { t } = useTranslation();
-
+const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUpload }) => {
   const ajouterCollaborateur = () =>
     updateCollabs([...collaborateurs, { nom: '', role: '' }]);
 
@@ -24,11 +21,12 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
   };
 
   const onDropVignette = acceptedFiles => {
-    const file = acceptedFiles[0];
-    if (file) {
-      Object.assign(file, { preview: URL.createObjectURL(file) });
-      update({ thumbnail: file });
-    }
+    const file = Object.assign(acceptedFiles[0], {
+      preview: URL.createObjectURL(acceptedFiles[0]),
+      uploading: true,
+    });
+    update({ thumbnail: file });
+    handleUpload && handleUpload(file);
   };
 
   const removeVignette = e => {
@@ -45,10 +43,15 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
 
   const onDropGallery = acceptedFiles => {
     const currentGallery = formData.gallery || [];
-    const newFiles = acceptedFiles.map(file =>
-      Object.assign(file, { preview: URL.createObjectURL(file) })
+    const filesToAdd = acceptedFiles.slice(0, 3 - currentGallery.length);
+    const newFiles = filesToAdd.map(file =>
+      Object.assign(file, {
+        preview: URL.createObjectURL(file),
+        uploading: true,
+      })
     );
-    update({ gallery: [...currentGallery, ...newFiles].slice(0, 3) });
+    update({ gallery: [...currentGallery, ...newFiles] });
+    newFiles.forEach(f => handleUpload && handleUpload(f));
   };
 
   const removeGalleryImage = (e, index) => {
@@ -70,7 +73,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
 
   return (
     <section className="flex justify-center items-center bg-gray-50 p-6">
-      <div className="w-full max-w-5xl bg-white rounded-3xl p-8 md:p-12">
+      <div className="w-full max-w-5xl bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
         <header className="flex items-center gap-4 mb-10 border-b pb-6">
           <div className="flex items-center justify-center p-2 border border-slate-300 rounded-md">
             <FiFilm className="w-6 h-6 text-slate-700" />
@@ -80,8 +83,9 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
           </h2>
         </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
-          <div className="flex flex-col">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
+
+          <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Lien Youtube*</label>
             <input
               type="text"
@@ -92,7 +96,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             />
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Sous-titres (.srt)</label>
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2 text-sm cursor-pointer mb-2">
@@ -115,18 +119,17 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             </div>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col md:col-span-1 mt-4">
             <label className={labelStyle}>Vignette Officielle (16:9)</label>
             <div
               {...getRootVignette()}
-              className="bg-[#F1F3F6] rounded-lg h-56 relative flex flex-col items-center justify-center border-2 border-dashed border-transparent hover:border-slate-300 transition-all cursor-pointer overflow-hidden"
+              className="bg-[#F1F3F6] rounded-lg h-40 relative flex flex-col items-center justify-center border-2 border-dashed border-transparent hover:border-slate-300 transition-all cursor-pointer overflow-hidden"
             >
               <input {...getInputVignette()} />
-
               {formData.thumbnail ? (
                 <>
                   <img
-                    src={formData.thumbnail.preview}
+                    src={formData.thumbnail.url || formData.thumbnail.preview}
                     alt="Preview"
                     className="w-full h-full object-cover"
                   />
@@ -139,7 +142,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
                 </>
               ) : (
                 <>
-                  <LuImagePlus className="w-16 h-16 text-slate-400 mb-2" />
+                  <LuImagePlus className="w-12 h-12 text-slate-400 mb-2" />
                   <span className="text-xs font-bold text-slate-400 uppercase">
                     PNG ou JPG – Max 15 Mo
                   </span>
@@ -148,14 +151,13 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             </div>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col md:col-span-2 mt-4">
             <label className={labelStyle}>Galerie Médias (Max 3)</label>
             <div
               {...getRootGallery()}
               className="bg-[#F1F3F6] rounded-lg h-56 flex items-center justify-center gap-4 px-4 cursor-pointer hover:bg-[#ebedf0] transition-colors overflow-hidden"
             >
               <input {...getInputGallery()} />
-
               {!formData.gallery || formData.gallery.length === 0 ? (
                 <div className="flex gap-6">
                   <LuImagePlus className="w-12 h-12 text-slate-400" />
@@ -167,7 +169,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
                   {formData.gallery.map((file, index) => (
                     <div key={index} className="relative flex-1 h-full group">
                       <img
-                        src={file.preview}
+                        src={file.url || file.preview}
                         alt="gallery"
                         className="w-full h-full object-cover rounded-md shadow-sm"
                       />
@@ -189,7 +191,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
             </div>
           </div>
 
-          <div className="md:col-span-2 mt-4">
+          <div className="md:col-span-3 mt-4">
             <label className={labelStyle}>Collaborateurs</label>
             {collaborateurs.map((collab, index) => (
               <div key={index} className="flex gap-4 mb-4">
@@ -235,6 +237,7 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
               </button>
             </div>
           </div>
+
         </div>
       </div>
     </section>

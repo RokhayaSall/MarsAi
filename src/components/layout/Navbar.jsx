@@ -1,15 +1,16 @@
+
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { FaGlobe } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next'; // <-- import i18n Etape 3
+import { useTranslation } from 'react-i18next'; 
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const { t, i18n } = useTranslation(); // <-- hook i18n Etape 4
 
-  // Fonction pour detecter la langue pour changer une autre langue
+  const { t, i18n } = useTranslation(); 
+
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr');
   };
