@@ -14,7 +14,10 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 import SubmitMovie from './pages/SubmitMovie';
+import DashboardJury from './pages/DashboardJury';
+import JuryRoutes from './routes/JuryRoutes';
 import { AuthProvider } from './context/AuthProvider'; 
+
 
 import './App.css';
 
@@ -30,6 +33,9 @@ function App() {
             <Route path="/form-director" element={<FormDirector />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
+            
+            <Route path="/dashboard/jury" element={<JuryRoutes> <DashboardJury /> </JuryRoutes>} />
+
 
 
 
