@@ -13,16 +13,15 @@ import AdminConfig from './pages/DashbordAdminPage/AdminConfig';
 import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
-
-import { AuthProvider } from './context/AuthProvider';
+import SubmitMovie from './pages/SubmitMovie';
+import { AuthProvider } from './context/AuthProvider'; 
+import MoviePage from './pages/MovieDetail';
 
 import './App.css';
 
 function App() {
   return (
     <AuthProvider>
-      {' '}
-      {/* Envelopper toute l'application */}
       <BrowserRouter>
         <Header />
         <main>
@@ -31,61 +30,17 @@ function App() {
             <Route path="/gallery" element={<Movies />} />
             <Route path="/form-director" element={<FormDirector />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/submit-movie" element={<SubmitMovie />} />
+            
+            <Route path="/movie-detail/:id" element={<MoviePage />} />
 
             {/* ROUTES ADMIN PROTÉGÉES */}
-            <Route
-              path="/admin"
-              element={
-                <AdminRoute>
-                  <DashbordAdmin />
-                </AdminRoute>
-              }
-            />
-
-            <Route
-              path="/admin/jury"
-              element={
-                <AdminRoute>
-                  <AdminJury />
-                </AdminRoute>
-              }
-            />
-
-            <Route
-              path="/admin/config"
-              element={
-                <AdminRoute>
-                  <AdminConfig />
-                </AdminRoute>
-              }
-            />
-
-            <Route
-              path="/admin/events"
-              element={
-                <AdminRoute>
-                  <AdminEvents />
-                </AdminRoute>
-              }
-            />
-
-            <Route
-              path="/admin/films"
-              element={
-                <AdminRoute>
-                  <AdminMovies />
-                </AdminRoute>
-              }
-            />
-
-            <Route
-              path="/admin/results"
-              element={
-                <AdminRoute>
-                  <AdminMoviesResult />
-                </AdminRoute>
-              }
-            />
+            <Route path="/admin" element={<AdminRoute><DashbordAdmin /></AdminRoute>} />
+            <Route path="/admin/jury" element={<AdminRoute><AdminJury /></AdminRoute>} />
+            <Route path="/admin/config" element={<AdminRoute><AdminConfig /></AdminRoute>} />
+            <Route path="/admin/events" element={<AdminRoute><AdminEvents /></AdminRoute>} />
+            <Route path="/admin/films" element={<AdminRoute><AdminMovies /></AdminRoute>} />
+            <Route path="/admin/results" element={<AdminRoute><AdminMoviesResult /></AdminRoute>} />
 
             <Route path="*" element={<Home />} />
           </Routes>
