@@ -3,7 +3,13 @@ import { FiFilm, FiX } from 'react-icons/fi';
 import { LuImagePlus } from 'react-icons/lu';
 import { useDropzone } from 'react-dropzone';
 
-const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUpload }) => {
+const Livrables = ({
+  formData,
+  update,
+  collaborateurs,
+  updateCollabs,
+  handleUpload,
+}) => {
   const ajouterCollaborateur = () =>
     updateCollabs([...collaborateurs, { nom: '', role: '' }]);
 
@@ -84,7 +90,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
-
           <div className="flex flex-col md:col-span-3">
             <label className={labelStyle}>Lien Youtube*</label>
             <input
@@ -237,7 +242,6 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
               </button>
             </div>
           </div>
-
         </div>
       </div>
     </section>

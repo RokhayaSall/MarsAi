@@ -18,20 +18,19 @@ export default function AdminJury() {
   const token = localStorage.getItem('token');
 
   // Charger la liste des jurés
-      useEffect(() => {
-        const fetchJury = async () => {
-          const token = localStorage.getItem('token'); 
-          if (!token) return;
-          try {
-            const data = await getJury({ token });
-            setJury(data);
-          } catch (err) {
-            console.error('Erreur fetch jury:', err);
-          }
-        };
-        fetchJury();
-      }, []); 
-
+  useEffect(() => {
+    const fetchJury = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+      try {
+        const data = await getJury({ token });
+        setJury(data);
+      } catch (err) {
+        console.error('Erreur fetch jury:', err);
+      }
+    };
+    fetchJury();
+  }, []);
 
   // Supprimer un juré
   const handleDelete = async id => {

@@ -16,14 +16,15 @@ import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 import SubmitMovie from './pages/SubmitMovie';
 import DashboardJury from './pages/DashboardJury';
 import JuryRoutes from './routes/JuryRoutes';
-import { AuthProvider } from './context/AuthProvider'; 
-
+import { AuthProvider } from './context/AuthProvider';
 
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider> {/* Envelopper toute l'application */}
+    <AuthProvider>
+      {' '}
+      {/* Envelopper toute l'application */}
       <BrowserRouter>
         <Header />
         <main>
@@ -33,11 +34,16 @@ function App() {
             <Route path="/form-director" element={<FormDirector />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
-            
-            <Route path="/dashboard/jury" element={<JuryRoutes> <DashboardJury /> </JuryRoutes>} />
 
-
-
+            <Route
+              path="/dashboard/jury"
+              element={
+                <JuryRoutes>
+                  {' '}
+                  <DashboardJury />{' '}
+                </JuryRoutes>
+              }
+            />
 
             {/* ROUTES ADMIN PROTÉGÉES */}
             <Route

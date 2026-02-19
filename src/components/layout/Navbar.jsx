@@ -1,15 +1,15 @@
-
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { FaGlobe } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
+import ButtonLogOut from '../ui/Buttons';
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
-  const { t, i18n } = useTranslation(); 
+  const { t, i18n } = useTranslation();
 
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr');
@@ -74,6 +74,7 @@ function Header() {
                 onClick={() => setIsNavOpen(false)}
               />
             </Link>
+            <ButtonLogOut></ButtonLogOut>
           </li>
         </ul>
       </nav>

@@ -26,7 +26,7 @@ const SubmitMovie = () => {
     ia_tools: '',
     has_subs: false,
     thumbnail: null,
-    gallery: []
+    gallery: [],
   });
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
@@ -36,7 +36,7 @@ const SubmitMovie = () => {
 
   const handleUpload = async file => {
     const form = new FormData();
-    form.append('file', file); 
+    form.append('file', file);
     form.append('upload_preset', UPLOAD_PRESET);
 
     try {
@@ -77,23 +77,37 @@ const SubmitMovie = () => {
     e.preventDefault();
 
     // Vérifie champs obligatoires
-    const requiredFields = ['original_title', 'english_title', 'duration', 'language'];
+    const requiredFields = [
+      'original_title',
+      'english_title',
+      'duration',
+      'language',
+    ];
     const missingFields = requiredFields.filter(
-      f => !formData[f] || (typeof formData[f] === 'string' && formData[f].trim() === '')
+      f =>
+        !formData[f] ||
+        (typeof formData[f] === 'string' && formData[f].trim() === '')
     );
     if (missingFields.length > 0) {
-      return alert(`Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`);
+      return alert(
+        `Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`
+      );
     }
 
     // Vérifie si des images sont encore en upload
-    if ((formData.thumbnail?.uploading) || formData.gallery.some(img => img.uploading)) {
-      return alert("Merci d'attendre la fin des uploads avant de soumettre le formulaire !");
+    if (
+      formData.thumbnail?.uploading ||
+      formData.gallery.some(img => img.uploading)
+    ) {
+      return alert(
+        "Merci d'attendre la fin des uploads avant de soumettre le formulaire !"
+      );
     }
 
     const finalData = {
       ...formData,
       thumbnail: formData.thumbnail ? { url: formData.thumbnail.url } : null,
-      gallery: formData.gallery.map(img => ({ url: img.url }))
+      gallery: formData.gallery.map(img => ({ url: img.url })),
     };
 
     try {
@@ -120,7 +134,7 @@ const SubmitMovie = () => {
           ia_tools: '',
           has_subs: false,
           thumbnail: null,
-          gallery: []
+          gallery: [],
         });
         setCollaborateurs([{ nom: '', role: '' }]);
       } else {
@@ -136,8 +150,12 @@ const SubmitMovie = () => {
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <WiStars className="w-20 h-20 text-red-400 mx-auto" />
-        <h2 className="text-3xl text-red-500 mt-5">{t('submit_movie.appel_projets_2026')}</h2>
-        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">{t('submit_movie.submit_film')}</h1>
+        <h2 className="text-3xl text-red-500 mt-5">
+          {t('submit_movie.appel_projets_2026')}
+        </h2>
+        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">
+          {t('submit_movie.submit_film')}
+        </h1>
         <h3 className="text-slate-500 mt-2">{t('submit_movie.fill_info')}</h3>
       </div>
 

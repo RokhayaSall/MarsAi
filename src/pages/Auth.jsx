@@ -39,16 +39,19 @@ export default function Auth() {
         ? { email: form.email, password: form.password }
         : form;
 
-      const res = isLogin ? await login(payloadData) : await register(payloadData);
+      const res = isLogin
+        ? await login(payloadData)
+        : await register(payloadData);
 
       if (res.token) {
         localStorage.setItem('token', res.token);
 
         const payload = jwtDecode(res.token); // décode le token pour connaitre le role
 
-        if (payload.roles.includes('Jury')) navigate('/dashboard/jury'); //redirige en fonction du role du user
-         else if (payload.roles.includes('Admin')) navigate('/admin'); 
-         else navigate('/'); // sinon va sur l'accueil
+        if (payload.roles.includes('Jury'))
+          navigate('/dashboard/jury'); //redirige en fonction du role du user
+        else if (payload.roles.includes('Admin')) navigate('/admin');
+        else navigate('/'); // sinon va sur l'accueil
 
         setSuccess(
           isLogin ? t('auth.successLogin') : t('auth.successRegister')
