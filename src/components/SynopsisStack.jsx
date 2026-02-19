@@ -4,7 +4,7 @@ const SynopsisStack = ({ synopsis, techStack }) => {
   const tools = techStack ? techStack.split(',').map(t => t.trim()) : [];
 
   return (
-    <div className="bg-[#1A1A1A] text-white rounded-[2.5rem] p-12 border-[3px] border-dashed border-[#314E63]">
+    <div className="bg-[#1A1A1A] text-white rounded-[2.5rem] p-12  border-dashed border-[#314E63]">
       <div className="mb-12">
         <div className="flex items-center gap-4 mb-6">
           <span className="text-red-500 text-2xl">📖</span>

@@ -10,7 +10,7 @@ const MovieInfo = ({ title, director, origin, shareUrl }) => {
   };
 
   return (
-    <div className="bg-white rounded-[2.5rem] p-10 border-[3px] border-dashed border-[#A5D7E8] shadow-sm">
+    <div className="bg-white rounded-[2.5rem] p-10  border-dashed border-[#A5D7E8] shadow-sm">
       <h1 className="text-5xl font-[900] text-[#2D2E32] uppercase mb-10 tracking-tighter">
         {title || "Titre du film"}
       </h1>

@@ -14,7 +14,7 @@ const VideoPlayer = ({ url, thumbnail }) => {
   const embedUrl = getEmbedUrl(url);
 
   return (
-    <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden border-[3px] border-dashed border-[#A5D7E8] bg-black">
+    <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden border-dashed border-[#A5D7E8] bg-black">
       {embedUrl ? (
         /* Si on a une URL valide, on affiche l'iframe */
         <iframe

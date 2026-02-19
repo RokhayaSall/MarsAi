@@ -32,7 +32,6 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
             
-            {/* ✅ CORRIGÉ : Route maintenant dynamique pour accepter l'ID */}
             <Route path="/movie-detail/:id" element={<MoviePage />} />
 
             {/* ROUTES ADMIN PROTÉGÉES */}
