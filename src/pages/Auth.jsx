@@ -40,20 +40,23 @@ export default function Auth() {
 
       const res = isLogin ? await login(payload) : await register(payload);
 
+      if (res.mustChangePassword) {
+        navigate('/change-password', { state: { userId: res.userId } });
+        return;
+      }
+
+      // Si token reçu, on le stocke et redirige
       if (res.token) {
         localStorage.setItem('token', res.token);
 
-        setSuccess(
-          isLogin ? t('auth.successLogin') : t('auth.successRegister')
-        );
-
-        setTimeout(() => {
-          navigate('/admin');
-        }, 800);
-      } else {
-        setSuccess(t('auth.registered'));
-        setIsLogin(true);
+        // redirection selon rôle ou admin
+        navigate('/admin');
+        return;
       }
+
+      // sinon, c’est une inscription → message succès
+      setSuccess(t('auth.registered'));
+      setIsLogin(true);
     } catch (err) {
       setError(err.message);
       setSuccess('');

@@ -14,13 +14,15 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 
-import { AuthProvider } from './context/AuthProvider'; 
+import { AuthProvider } from './context/AuthProvider';
 
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider> {/* Envelopper toute l'application */}
+    <AuthProvider>
+      {' '}
+      {/* Envelopper toute l'application */}
       <BrowserRouter>
         <Header />
         <main>

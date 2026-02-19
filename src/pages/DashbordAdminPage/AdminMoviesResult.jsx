@@ -20,8 +20,6 @@ export default function MovieResults() {
         );
         const result = await res.json();
 
-        console.log('DATA API:', result);
-
         const safeData = result.data.map(movie => ({
           ...movie,
           score: movie.score != null ? Number(movie.score) : 0,
@@ -85,13 +83,13 @@ export default function MovieResults() {
           <div className="text-center text-gray-400">Aucun film disponible</div>
         )}
 
-        {/* 🔎 Recherche */}
+        {/* Recherche */}
         <SearchBar search={search} setSearch={setSearch} />
 
-        {/* 📊 Leaderboard */}
+        {/* Leaderboard */}
         <LeaderboardTable movies={currentMovies} />
 
-        {/* 📄 Pagination */}
+        {/* Pagination */}
         {totalPages > 1 && (
           <div className="mt-6 flex justify-center items-center gap-4">
             <button

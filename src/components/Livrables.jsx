@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { useDropzone } from 'react-dropzone';
 
 const Livrables = ({ formData, update, collaborateurs, updateCollabs }) => {
+// eslint-disable-next-line no-unused-vars
   const { t } = useTranslation();
 
   const ajouterCollaborateur = () =>
