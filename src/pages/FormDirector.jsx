@@ -8,6 +8,9 @@ export default function FormDirector() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  // On récupère l'URL depuis les variables d'environnement de Vite
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
   const [formData, setFormData] = useState({
     nom: '',
     prenom: '',
@@ -47,7 +50,8 @@ export default function FormDirector() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:3001/api/form', {
+      // Utilisation de la variable API_BASE_URL avec les backticks ``
+      const res = await fetch(`${API_BASE_URL}/api/form`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ formData, collaborateurs }),
