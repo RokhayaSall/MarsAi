@@ -1,10 +1,18 @@
 import React from 'react';
 
 const MovieInfo = ({ title, director, origin, shareUrl }) => {
+  
+  const handleCopy = () => {
+    if (shareUrl) {
+      navigator.clipboard.writeText(shareUrl);
+      alert("Lien copié !");
+    }
+  };
+
   return (
     <div className="bg-white rounded-[2.5rem] p-10 border-[3px] border-dashed border-[#A5D7E8] shadow-sm">
       <h1 className="text-5xl font-[900] text-[#2D2E32] uppercase mb-10 tracking-tighter">
-        {title}
+        {title || "Titre du film"}
       </h1>
 
       <div className="flex gap-16 mb-12">
@@ -12,7 +20,8 @@ const MovieInfo = ({ title, director, origin, shareUrl }) => {
           <div className="w-12 h-12 border border-red-100 rounded-xl flex items-center justify-center text-red-400 text-xl">👤</div>
           <div>
             <p className="text-[11px] uppercase text-gray-400 font-extrabold tracking-widest">Réalisateur</p>
-            <p className="font-black text-[#2D2E32] text-lg">{director}</p>
+            {/* ✅ Affiche maintenant le nom transformé par le controller */}
+            <p className="font-black text-[#2D2E32] text-lg">{director || "Chargement..."}</p>
           </div>
         </div>
 
@@ -20,7 +29,7 @@ const MovieInfo = ({ title, director, origin, shareUrl }) => {
           <div className="w-12 h-12 border border-blue-100 rounded-xl flex items-center justify-center text-blue-400 text-xl">🌐</div>
           <div>
             <p className="text-[11px] uppercase text-gray-400 font-extrabold tracking-widest">Origine</p>
-            <p className="font-black text-[#2D2E32] text-lg">{origin}</p>
+            <p className="font-black text-[#2D2E32] text-lg">{origin || "N/A"}</p>
           </div>
         </div>
       </div>
@@ -39,7 +48,10 @@ const MovieInfo = ({ title, director, origin, shareUrl }) => {
            <div className="flex-1 bg-[#F5F7F9] border border-gray-100 rounded-full px-6 py-3 text-[11px] text-gray-400 font-mono truncate">
              {shareUrl}
            </div>
-           <button className="bg-[#2D2E32] text-white text-[11px] font-black px-8 py-3 rounded-full uppercase hover:opacity-90 transition-opacity flex items-center gap-2">
+           <button 
+             onClick={handleCopy}
+             className="bg-[#2D2E32] text-white text-[11px] font-black px-8 py-3 rounded-full uppercase hover:opacity-90 transition-opacity flex items-center gap-2"
+           >
              <span>📋</span> Copier
            </button>
         </div>
@@ -48,4 +60,4 @@ const MovieInfo = ({ title, director, origin, shareUrl }) => {
   );
 };
 
-export default MovieInfo; 
+export default MovieInfo;

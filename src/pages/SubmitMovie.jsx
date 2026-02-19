@@ -76,7 +76,7 @@ const SubmitMovie = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // Vérifie champs obligatoires
+    // 1. Vérification des champs obligatoires
     const requiredFields = ['original_title', 'english_title', 'duration', 'language'];
     const missingFields = requiredFields.filter(
       f => !formData[f] || (typeof formData[f] === 'string' && formData[f].trim() === '')
@@ -85,7 +85,7 @@ const SubmitMovie = () => {
       return alert(`Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`);
     }
 
-    // Vérifie si des images sont encore en upload
+    // 2. Vérification des uploads en cours
     if ((formData.thumbnail?.uploading) || formData.gallery.some(img => img.uploading)) {
       return alert("Merci d'attendre la fin des uploads avant de soumettre le formulaire !");
     }
@@ -97,10 +97,22 @@ const SubmitMovie = () => {
     };
 
     try {
+      // ✅ RÉCUPÉRATION SIMPLE DE L'ID (SANS BLOCAGE)
+      const storedUser = localStorage.getItem('user');
+      const user = storedUser ? JSON.parse(storedUser) : null;
+      
+      // On prend l'id si il existe, sinon on envoie null ou 1
+      const directorId = user?.id || user?._id || null;
+
+      // 4. Envoi de la requête au backend
       const response = await fetch('http://localhost:3001/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formData: finalData, collaborateurs }),
+        body: JSON.stringify({ 
+          formData: finalData, 
+          collaborateurs,
+          directorId: directorId // On envoie ce qu'on a trouvé
+        }),
       });
 
       const result = await response.json();
@@ -124,10 +136,10 @@ const SubmitMovie = () => {
         });
         setCollaborateurs([{ nom: '', role: '' }]);
       } else {
-        alert(result.error || 'Une erreur est survenue');
+        alert(result.error || 'Une erreur est survenue lors de l\'enregistrement.');
       }
     } catch (err) {
-      console.error(err);
+      console.error("Erreur Fetch:", err);
       alert('Impossible de contacter le serveur.');
     }
   };
