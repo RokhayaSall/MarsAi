@@ -74,7 +74,7 @@ function Header() {
                 onClick={() => setIsNavOpen(false)}
               />
             </Link>
-            <ButtonLogOut></ButtonLogOut>
+            <ButtonLogOut />
           </li>
         </ul>
       </nav>

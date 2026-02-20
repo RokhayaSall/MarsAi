@@ -56,10 +56,6 @@ export default function Auth() {
         setSuccess(
           isLogin ? t('auth.successLogin') : t('auth.successRegister')
         );
-
-        // setTimeout(() => {
-        //   navigate('/admin');
-        // }, 800);
       } else {
         setSuccess(t('auth.registered'));
         setIsLogin(true);

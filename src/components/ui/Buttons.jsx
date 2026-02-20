@@ -42,13 +42,18 @@ export default function ButtonLogOut() {
     logout(); //function qui supprime le token
     navigate('/home');
   };
+  const isLoggedIn = !!localStorage.getItem('token'); // !! verifie si le token est true ou false et getItem retourne le token
 
   return (
-    <button
-      onClick={logoutUser}
-      className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center w-40 md:w-auto"
-    >
-      Déconnexion
-    </button>
+    <>
+      {isLoggedIn && ( // si isLoggedIn est true donc connecté affiche le bouton sinon false n'affiche pas le bouton
+        <button
+          onClick={logoutUser}
+          className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center w-40 md:w-auto"
+        >
+          Déconnexion
+        </button>
+      )}
+    </>
   );
 }
