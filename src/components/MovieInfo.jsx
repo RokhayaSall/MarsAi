@@ -20,7 +20,6 @@ const MovieInfo = ({ title, director, origin, shareUrl }) => {
           <div className="w-12 h-12 border border-red-100 rounded-xl flex items-center justify-center text-red-400 text-xl">👤</div>
           <div>
             <p className="text-[11px] uppercase text-gray-400 font-extrabold tracking-widest">Réalisateur</p>
-            {/* ✅ Affiche maintenant le nom transformé par le controller */}
             <p className="font-black text-[#2D2E32] text-lg">{director || "Chargement..."}</p>
           </div>
         </div>

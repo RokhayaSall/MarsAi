@@ -30,17 +30,14 @@ const MoviePage = () => {
     <div className="min-h-screen bg-[#F8FAFC] pb-20">
       <div className="max-w-4xl mx-auto px-4 pt-6">
         
-        {/* Bouton Retour */}
         <Link to="/gallery" className="inline-flex items-center text-sm font-bold text-[#2563EB] mb-6 hover:opacity-70">
           <span className="mr-2">←</span> RETOUR GALERIE
         </Link>
 
-        {/* Section Vidéo */}
         <div className="rounded-3xl overflow-hidden shadow-2xl mb-8 bg-black aspect-video border-4 border-white">
           <VideoPlayer url={movieData.youtube_url} thumbnail={movieData.cover_image} />
         </div>
 
-        {/* Infos Principales */}
         <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 mb-8">
           <MovieInfo 
             title={movieData.original_title}
@@ -50,7 +47,6 @@ const MoviePage = () => {
           />
         </div>
 
-        {/* Synopsis et Tech Stack */}
         <SynopsisStack 
           synopsis={movieData.original_synopsis}
           techStack={movieData.ia_tools} 
