@@ -50,5 +50,5 @@ dist-ssr
 
 .env
 .env.*
-api.jsx
 
+src/services/api.jsx
