@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { login, register } from '../services/authService';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Auth() {
   const { t } = useTranslation();
@@ -34,11 +35,13 @@ export default function Auth() {
     setError('');
 
     try {
-      const payload = isLogin
+      const payloadData = isLogin
         ? { email: form.email, password: form.password }
         : form;
 
-      const res = isLogin ? await login(payload) : await register(payload);
+      const res = isLogin
+        ? await login(payloadData)
+        : await register(payloadData);
 
       if (res.mustChangePassword) {
         navigate('/change-password', { state: { userId: res.userId } });
@@ -49,9 +52,19 @@ export default function Auth() {
       if (res.token) {
         localStorage.setItem('token', res.token);
 
-        // redirection selon rôle ou admin
-        navigate('/admin');
-        return;
+        const payload = jwtDecode(res.token); // décode le token pour connaitre le role
+
+        if (payload.roles.includes('Jury'))
+          navigate('/dashboard/jury'); //redirige en fonction du role du user
+        else if (payload.roles.includes('Admin')) navigate('/admin');
+        else navigate('/'); // sinon va sur l'accueil
+
+        setSuccess(
+          isLogin ? t('auth.successLogin') : t('auth.successRegister')
+        );
+      } else {
+        setSuccess(t('auth.registered'));
+        setIsLogin(true);
       }
 
       // sinon, c’est une inscription → message succès
