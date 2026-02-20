@@ -105,7 +105,7 @@ const SubmitMovie = () => {
       const directorId = user?.id || user?._id || null;
 
       // 4. Envoi de la requête au backend
-      const response = await fetch('http://localhost:3001/api/submit', {
+      const response = await fetch('http://localhost:3000/api/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
