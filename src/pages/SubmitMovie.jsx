@@ -9,6 +9,8 @@ import axios from 'axios';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djkgizajl/upload';
 const UPLOAD_PRESET = 'marsai';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+
 
 const SubmitMovie = () => {
   const { t } = useTranslation();
@@ -76,13 +78,8 @@ const SubmitMovie = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // Vérifie champs obligatoires
-    const requiredFields = [
-      'original_title',
-      'english_title',
-      'duration',
-      'language',
-    ];
+    // 1. Vérification des champs obligatoires
+    const requiredFields = ['original_title', 'english_title', 'duration', 'language'];
     const missingFields = requiredFields.filter(
       f =>
         !formData[f] ||
@@ -94,14 +91,9 @@ const SubmitMovie = () => {
       );
     }
 
-    // Vérifie si des images sont encore en upload
-    if (
-      formData.thumbnail?.uploading ||
-      formData.gallery.some(img => img.uploading)
-    ) {
-      return alert(
-        "Merci d'attendre la fin des uploads avant de soumettre le formulaire !"
-      );
+    // 2. Vérification des uploads en cours
+    if ((formData.thumbnail?.uploading) || formData.gallery.some(img => img.uploading)) {
+      return alert("Merci d'attendre la fin des uploads avant de soumettre le formulaire !");
     }
 
     const finalData = {
@@ -111,10 +103,22 @@ const SubmitMovie = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/submit', {
+      // ✅ RÉCUPÉRATION SIMPLE DE L'ID (SANS BLOCAGE)
+      const storedUser = localStorage.getItem('user');
+      const user = storedUser ? JSON.parse(storedUser) : null;
+      
+      // On prend l'id si il existe, sinon on envoie null ou 1
+      const directorId = user?.id || user?._id || null;
+
+      // 4. Envoi de la requête au backend
+      const response = await fetch(`${API_BASE_URL}/api/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formData: finalData, collaborateurs }),
+        body: JSON.stringify({ 
+          formData: finalData, 
+          collaborateurs,
+          directorId: directorId // On envoie ce qu'on a trouvé
+        }),
       });
 
       const result = await response.json();
@@ -138,10 +142,10 @@ const SubmitMovie = () => {
         });
         setCollaborateurs([{ nom: '', role: '' }]);
       } else {
-        alert(result.error || 'Une erreur est survenue');
+        alert(result.error || 'Une erreur est survenue lors de l\'enregistrement.');
       }
     } catch (err) {
-      console.error(err);
+      console.error("Erreur Fetch:", err);
       alert('Impossible de contacter le serveur.');
     }
   };

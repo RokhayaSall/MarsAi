@@ -59,7 +59,7 @@ export default function DashbordAdmin() {
           </Card>
 
           <Card
-            title="Jurés ayant finalisé leur lots"
+            title="Jurys ayant finalisé leur lots"
             value={stats?.jury?.finishedJury ?? 0}
             icon={Users}
           />

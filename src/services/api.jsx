@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const apiFetch = async (url, options = {}) => {
   const token = localStorage.getItem('token');
@@ -12,11 +12,10 @@ export const apiFetch = async (url, options = {}) => {
     },
   });
 
-  const data = await res.json();
-
   if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
     throw new Error(data.message || 'Erreur API');
   }
 
-  return data;
+  return res.json();
 };

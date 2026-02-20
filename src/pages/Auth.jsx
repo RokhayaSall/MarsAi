@@ -43,6 +43,12 @@ export default function Auth() {
         ? await login(payloadData)
         : await register(payloadData);
 
+      if (res.mustChangePassword) {
+        navigate('/change-password', { state: { userId: res.userId } });
+        return;
+      }
+
+      // Si token reçu, on le stocke et redirige
       if (res.token) {
         localStorage.setItem('token', res.token);
 
@@ -60,6 +66,10 @@ export default function Auth() {
         setSuccess(t('auth.registered'));
         setIsLogin(true);
       }
+
+      // sinon, c’est une inscription → message succès
+      setSuccess(t('auth.registered'));
+      setIsLogin(true);
     } catch (err) {
       setError(err.message);
       setSuccess('');

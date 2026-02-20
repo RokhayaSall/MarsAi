@@ -3,13 +3,12 @@ import { FiFilm, FiX } from 'react-icons/fi';
 import { LuImagePlus } from 'react-icons/lu';
 import { useDropzone } from 'react-dropzone';
 
-const Livrables = ({
-  formData,
-  update,
-  collaborateurs,
-  updateCollabs,
-  handleUpload,
-}) => {
+
+
+const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUpload }) => {
+// eslint-disable-next-line no-unused-vars
+  // const { t } = useTranslation();
+
   const ajouterCollaborateur = () =>
     updateCollabs([...collaborateurs, { nom: '', role: '' }]);
 
