@@ -23,7 +23,6 @@ import './App.css';
 function App() {
   return (
     <AuthProvider>
-      {' '}
       {/* Envelopper toute l'application */}
       <BrowserRouter>
         <Header />
@@ -39,8 +38,7 @@ function App() {
               path="/dashboard/jury"
               element={
                 <JuryRoutes>
-                  {' '}
-                  <DashboardJury />{' '}
+                  <DashboardJury />
                 </JuryRoutes>
               }
             />

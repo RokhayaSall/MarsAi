@@ -61,6 +61,7 @@ function Header() {
               {t('nav.submit')}
             </Link>
           </li>
+          <ButtonLogOut />
           <li className="flex gap-6 items-center">
             {/* Icon du monde pour changer la langue!!!!!! */}
             <FaGlobe
@@ -74,7 +75,6 @@ function Header() {
                 onClick={() => setIsNavOpen(false)}
               />
             </Link>
-            <ButtonLogOut />
           </li>
         </ul>
       </nav>
