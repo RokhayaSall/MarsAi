@@ -1,7 +1,6 @@
 import React from 'react';
 
 const VideoPlayer = ({ url, thumbnail }) => {
-  // Petite fonction pour transformer une URL youtube standard en URL embed
   const getEmbedUrl = (videoUrl) => {
     if (!videoUrl) return null;
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -16,7 +15,6 @@ const VideoPlayer = ({ url, thumbnail }) => {
   return (
     <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden border-dashed border-[#A5D7E8] bg-black">
       {embedUrl ? (
-        /* Si on a une URL valide, on affiche l'iframe */
         <iframe
           className="w-full h-full"
           src={embedUrl}
@@ -26,7 +24,6 @@ const VideoPlayer = ({ url, thumbnail }) => {
           allowFullScreen
         ></iframe>
       ) : (
-        /* Sinon, on affiche ta miniature avec le bouton play (fallback) */
         <div className="relative w-full h-full">
           <img 
             src={thumbnail} 
