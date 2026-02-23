@@ -14,13 +14,16 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 import SubmitMovie from './pages/SubmitMovie';
-import { AuthProvider } from './context/AuthProvider'; 
+import { AuthProvider } from './context/AuthProvider';
+import SearchBar from './components/ui/SearchBar';
 
 import './App.css';
 
 function App() {
   return (
-    <AuthProvider> {/* Envelopper toute l'application */}
+    <AuthProvider>
+      {' '}
+      {/* Envelopper toute l'application */}
       <BrowserRouter>
         <Header />
         <main>
@@ -30,8 +33,7 @@ function App() {
             <Route path="/form-director" element={<FormDirector />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
-
-
+            <Route path="/searching" element={<SearchBar />} />
 
             {/* ROUTES ADMIN PROTÉGÉES */}
             <Route

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { CardMovie } from '../components/ui/Cards';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import SearchBar from '../components/ui/SearchBar';
 
 export default function GalerieFilms() {
   const { t } = useTranslation();
@@ -34,7 +35,9 @@ export default function GalerieFilms() {
         >
           <span className="text-lg">←</span> {t('movies.back_home')}
         </button>
-
+        <br />
+        <SearchBar />
+        <br />
         <h1 className="text-7xl font-black text-[#282828] leading-[0.9] tracking-tighter mb-2">
           {t('movies.gallery_title').split('\n')[0]} <br />
           <span className="text-[#FF5845]">
