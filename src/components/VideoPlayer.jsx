@@ -1,11 +1,12 @@
 import React from 'react';
 
 const VideoPlayer = ({ url, thumbnail }) => {
-  const getEmbedUrl = (videoUrl) => {
+  const getEmbedUrl = videoUrl => {
     if (!videoUrl) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = videoUrl.match(regExp);
-    return (match && match[2].length === 11) 
+    return match && match[2].length === 11
       ? `https://www.youtube.com/embed/${match[2]}`
       : null;
   };
@@ -25,9 +26,9 @@ const VideoPlayer = ({ url, thumbnail }) => {
         ></iframe>
       ) : (
         <div className="relative w-full h-full">
-          <img 
-            src={thumbnail} 
-            alt="Thumbnail" 
+          <img
+            src={thumbnail}
+            alt="Thumbnail"
             className="w-full h-full object-cover opacity-60"
           />
           <div className="absolute inset-0 flex items-center justify-center">
