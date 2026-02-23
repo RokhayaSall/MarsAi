@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+// Formulaire pour ajouter un jury
+// Props :
+// - onCreate : fonction pour créer un jury (doit retourner une promesse si async)
+// Affiche un message de succès ou d'erreur selon le résultat de onCreate
+
 export default function JuryForm({ onCreate }) {
   const [form, setForm] = useState({
     firstname: '',
@@ -8,7 +13,7 @@ export default function JuryForm({ onCreate }) {
   });
 
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(''); // ← Nouveau state pour message succès
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();

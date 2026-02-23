@@ -4,6 +4,7 @@ import Sidebar from '../../components/DashbordAdmin/Sidebar';
 import TopScoreCard from '../../components/DashbordAdmin/AdminMoviesResult/TopScoreCard';
 import SearchBar from '../../components/DashbordAdmin/AdminMoviesResult/SearchBar';
 import LeaderboardTable from '../../components/DashbordAdmin/AdminMoviesResult/LeaderBoardTable';
+import { apiFetch } from '../../services/api';
 
 export default function MovieResults() {
   const [search, setSearch] = useState('');
@@ -15,10 +16,7 @@ export default function MovieResults() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/admin/movies-result`
-        );
-        const result = await res.json();
+        const result = await apiFetch('/api/admin/movies-result');
 
         const safeData = result.data.map(movie => ({
           ...movie,

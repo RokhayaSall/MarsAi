@@ -44,7 +44,7 @@ export default function DashbordAdmin() {
   return (
     <div className="flex bg-gray-50 min-h-screen text-gray-900">
       {/* Sidebar */}
-      <Sidebar light /> {/* Passer prop light pour version claire */}
+      <Sidebar light />
       {/* Main */}
       <main className="flex-1">
         {/* Dashboard Cards */}
@@ -83,7 +83,7 @@ export default function DashbordAdmin() {
           </Card>
 
           <Card
-            title="Comptes Réalisateurs actifs"
+            title="Nombres de Réalisateurs inscrits"
             value={stats?.directors?.activeCount ?? 0}
             subtitle={`+${stats?.directors?.todayIncrease ?? 0} aujourd’hui`}
             icon={Users}

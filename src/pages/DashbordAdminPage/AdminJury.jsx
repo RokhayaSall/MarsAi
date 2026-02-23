@@ -39,7 +39,6 @@ export default function AdminJury() {
 
   const handleCreate = async newJury => {
     try {
-      // newJury = { firstname, lastname, email }
       const created = await createJury(newJury);
       setJury(prev => [...prev, created]);
       setShowForm(false);
