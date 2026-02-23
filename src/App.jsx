@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AdminRoute from './routes/AdminRoutes';
-
 import Header from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
@@ -14,16 +13,16 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 import SubmitMovie from './pages/SubmitMovie';
+import DashboardJury from './pages/DashboardJury';
+import JuryRoutes from './routes/JuryRoutes';
 import { AuthProvider } from './context/AuthProvider';
-import SearchBar from './components/ui/SearchBar';
+import MoviePage from './pages/MovieDetail';
 
 import './App.css';
 
 function App() {
   return (
     <AuthProvider>
-      {' '}
-      {/* Envelopper toute l'application */}
       <BrowserRouter>
         <Header />
         <main>
@@ -34,6 +33,25 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
             <Route path="/searching" element={<SearchBar />} />
+            <Route path="/movie-detail/:id" element={<MoviePage />} />
+
+            {/* ROUTES JURY PROTÉGÉES */}
+            <Route
+              path="/dashboard/jury"
+              element={
+                <JuryRoutes>
+                  <DashboardJury />
+                </JuryRoutes>
+              }
+            />
+            <Route
+              path="/dashboard/jury/:id"
+              element={
+                <JuryRoutes>
+                  <DashboardJury />
+                </JuryRoutes>
+              }
+            />
 
             {/* ROUTES ADMIN PROTÉGÉES */}
             <Route
@@ -44,7 +62,6 @@ function App() {
                 </AdminRoute>
               }
             />
-
             <Route
               path="/admin/jury"
               element={
@@ -53,7 +70,6 @@ function App() {
                 </AdminRoute>
               }
             />
-
             <Route
               path="/admin/config"
               element={
@@ -62,7 +78,6 @@ function App() {
                 </AdminRoute>
               }
             />
-
             <Route
               path="/admin/events"
               element={
@@ -71,7 +86,6 @@ function App() {
                 </AdminRoute>
               }
             />
-
             <Route
               path="/admin/films"
               element={
@@ -80,7 +94,6 @@ function App() {
                 </AdminRoute>
               }
             />
-
             <Route
               path="/admin/results"
               element={

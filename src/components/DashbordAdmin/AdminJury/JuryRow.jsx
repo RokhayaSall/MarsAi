@@ -1,4 +1,18 @@
-export default function JuryRow({ jury, onDelete, onEdit }) {
+import { Edit, Trash2 } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+
+// Affiche une ligne pour un jury
+// Props :
+// - jury : objet jury { id, firstname, lastname, email }
+// - onEdit : fonction pour éditer un jury (reçoit le jury en paramètre)
+// - onDelete : fonction pour supprimer un jury (reçoit l'id du jury en paramètre)
+// Affiche une confirmation avant de supprimer un jury
+
+// la je vais lié quand on clique sur jury on arrive sur leur dashbord et on peut voir les films qu'il a évalué et les notes
+// qu'il a donné, et on peut aussi supprimer le jury ou éditer ses infos (email, nom, prénom)
+// et aussi lui renvoyer un mail pour l'inviter à évaluer les films du mois
+
+export default function JuryRow({ jury, onEdit, onDelete }) {
   const handleDelete = () => {
     const ok = window.confirm(
       `Supprimer le jury ${jury.firstname} ${jury.lastname} ?`
@@ -10,33 +24,64 @@ export default function JuryRow({ jury, onDelete, onEdit }) {
 
   return (
     <div
-      className="flex justify-between items-center bg-gray-50 border border-gray-200 
-      p-4 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
+      className="
+        flex justify-between items-center
+        bg-white
+        border border-slate-200
+        p-5
+        rounded-2xl
+        shadow-sm
+        transition-all duration-300
+        hover:shadow-md
+        hover:-translate-y-0.5
+      "
     >
-      {/* Infos du jury */}
-      <div className="flex flex-col">
-        <p className="font-medium text-gray-900">
-          {jury.firstname} {jury.lastname}
-        </p>
-        <p className="text-sm text-gray-500">{jury.email}</p>
+      {/* Profil + Infos */}
+      <div className="flex items-center gap-4">
+        {/* Avatar */}
+        <div
+          className="
+            w-11 h-11
+            rounded-full
+            bg-blue-500/10
+            text-blue-600
+            flex items-center justify-center
+            font-semibold
+            text-sm
+            border border-blue-500/20
+          "
+        >
+          {jury.firstname.charAt(0).toUpperCase()}
+        </div>
+
+        {/* Texte */}
+        <NavLink
+          to={`/dashboard/jury/${jury.id}`}
+          className="text-decoration-none"
+        >
+          <div className="flex flex-col">
+            <p className="font-semibold text-slate-800 text-lg">
+              {jury.firstname} {jury.lastname}
+            </p>
+            <p className="text-sm text-slate-500">{jury.email}</p>
+          </div>
+        </NavLink>
       </div>
 
       {/* Actions */}
       <div className="flex gap-3">
         <button
           onClick={() => onEdit(jury)}
-          className="text-sm px-3 py-1 rounded-md bg-blue-50 text-blue-600 
-            hover:bg-blue-100 hover:text-blue-700 transition-colors"
+          className="flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition"
         >
-          Modifier
+          <Edit size={16} /> Éditer
         </button>
 
         <button
           onClick={handleDelete}
-          className="text-sm px-3 py-1 rounded-md bg-red-50 text-red-600 
-            hover:bg-red-100 hover:text-red-700 transition-colors"
+          className="flex items-center gap-1 px-3 py-1 bg-red-50 text-red-600 rounded-md hover:bg-red-100 transition"
         >
-          Supprimer
+          <Trash2 size={16} /> Supprimer
         </button>
       </div>
     </div>

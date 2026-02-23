@@ -15,19 +15,57 @@ export default function LeaderboardTable({ movies }) {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Miniature</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Rang</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Titre</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Auteur</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Pays</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Score</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-medium text-gray-500">Statut</th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Miniature
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Rang
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Titre
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Auteur
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Pays
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Score
+            </th>
+            <th
+              scope="col"
+              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
+            >
+              Statut
+            </th>
             <th scope="col" className="px-4 py-2" />
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-100">
           {moviesWithScore.map((movie, index) => (
-            <tr key={movie.id} className="hover:bg-gray-50 transition cursor-pointer">
+            <tr
+              key={movie.id}
+              className="hover:bg-gray-50 transition cursor-pointer"
+            >
               <td className="px-4 py-2">
                 <img
                   src={movie.cover_image || '/placeholder.png'}
@@ -39,7 +77,9 @@ export default function LeaderboardTable({ movies }) {
               <td className="px-4 py-2">{movie.original_title}</td>
               <td className="px-4 py-2">{movie.author}</td>
               <td className="px-4 py-2">{movie.country}</td>
-              <td className="px-4 py-2 font-semibold">{movie.fallbackScore.toFixed(1)}</td>
+              <td className="px-4 py-2 font-semibold">
+                {movie.fallbackScore.toFixed(1)}
+              </td>
               <td className="px-4 py-2">
                 <span className="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded-full">
                   {movie.status || 'EN COURS'}

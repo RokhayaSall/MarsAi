@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djkgizajl/upload';
 const UPLOAD_PRESET = 'marsai';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const SubmitMovie = () => {
   const { t } = useTranslation();
@@ -26,7 +27,7 @@ const SubmitMovie = () => {
     ia_tools: '',
     has_subs: false,
     thumbnail: null,
-    gallery: []
+    gallery: [],
   });
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
@@ -36,7 +37,7 @@ const SubmitMovie = () => {
 
   const handleUpload = async file => {
     const form = new FormData();
-    form.append('file', file); 
+    form.append('file', file);
     form.append('upload_preset', UPLOAD_PRESET);
 
     try {
@@ -76,31 +77,57 @@ const SubmitMovie = () => {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // Vérifie champs obligatoires
-    const requiredFields = ['original_title', 'english_title', 'duration', 'language'];
+    // 1. Vérification des champs obligatoires
+    const requiredFields = [
+      'original_title',
+      'english_title',
+      'duration',
+      'language',
+    ];
     const missingFields = requiredFields.filter(
-      f => !formData[f] || (typeof formData[f] === 'string' && formData[f].trim() === '')
+      f =>
+        !formData[f] ||
+        (typeof formData[f] === 'string' && formData[f].trim() === '')
     );
     if (missingFields.length > 0) {
-      return alert(`Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`);
+      return alert(
+        `Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`
+      );
     }
 
-    // Vérifie si des images sont encore en upload
-    if ((formData.thumbnail?.uploading) || formData.gallery.some(img => img.uploading)) {
-      return alert("Merci d'attendre la fin des uploads avant de soumettre le formulaire !");
+    // 2. Vérification des uploads en cours
+    if (
+      formData.thumbnail?.uploading ||
+      formData.gallery.some(img => img.uploading)
+    ) {
+      return alert(
+        "Merci d'attendre la fin des uploads avant de soumettre le formulaire !"
+      );
     }
 
     const finalData = {
       ...formData,
       thumbnail: formData.thumbnail ? { url: formData.thumbnail.url } : null,
-      gallery: formData.gallery.map(img => ({ url: img.url }))
+      gallery: formData.gallery.map(img => ({ url: img.url })),
     };
 
     try {
-      const response = await fetch('http://localhost:3001/api/submit', {
+      // ✅ RÉCUPÉRATION SIMPLE DE L'ID (SANS BLOCAGE)
+      const storedUser = localStorage.getItem('user');
+      const user = storedUser ? JSON.parse(storedUser) : null;
+
+      // On prend l'id si il existe, sinon on envoie null ou 1
+      const directorId = user?.id || user?._id || null;
+
+      // 4. Envoi de la requête au backend
+      const response = await fetch(`${API_BASE_URL}/api/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formData: finalData, collaborateurs }),
+        body: JSON.stringify({
+          formData: finalData,
+          collaborateurs,
+          directorId: directorId, // On envoie ce qu'on a trouvé
+        }),
       });
 
       const result = await response.json();
@@ -120,14 +147,16 @@ const SubmitMovie = () => {
           ia_tools: '',
           has_subs: false,
           thumbnail: null,
-          gallery: []
+          gallery: [],
         });
         setCollaborateurs([{ nom: '', role: '' }]);
       } else {
-        alert(result.error || 'Une erreur est survenue');
+        alert(
+          result.error || "Une erreur est survenue lors de l'enregistrement."
+        );
       }
     } catch (err) {
-      console.error(err);
+      console.error('Erreur Fetch:', err);
       alert('Impossible de contacter le serveur.');
     }
   };
@@ -136,8 +165,12 @@ const SubmitMovie = () => {
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <WiStars className="w-20 h-20 text-red-400 mx-auto" />
-        <h2 className="text-3xl text-red-500 mt-5">{t('submit_movie.appel_projets_2026')}</h2>
-        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">{t('submit_movie.submit_film')}</h1>
+        <h2 className="text-3xl text-red-500 mt-5">
+          {t('submit_movie.appel_projets_2026')}
+        </h2>
+        <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">
+          {t('submit_movie.submit_film')}
+        </h1>
         <h3 className="text-slate-500 mt-2">{t('submit_movie.fill_info')}</h3>
       </div>
 

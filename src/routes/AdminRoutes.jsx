@@ -26,10 +26,10 @@ export default function AdminRoute({ children }) {
       return <Navigate to="/home" replace />;
     }
 
-   return children;
-    } catch (error) {
-      console.error('AdminRoute token error:', error);
-      localStorage.removeItem('token');
-      return <Navigate to="/auth" replace />;
-    }
+    return children;
+  } catch (error) {
+    console.error('AdminRoute token error:', error);
+    localStorage.removeItem('token');
+    return <Navigate to="/auth" replace />;
+  }
 }
