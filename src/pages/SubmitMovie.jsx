@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'; // Ajout de useEffect
-import { useNavigate } from 'react-router-dom';     // Ajout de useNavigate
+import React, { useState, useEffect } from 'react'; 
+import { useNavigate } from 'react-router-dom';     
 import { useTranslation } from 'react-i18next';
 import FilmIdentityForm from '../components/FilmIdentity';
 import IaDeclaration from '../components/IaDeclaration';
@@ -8,15 +8,13 @@ import OwnershipCertificate from '../components/OwnershipCertificate';
 import { WiStars } from 'react-icons/wi';
 import axios from 'axios';
 
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djkgizajl/upload';
-const UPLOAD_PRESET = 'marsai';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const SubmitMovie = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // 1. État du formulaire
+  // --- ÉTAT DU FORMULAIRE ---
   const [formData, setFormData] = useState({
     original_title: '',
     english_title: '',
@@ -29,93 +27,81 @@ const SubmitMovie = () => {
     creative_process: '',
     ia_tools: '',
     has_subs: false,
-    thumbnail: null,
-    gallery: [],
+    thumbnail: null, 
+    video_file: null,
+    gallery: [], // Initialisé comme tableau
   });
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // --- LOGIQUE DE LIAISON RÉALISATEUR ---
-  // On récupère l'ID sauvegardé par la page précédente
   const directorId = localStorage.getItem('currentDirectorId');
 
   useEffect(() => {
-    // Si pas d'ID, on redirige vers le formulaire réalisateur
     if (!directorId) {
       alert("Veuillez d'abord remplir le formulaire réalisateur.");
-      navigate('/form-director'); // Remplacez par votre route réelle
+      navigate('/form-director');
     }
   }, [directorId, navigate]);
 
   const updateField = updatedFields =>
     setFormData(prev => ({ ...prev, ...updatedFields }));
 
-  // Gestion des uploads Cloudinary
-  const handleUpload = async file => {
-    const form = new FormData();
-    form.append('file', file);
-    form.append('upload_preset', UPLOAD_PRESET);
-
-    try {
-      const res = await axios.post(CLOUDINARY_URL, form, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-
-      setFormData(prev => {
-        let newGallery = prev.gallery.map(img =>
-          img.preview === file.preview
-            ? { ...img, url: res.data.secure_url, uploading: false }
-            : img
-        );
-
-        let newThumbnail =
-          prev.thumbnail?.preview === file.preview
-            ? { ...prev.thumbnail, url: res.data.secure_url, uploading: false }
-            : prev.thumbnail;
-
-        return { ...prev, gallery: newGallery, thumbnail: newThumbnail };
-      });
-    } catch (err) {
-      console.error('Erreur upload Cloudinary:', err);
-    }
+  // --- GESTION DES FICHIERS ---
+  const handleFileSelection = (file, category) => {
+    setFormData(prev => {
+      if (category === 'gallery') {
+        const isAlreadyIn = prev.gallery.some(f => f.name === file.name && f.size === file.size);
+        if (isAlreadyIn) return prev;
+        return {
+          ...prev,
+          gallery: [...prev.gallery, file]
+        };
+      }
+      return {
+        ...prev,
+        [category]: file
+      };
+    });
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
-  
-  // 1. CAPTURE IMMÉDIATE
-  const directorId = localStorage.getItem('currentDirectorId');
-  console.log("Tentative de récupération de l'ID avant envoi :", directorId);
-
-  if (!directorId) {
-    alert("ERREUR CRITIQUE : L'ID du réalisateur a disparu du stockage !");
-    return;
-  }
+  setIsSubmitting(true);
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/submit`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      // ⚠️ CORRECTION ICI : on envoie formData et collaborateurs séparément
-      body: JSON.stringify({ 
-        formData: formData,           // Les infos du film
-        collaborateurs: collaborateurs, // Les collabs (que tu as dans ton state !)
-        directorId: directorId         // L'ID du réalisateur
-      }),
+    const data = new FormData();
+    // On extrait video_file de l'état
+    const { thumbnail, video_file, gallery, ...textData } = formData;
+    
+    data.append('formData', JSON.stringify(textData));
+    data.append('directorId', directorId);
+    data.append('collaborateurs', JSON.stringify(collaborateurs));
+
+    if (thumbnail) data.append('thumbnail', thumbnail); 
+    
+    // TRÈS IMPORTANT : On envoie le fichier vidéo ici
+    if (video_file) {
+      data.append('video', video_file); 
+    }
+
+    if (Array.isArray(gallery)) {
+      gallery.forEach((file) => data.append('gallery', file));
+    }
+
+    const response = await axios.post(`${API_BASE_URL}/api/movies/submit`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' }
     });
 
-    const data = await response.json();
-
-    if (response.ok) {
-      alert("Succès ! Film lié au réalisateur n°" + directorId);
-      // Optionnel : rediriger vers une page de succès
-      // navigate('/success'); 
-    } else {
-      alert("Erreur serveur : " + (data.error || "Inconnue"));
+    if (response.status === 200 || response.status === 201) {
+      alert("✅ Film et médias enregistrés avec succès !");
+      navigate('/success');
     }
   } catch (error) {
-    console.error("Erreur réseau :", error);
-    alert("Impossible de contacter le serveur.");
+    console.error("Erreur:", error);
+    alert("❌ Erreur lors de l'envoi");
+  } finally {
+    setIsSubmitting(false);
   }
 };
 
@@ -137,16 +123,19 @@ const SubmitMovie = () => {
           update={updateField}
           collaborateurs={collaborateurs}
           updateCollabs={setCollaborateurs}
-          handleUpload={handleUpload}
+          handleUpload={handleFileSelection} 
         />
         <OwnershipCertificate formData={formData} update={updateField} />
 
         <div className="max-w-4xl mx-auto mt-10 flex justify-end">
           <button
             type="submit"
-            className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition-colors shadow-lg"
+            disabled={isSubmitting}
+            className={`bg-slate-900 text-white px-8 py-3 rounded-full font-bold transition-colors shadow-lg ${
+              isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-800'
+            }`}
           >
-            {t('submit_movie.finalize_submission')}
+            {isSubmitting ? 'Envoi en cours...' : t('submit_movie.finalize_submission')}
           </button>
         </div>
       </form>
