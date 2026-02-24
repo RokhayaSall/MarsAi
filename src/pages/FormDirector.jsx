@@ -9,7 +9,7 @@ export default function FormDirector() {
   const navigate = useNavigate();
 
   // On récupère l'URL depuis les variables d'environnement de Vite
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   const [formData, setFormData] = useState({
     nom: '',
@@ -47,23 +47,44 @@ export default function FormDirector() {
   const supprimerCollaborateur = () =>
     setCollaborateurs(collaborateurs.slice(0, -1));
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/form`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formData, collaborateurs }),
-      });
-      const data = await res.json();
-      console.log(data);
-      alert(t('form.formulaire_envoye'));
-    } catch (err) {
-      console.error(err);
-      alert(t('form.erreur_envoi'));
-    }
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Tentative d'envoi...");
 
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/form`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ formData, collaborateurs }),
+    });
+
+    const data = await res.json();
+    console.log("Réponse brute du serveur :", data);
+
+    if (res.ok) {
+      // FORCE L'ID : On cherche toutes les sources possibles
+      const idFinal = data.id || data.insertId || data.directorId;
+      
+      if (idFinal) {
+        // ON FORCE L'ÉCRITURE ICI
+        localStorage.setItem('currentDirectorId', idFinal.toString());
+        
+        // ALERTE DE CONFIRMATION
+        alert("ID " + idFinal + " enregistré dans le navigateur !");
+        
+        // On vérifie immédiatement dans la console
+        console.log("Vérification : ", localStorage.getItem('currentDirectorId'));
+      } else {
+        alert("Le serveur a dit OK mais n'a pas envoyé d'ID. Regardez la console.");
+      }
+    } else {
+      alert("Erreur serveur : " + res.status);
+    }
+  } catch (err) {
+    console.error("Erreur :", err);
+    alert("Problème de connexion au serveur.");
+  }
+};
   const inputClass =
     'w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase';
   const labelClass =
