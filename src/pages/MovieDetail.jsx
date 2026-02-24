@@ -64,8 +64,7 @@ const MoviePage = () => {
         <section className="relative mb-20">
           <div className="absolute -inset-4 bg-gradient-to-b from-blue-500/10 to-transparent opacity-50 blur-2xl rounded-[3rem]"></div>
           <div className="relative rounded-[2.5rem] overflow-hidden shadow-[0_0_50px_-12px_rgba(0,0,0,0.8)] bg-black aspect-video ring-1 ring-white/10">
-            <VideoPlayer url={movieData.youtube_url} thumbnail={movieData.cover_image} />
-          </div>
+        <VideoPlayer url={movieData.video_url || movieData.youtube_url} thumbnail={movieData.cover_image} />          </div>
         </section>
 
         {/* Content Grid */}
