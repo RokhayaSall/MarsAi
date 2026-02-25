@@ -31,7 +31,7 @@ const MoviePage = () => {
         <div className="absolute inset-0 border-2 border-blue-500/20 rounded-full"></div>
         <div className="absolute inset-0 border-t-2 border-blue-500 rounded-full animate-spin"></div>
       </div>
-      <p className="mt-6 text-blue-200/50 font-light tracking-[0.3em] uppercase text-[10px]">Chargement de l'œuvre</p>
+      <p className="mt-6 text-blue-200/50 font-light tracking-[0.3em] uppercase text-[10px]">Chargement de l&aposœuvre</p>
     </div>
   );
 
