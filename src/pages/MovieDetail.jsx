@@ -14,12 +14,12 @@ const MoviePage = () => {
     window.scrollTo(0, 0);
     if (!id || id === "undefined") return;
     fetch(`http://localhost:3001/api/movies/${id}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setMovieData(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         setLoading(false);
       });
