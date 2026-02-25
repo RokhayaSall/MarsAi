@@ -45,11 +45,13 @@ function App() {
               }
             />
             {/* //mettre la page notation avec film ect pas le composant ratings */}
+            <Route path="/dashboard/jury/movies/:id"
+              element={ <JuryRoutes> <Ratings /> </JuryRoutes> } />
             <Route
-              path="/dashboard/jury/movies/:id"
+              path="/dashboard/jury/:id"
               element={
                 <JuryRoutes>
-                  <Ratings />
+                  <DashboardJury />
                 </JuryRoutes>
               }
             />

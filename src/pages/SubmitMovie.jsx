@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import FilmIdentityForm from '../components/FilmIdentity';
 import IaDeclaration from '../components/IaDeclaration';
@@ -7,13 +8,13 @@ import OwnershipCertificate from '../components/OwnershipCertificate';
 import { WiStars } from 'react-icons/wi';
 import axios from 'axios';
 
-const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/djkgizajl/upload';
-const UPLOAD_PRESET = 'marsai';
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 const SubmitMovie = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
+  // --- ÉTAT DU FORMULAIRE ---
   const [formData, setFormData] = useState({
     original_title: '',
     english_title: '',
@@ -27,151 +28,91 @@ const SubmitMovie = () => {
     ia_tools: '',
     has_subs: false,
     thumbnail: null,
-    gallery: [],
+    video_file: null,
+    gallery: [], // Initialisé comme tableau
   });
 
   const [collaborateurs, setCollaborateurs] = useState([{ nom: '', role: '' }]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const directorId = localStorage.getItem('currentDirectorId');
+
+  useEffect(() => {
+    if (!directorId) {
+      alert("Veuillez d'abord remplir le formulaire réalisateur.");
+      navigate('/form-director');
+    }
+  }, [directorId, navigate]);
 
   const updateField = updatedFields =>
     setFormData(prev => ({ ...prev, ...updatedFields }));
 
-  const handleUpload = async file => {
-    const form = new FormData();
-    form.append('file', file);
-    form.append('upload_preset', UPLOAD_PRESET);
-
-    try {
-      const res = await axios.post(CLOUDINARY_URL, form, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-
-      setFormData(prev => {
-        let newGallery = prev.gallery.map(img =>
-          img.preview === file.preview
-            ? { ...img, url: res.data.secure_url, uploading: false }
-            : img
-        );
-
-        let newThumbnail =
-          prev.thumbnail?.preview === file.preview
-            ? { ...prev.thumbnail, url: res.data.secure_url, uploading: false }
-            : prev.thumbnail;
-
-        return { ...prev, gallery: newGallery, thumbnail: newThumbnail };
-      });
-    } catch (err) {
-      console.error('Erreur upload Cloudinary:', err);
-      setFormData(prev => ({
-        ...prev,
-        gallery: prev.gallery.map(img =>
-          img.preview === file.preview ? { ...img, uploading: false } : img
-        ),
-        thumbnail:
-          prev.thumbnail?.preview === file.preview
-            ? { ...prev.thumbnail, uploading: false }
-            : prev.thumbnail,
-      }));
-    }
-  };
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    // 1. Vérification des champs obligatoires
-    const requiredFields = [
-      'original_title',
-      'english_title',
-      'duration',
-      'language',
-    ];
-    const missingFields = requiredFields.filter(
-      f =>
-        !formData[f] ||
-        (typeof formData[f] === 'string' && formData[f].trim() === '')
-    );
-    if (missingFields.length > 0) {
-      return alert(
-        `Merci de remplir tous les champs obligatoires : ${missingFields.join(', ')}`
-      );
-    }
-
-    // 2. Vérification des uploads en cours
-    if (
-      formData.thumbnail?.uploading ||
-      formData.gallery.some(img => img.uploading)
-    ) {
-      return alert(
-        "Merci d'attendre la fin des uploads avant de soumettre le formulaire !"
-      );
-    }
-
-    const finalData = {
-      ...formData,
-      thumbnail: formData.thumbnail ? { url: formData.thumbnail.url } : null,
-      gallery: formData.gallery.map(img => ({ url: img.url })),
-    };
-
-    try {
-      // ✅ RÉCUPÉRATION SIMPLE DE L'ID (SANS BLOCAGE)
-      const storedUser = localStorage.getItem('user');
-      const user = storedUser ? JSON.parse(storedUser) : null;
-
-      // On prend l'id si il existe, sinon on envoie null ou 1
-      const directorId = user?.id || user?._id || null;
-
-      // 4. Envoi de la requête au backend
-      const response = await fetch(`${API_BASE_URL}/api/submit`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          formData: finalData,
-          collaborateurs,
-          directorId: directorId, // On envoie ce qu'on a trouvé
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert('Formulaire enregistré avec succès !');
-        setFormData({
-          original_title: '',
-          english_title: '',
-          youtube_url: '',
-          duration: null,
-          is_hybrid: false,
-          language: '',
-          original_synopsis: '',
-          english_synopsis: '',
-          creative_process: '',
-          ia_tools: '',
-          has_subs: false,
-          thumbnail: null,
-          gallery: [],
-        });
-        setCollaborateurs([{ nom: '', role: '' }]);
-      } else {
-        alert(
-          result.error || "Une erreur est survenue lors de l'enregistrement."
-        );
+  // --- GESTION DES FICHIERS ---
+  const handleFileSelection = (file, category) => {
+    setFormData(prev => {
+      if (category === 'gallery') {
+        const isAlreadyIn = prev.gallery.some(f => f.name === file.name && f.size === file.size);
+        if (isAlreadyIn) return prev;
+        return {
+          ...prev,
+          gallery: [...prev.gallery, file]
+        };
       }
-    } catch (err) {
-      console.error('Erreur Fetch:', err);
-      alert('Impossible de contacter le serveur.');
-    }
+      return {
+        ...prev,
+        [category]: file
+      };
+    });
   };
+
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  try {
+    const data = new FormData();
+    // On extrait video_file de l'état
+    const { thumbnail, video_file, gallery, ...textData } = formData;
+
+    data.append('formData', JSON.stringify(textData));
+    data.append('directorId', directorId);
+    data.append('collaborateurs', JSON.stringify(collaborateurs));
+
+    if (thumbnail) data.append('thumbnail', thumbnail);
+
+    // TRÈS IMPORTANT : On envoie le fichier vidéo ici
+    if (video_file) {
+      data.append('video', video_file);
+    }
+
+    if (Array.isArray(gallery)) {
+      gallery.forEach((file) => data.append('gallery', file));
+    }
+
+    const response = await axios.post(`${API_BASE_URL}/api/movies/submit`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    });
+
+    if (response.status === 200 || response.status === 201) {
+      alert("✅ Film et médias enregistrés avec succès !");
+      navigate('/success');
+    }
+  } catch (error) {
+    console.error("Erreur:", error);
+    alert("❌ Erreur lors de l'envoi");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <WiStars className="w-20 h-20 text-red-400 mx-auto" />
-        <h2 className="text-3xl text-red-500 mt-5">
-          {t('submit_movie.appel_projets_2026')}
-        </h2>
+        <h2 className="text-3xl text-red-500 mt-5">{t('submit_movie.appel_projets_2026')}</h2>
         <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">
           {t('submit_movie.submit_film')}
         </h1>
-        <h3 className="text-slate-500 mt-2">{t('submit_movie.fill_info')}</h3>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -182,16 +123,19 @@ const SubmitMovie = () => {
           update={updateField}
           collaborateurs={collaborateurs}
           updateCollabs={setCollaborateurs}
-          handleUpload={handleUpload}
+          handleUpload={handleFileSelection}
         />
         <OwnershipCertificate formData={formData} update={updateField} />
 
         <div className="max-w-4xl mx-auto mt-10 flex justify-end">
           <button
             type="submit"
-            className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition-colors shadow-lg"
+            disabled={isSubmitting}
+            className={`bg-slate-900 text-white px-8 py-3 rounded-full font-bold transition-colors shadow-lg ${
+              isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-800'
+            }`}
           >
-            {t('submit_movie.finalize_submission')}
+            {isSubmitting ? 'Envoi en cours...' : t('submit_movie.finalize_submission')}
           </button>
         </div>
       </form>

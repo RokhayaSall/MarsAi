@@ -1,4 +1,16 @@
 import { Edit, Trash2 } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
+
+// Affiche une ligne pour un jury
+// Props :
+// - jury : objet jury { id, firstname, lastname, email }
+// - onEdit : fonction pour éditer un jury (reçoit le jury en paramètre)
+// - onDelete : fonction pour supprimer un jury (reçoit l'id du jury en paramètre)
+// Affiche une confirmation avant de supprimer un jury
+
+// la je vais lié quand on clique sur jury on arrive sur leur dashbord et on peut voir les films qu'il a évalué et les notes
+// qu'il a donné, et on peut aussi supprimer le jury ou éditer ses infos (email, nom, prénom)
+// et aussi lui renvoyer un mail pour l'inviter à évaluer les films du mois
 
 export default function JuryRow({ jury, onEdit, onDelete }) {
   const handleDelete = () => {
@@ -43,12 +55,17 @@ export default function JuryRow({ jury, onEdit, onDelete }) {
         </div>
 
         {/* Texte */}
-        <div className="flex flex-col">
-          <p className="font-semibold text-slate-800 text-lg">
-            {jury.firstname} {jury.lastname}
-          </p>
-          <p className="text-sm text-slate-500">{jury.email}</p>
-        </div>
+        <NavLink
+          to={`/dashboard/jury/${jury.id}`}
+          className="text-decoration-none"
+        >
+          <div className="flex flex-col">
+            <p className="font-semibold text-slate-800 text-lg">
+              {jury.firstname} {jury.lastname}
+            </p>
+            <p className="text-sm text-slate-500">{jury.email}</p>
+          </div>
+        </NavLink>
       </div>
 
       {/* Actions */}

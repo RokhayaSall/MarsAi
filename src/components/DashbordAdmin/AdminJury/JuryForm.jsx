@@ -1,5 +1,10 @@
 import { useState } from 'react';
 
+// Formulaire pour ajouter un jury
+// Props :
+// - onCreate : fonction pour créer un jury (doit retourner une promesse si async)
+// Affiche un message de succès ou d'erreur selon le résultat de onCreate
+
 export default function JuryForm({ onCreate }) {
   const [form, setForm] = useState({
     firstname: '',
@@ -8,7 +13,7 @@ export default function JuryForm({ onCreate }) {
   });
 
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState(''); // ← Nouveau state pour message succès
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -56,7 +61,7 @@ export default function JuryForm({ onCreate }) {
         grid grid-cols-1 md:grid-cols-2 gap-6
       "
     >
-      {['firstname', 'lastname', 'email'].map(field => (
+      {['firstname', 'lastname'].map(field => (
         <div key={field} className="flex flex-col">
           <label
             htmlFor={field}
@@ -99,24 +104,63 @@ export default function JuryForm({ onCreate }) {
         </div>
       )}
 
-      <div className="md:col-span-2">
-        <button
-          type="submit"
-          className="
-            w-full
-            py-3 rounded-xl
-            text-sm font-medium
-            bg-emerald-500/10 text-emerald-600
-            border border-emerald-500/20
-            shadow-sm
-            hover:bg-emerald-500/20
-            hover:shadow-md
-            hover:-translate-y-0.5
-            transition-all duration-200
-          "
+      <div className="flex flex-col md:col-span-2">
+        <label
+          htmlFor="email"
+          className="block text-sm font-medium mb-2 uppercase tracking-wide"
         >
-          Valider
-        </button>
+          Email
+        </label>
+
+        <div className="flex gap-3">
+          <input
+            id="email"
+            name="email"
+            value={form.email}
+            type="email"
+            placeholder="Email"
+            className="
+        flex-1
+        bg-slate-50
+        border border-slate-200
+        text-slate-800
+        placeholder-slate-400
+        p-4
+        rounded-xl
+        focus:outline-none
+        focus:border-blue-500
+        focus:ring-2
+        focus:ring-blue-500/20
+        transition-all
+      "
+            onChange={handleChange}
+            required
+          />
+
+          <button
+            type="submit"
+            className="
+        px-20
+        p-4
+        rounded-xl
+        text-sm font-medium
+        bg-emerald-500/10 text-emerald-600
+        border border-slate-200
+        shadow-sm
+        hover:bg-emerald-500/20
+        hover:shadow-md
+        hover:-translate-y-0.5
+        focus:outline-none
+        focus:border-blue-500
+        focus:ring-2
+        focus:ring-blue-500/20
+        transition-all
+        whitespace-nowrap
+      "
+          >
+            Valider
+          </button>
+        </div>
       </div>
     </form>
   );

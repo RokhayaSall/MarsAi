@@ -1,7 +1,8 @@
 import React from 'react';
 
 const VideoPlayer = ({ url, thumbnail }) => {
-  const getEmbedUrl = videoUrl => {
+  // Détecter si c'est du YouTube
+  const getEmbedUrl = (videoUrl) => {
     if (!videoUrl) return null;
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -12,9 +13,17 @@ const VideoPlayer = ({ url, thumbnail }) => {
   };
 
   const embedUrl = getEmbedUrl(url);
+  
+  // Détecter si c'est un fichier vidéo direct (Scaleway, MP4, etc.)
+  // On vérifie si l'URL finit par une extension vidéo ou contient "s3" (Scaleway)
+  const isDirectVideo = url && (
+    url.match(/\.(mp4|webm|ogg|mov)$/i) || 
+    url.includes('s3.fr-par.scw.cloud')
+  );
 
   return (
-    <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden border-dashed border-[#A5D7E8] bg-black">
+    <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden bg-black ring-1 ring-white/10">
+      {/* CAS 1 : C'est une vidéo YouTube */}
       {embedUrl ? (
         <iframe
           className="w-full h-full"
@@ -24,18 +33,33 @@ const VideoPlayer = ({ url, thumbnail }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-      ) : (
-        <div className="relative w-full h-full">
-          <img
-            src={thumbnail}
-            alt="Thumbnail"
-            className="w-full h-full object-cover opacity-60"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-20 h-14 bg-[#FF0000] rounded-2xl flex items-center justify-center cursor-pointer hover:scale-105 transition-transform shadow-xl">
-              <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-white border-b-[12px] border-b-transparent ml-1"></div>
-            </div>
-          </div>
+      ) 
+      /* CAS 2 : C'est un fichier vidéo direct (Scaleway) */
+      : isDirectVideo ? (
+        <video
+          className="w-full h-full object-contain"
+          controls
+          poster={thumbnail} // Affiche la vignette pendant le chargement
+          playsInline
+        >
+          <source src={url} type="video/mp4" />
+          <source src={url} type="video/quicktime" /> {/* Pour les .mov */}
+          Votre navigateur ne supporte pas la lecture de vidéos.
+        </video>
+      ) 
+      /* CAS 3 : Rien n'est chargé ou erreur */
+      : (
+        <div className="relative w-full h-full flex items-center justify-center">
+          {thumbnail && (
+            <img 
+              src={thumbnail} 
+              alt="Thumbnail" 
+              className="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm"
+            />
+          )}
+          <p className="relative text-slate-500 text-xs font-bold uppercase tracking-widest">
+            Source vidéo non disponible
+          </p>
         </div>
       )}
     </div>
