@@ -1,19 +1,16 @@
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
-import { FaGlobe } from 'react-icons/fa';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ButtonLogOut from '../ui/Buttons';
 import ProfileConnect from '../ui/ProfileConnect';
+import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const { t, i18n } = useTranslation();
 
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'fr' ? 'en' : 'fr');
-  };
 
   return (
     <header className="px-8 py-6">
@@ -64,11 +61,9 @@ function Header() {
           <ButtonLogOut />
           <li className="flex gap-6 items-center">
             {/* Icon du monde pour changer la langue!!!!!! */}
-            <FaGlobe
-              className="text-[#2b71b1] w-10 h-10 cursor-pointer"
-              aria-label="Traduire le site"
-              onClick={toggleLanguage}
-            />
+              <li className="flex gap-6 items-center">
+                <LanguageSwitcher />
+              </li>
             <ProfileConnect onClick={() => setIsNavOpen(false)} />
           </li>
         </ul>
