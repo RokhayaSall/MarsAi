@@ -36,18 +36,73 @@ function App() {
             <Route path="/movie-detail/:id" element={<MoviePage />} />
 
             {/* ROUTES JURY PROTÉGÉES */}
-            <Route path="/dashboard/jury" element={<JuryRoutes><DashboardJury /></JuryRoutes>}/> 
+            <Route
+              path="/dashboard/jury"
+              element={
+                <JuryRoutes>
+                  <DashboardJury />
+                </JuryRoutes>
+              }
+            />
             {/* //mettre la page notation avec film ect pas le composant ratings */}
-            <Route path="/dashboard/jury/movies/:id" element={<JuryRoutes><Ratings /></JuryRoutes>}/>
-            
-            
+            <Route
+              path="/dashboard/jury/movies/:id"
+              element={
+                <JuryRoutes>
+                  <Ratings />
+                </JuryRoutes>
+              }
+            />
+
             {/* ROUTES ADMIN PROTÉGÉES */}
-            <Route path="/admin" element={<AdminRoute><DashbordAdmin /></AdminRoute>} />
-            <Route path="/admin/jury" element={<AdminRoute><AdminJury /></AdminRoute>} />
-            <Route path="/admin/config" element={<AdminRoute><AdminConfig /></AdminRoute>} />
-            <Route path="/admin/events" element={<AdminRoute><AdminEvents /></AdminRoute>} />
-            <Route path="/admin/films" element={<AdminRoute><AdminMovies /></AdminRoute>} />
-            <Route path="/admin/results" element={<AdminRoute><AdminMoviesResult /></AdminRoute>} />
+            <Route
+              path="/admin"
+              element={
+                <AdminRoute>
+                  <DashbordAdmin />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/jury"
+              element={
+                <AdminRoute>
+                  <AdminJury />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/config"
+              element={
+                <AdminRoute>
+                  <AdminConfig />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/events"
+              element={
+                <AdminRoute>
+                  <AdminEvents />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/films"
+              element={
+                <AdminRoute>
+                  <AdminMovies />
+                </AdminRoute>
+              }
+            />
+            <Route
+              path="/admin/results"
+              element={
+                <AdminRoute>
+                  <AdminMoviesResult />
+                </AdminRoute>
+              }
+            />
 
             <Route path="*" element={<Home />} />
           </Routes>

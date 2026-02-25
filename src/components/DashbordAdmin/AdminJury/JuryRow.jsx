@@ -1,4 +1,4 @@
-import { Edit, Trash2} from 'lucide-react';
+import { Edit, Trash2 } from 'lucide-react';
 
 export default function JuryRow({ jury, onEdit, onDelete }) {
   const handleDelete = () => {
