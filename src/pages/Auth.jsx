@@ -4,11 +4,14 @@ import { login, register } from '../services/authService';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { jwtDecode } from 'jwt-decode';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Auth() {
   const { t } = useTranslation();
 
   const [isLogin, setIsLogin] = useState(true);
+  const { loginUser } = useContext(AuthContext);
   const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
@@ -33,6 +36,7 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     try {
       const payloadData = isLogin
@@ -43,36 +47,37 @@ export default function Auth() {
         ? await login(payloadData)
         : await register(payloadData);
 
+      // Cas mot de passe obligatoire à changer
       if (res.mustChangePassword) {
         navigate('/change-password', { state: { userId: res.userId } });
         return;
       }
 
-      // Si token reçu, on le stocke et redirige
+      // LOGIN (si token reçu)
       if (res.token) {
-        localStorage.setItem('token', res.token);
+        // Met à jour le contexte
+        loginUser(res.token);
 
-        const payload = jwtDecode(res.token); // décode le token pour connaitre le role
+        const payload = jwtDecode(res.token);
+        const roles = Array.isArray(payload.roles) ? payload.roles : [];
 
-        if (payload.roles.includes('Jury'))
-          navigate('/dashboard/jury'); //redirige en fonction du role du user
-        else if (payload.roles.includes('Admin')) navigate('/admin');
-        else navigate('/'); // sinon va sur l'accueil
+        // Redirige selon le rôle
+        if (roles.includes('Admin')) {
+          navigate('/admin');
+        } else if (roles.includes('Jury')) {
+          navigate('/dashboard/jury');
+        } else {
+          navigate('/');
+        }
 
-        setSuccess(
-          isLogin ? t('auth.successLogin') : t('auth.successRegister')
-        );
-      } else {
-        setSuccess(t('auth.registered'));
-        setIsLogin(true);
+        setSuccess(t('auth.successLogin'));
+        return;
       }
-
-      // sinon, c’est une inscription → message succès
-      setSuccess(t('auth.registered'));
+      // REGISTER sans token
+      setSuccess(t('auth.successRegister'));
       setIsLogin(true);
     } catch (err) {
-      setError(err.message);
-      setSuccess('');
+      setError(err.message || 'Erreur');
     } finally {
       setLoading(false);
     }

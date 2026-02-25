@@ -1,5 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { logout } from '../../utils/token';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export function ButtonParticipate({ className }) {
   return (
@@ -37,23 +39,21 @@ export function ButtonGalery() {
 
 export default function ButtonLogOut() {
   const navigate = useNavigate();
+  const context = useContext(AuthContext);
 
-  const logoutUser = () => {
-    logout(); //function qui supprime le token
-    navigate('/home');
+  if (!context || !context.user) return null; // ⚡ évite crash si pas de contexte ou pas connecté
+
+  const handleLogout = () => {
+    logout(); // supprime le token
+    navigate('/home'); // redirige vers home
   };
-  const isLoggedIn = !!localStorage.getItem('token'); // !! verifie si le token est true ou false et getItem retourne le token
 
   return (
-    <>
-      {isLoggedIn && ( // si isLoggedIn est true donc connecté affiche le bouton sinon false n'affiche pas le bouton
-        <button
-          onClick={logoutUser}
-          className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center w-40 md:w-auto"
-        >
-          Déconnexion
-        </button>
-      )}
-    </>
+    <button
+      onClick={handleLogout}
+      className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center w-40 md:w-auto"
+    >
+      Déconnexion
+    </button>
   );
 }

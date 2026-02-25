@@ -1,4 +1,5 @@
 import { Navigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 export default function AdminRoute({ children }) {
   const token = localStorage.getItem('token');
@@ -13,7 +14,7 @@ export default function AdminRoute({ children }) {
       throw new Error('Invalid token');
     }
 
-    const payload = JSON.parse(atob(payloadBase64));
+    const payload = jwtDecode(payloadBase64);
 
     // Vérification expiration
     if (!payload.exp || payload.exp * 1000 < Date.now()) {
