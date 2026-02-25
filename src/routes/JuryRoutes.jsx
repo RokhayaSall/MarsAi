@@ -11,7 +11,7 @@ export default function JuryRoutes({ children }) {
   // si y a pas de token c'est que l'utilisateur n'est pas connecté
   // redirige vers la page /home.
   if (!token) {
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/auth" replace />;
   }
 
   try {
@@ -23,11 +23,11 @@ export default function JuryRoutes({ children }) {
       // supprime le token s'il est expiré
       localStorage.removeItem('token');
 
-      return <Navigate to="/home" replace />;
+      return <Navigate to="/auth" replace />;
     }
     // vérifie si l'utilisateur est un jury
     if (!payload.roles || !payload.roles.includes('Jury')) {
-      return <Navigate to="/home" replace />;
+      return <Navigate to="/auth" replace />;
     }
     // si tout est bon token valide, non expiré, bon rôle
     // affiche la page protégée DashboardJury
@@ -37,6 +37,6 @@ export default function JuryRoutes({ children }) {
     console.error('JuryRoute token erreur :', error);
     // supprime le token par sécurité et renvoie a home
     localStorage.removeItem('token');
-    return <Navigate to="/home" replace />;
+    return <Navigate to="/auth" replace />;
   }
 }

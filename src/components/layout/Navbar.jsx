@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx';
 import { FaGlobe } from 'react-icons/fa';
-import { CgProfile } from 'react-icons/cg';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ButtonLogOut from '../ui/Buttons';
+import ProfileConnect from '../ui/ProfileConnect';
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -69,12 +69,7 @@ function Header() {
               aria-label="Traduire le site"
               onClick={toggleLanguage}
             />
-            <Link to="/auth" aria-label="Page de connexion">
-              <CgProfile
-                className="text-[#2b71b1] w-11 h-11"
-                onClick={() => setIsNavOpen(false)}
-              />
-            </Link>
+            <ProfileConnect onClick={() => setIsNavOpen(false)} />
           </li>
         </ul>
       </nav>
