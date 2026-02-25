@@ -4,9 +4,10 @@ const VideoPlayer = ({ url, thumbnail }) => {
   // Détecter si c'est du YouTube
   const getEmbedUrl = (videoUrl) => {
     if (!videoUrl) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const regExp =
+      /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = videoUrl.match(regExp);
-    return (match && match[2].length === 11) 
+    return match && match[2].length === 11
       ? `https://www.youtube.com/embed/${match[2]}`
       : null;
   };

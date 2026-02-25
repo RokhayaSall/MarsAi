@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
 import MovieList from '../../components/DashbordAdmin/AdminMovies/MovieList';
 import MovieEditModal from '../../components/DashbordAdmin/AdminMovies/MovieEditModal';
+import { apiFetch } from '../../services/api';
 
 export default function AdminMovies() {
   const [movies, setMovies] = useState([]);
@@ -13,17 +14,15 @@ export default function AdminMovies() {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const res = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/admin/movies`
-        );
-        const data = await res.json();
+        const data = await apiFetch('/api/admin/movies');
         setMovies(data);
       } catch (err) {
-        console.error(err);
+        console.error('Erreur fetch movies:', err);
       } finally {
         setLoading(false);
       }
     };
+
     fetchMovies();
   }, []);
 
