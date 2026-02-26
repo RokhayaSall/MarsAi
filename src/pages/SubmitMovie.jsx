@@ -51,65 +51,73 @@ const SubmitMovie = () => {
   const handleFileSelection = (file, category) => {
     setFormData(prev => {
       if (category === 'gallery') {
-        const isAlreadyIn = prev.gallery.some(f => f.name === file.name && f.size === file.size);
+        const isAlreadyIn = prev.gallery.some(
+          f => f.name === file.name && f.size === file.size
+        );
         if (isAlreadyIn) return prev;
         return {
           ...prev,
-          gallery: [...prev.gallery, file]
+          gallery: [...prev.gallery, file],
         };
       }
       return {
         ...prev,
-        [category]: file
+        [category]: file,
       };
     });
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  try {
-    const data = new FormData();
-    // On extrait video_file de l'état
-    const { thumbnail, video_file, gallery, ...textData } = formData;
+    try {
+      const data = new FormData();
+      // On extrait video_file de l'état
+      const { thumbnail, video_file, gallery, ...textData } = formData;
 
-    data.append('formData', JSON.stringify(textData));
-    data.append('directorId', directorId);
-    data.append('collaborateurs', JSON.stringify(collaborateurs));
+      data.append('formData', JSON.stringify(textData));
+      data.append('directorId', directorId);
+      data.append('collaborateurs', JSON.stringify(collaborateurs));
 
-    if (thumbnail) data.append('thumbnail', thumbnail);
+      if (thumbnail) data.append('thumbnail', thumbnail);
 
-    // TRÈS IMPORTANT : On envoie le fichier vidéo ici
-    if (video_file) {
-      data.append('video', video_file);
+      // TRÈS IMPORTANT : On envoie le fichier vidéo ici
+      if (video_file) {
+        data.append('video', video_file);
+      }
+
+      if (Array.isArray(gallery)) {
+        gallery.forEach(file => data.append('gallery', file));
+      }
+
+      const response = await axios.post(
+        `${API_BASE_URL}/api/movies/submit`,
+        data,
+        {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        alert('✅ Film et médias enregistrés avec succès !');
+        navigate('/success');
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      alert("❌ Erreur lors de l'envoi");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    if (Array.isArray(gallery)) {
-      gallery.forEach((file) => data.append('gallery', file));
-    }
-
-    const response = await axios.post(`${API_BASE_URL}/api/movies/submit`, data, {
-      headers: { 'Content-Type': 'multipart/form-data' }
-    });
-
-    if (response.status === 200 || response.status === 201) {
-      alert("✅ Film et médias enregistrés avec succès !");
-      navigate('/success');
-    }
-  } catch (error) {
-    console.error("Erreur:", error);
-    alert("❌ Erreur lors de l'envoi");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">
         <WiStars className="w-20 h-20 text-red-400 mx-auto" />
-        <h2 className="text-3xl text-red-500 mt-5">{t('submit_movie.appel_projets_2026')}</h2>
+        <h2 className="text-3xl text-red-500 mt-5">
+          {t('submit_movie.appel_projets_2026')}
+        </h2>
         <h1 className="text-6xl font-extrabold mt-5 text-slate-900 uppercase">
           {t('submit_movie.submit_film')}
         </h1>
@@ -132,10 +140,14 @@ const SubmitMovie = () => {
             type="submit"
             disabled={isSubmitting}
             className={`bg-slate-900 text-white px-8 py-3 rounded-full font-bold transition-colors shadow-lg ${
-              isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-slate-800'
+              isSubmitting
+                ? 'opacity-50 cursor-not-allowed'
+                : 'hover:bg-slate-800'
             }`}
           >
-            {isSubmitting ? 'Envoi en cours...' : t('submit_movie.finalize_submission')}
+            {isSubmitting
+              ? 'Envoi en cours...'
+              : t('submit_movie.finalize_submission')}
           </button>
         </div>
       </form>
