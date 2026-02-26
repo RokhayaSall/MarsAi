@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { apiFetch } from '../../services/api';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
 
@@ -7,6 +8,8 @@ import ProgressBar from '../../components/DashbordAdmin/ProgressBar';
 import { Film, Users, Globe, Clipboard } from 'lucide-react';
 
 export default function DashbordAdmin() {
+  const { t } = useTranslation();
+
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -18,64 +21,68 @@ export default function DashbordAdmin() {
         setStats(data);
       } catch (err) {
         console.error(err);
-        setError('Impossible de charger le dashboard');
+        setError(t('admin.dashboard.errors.load'));
       } finally {
         setLoading(false);
       }
     };
 
     fetchDashboard();
-  }, []);
+  }, [t]);
 
   if (loading) {
     return (
       <div className="p-10 text-gray-500 animate-pulse bg-gray-50 min-h-screen">
-        Chargement du dashboard…
+        {t('admin.dashboard.loading')}
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="p-10 text-red-600 bg-gray-50 min-h-screen">{error}</div>
+      <div className="p-10 text-red-600 bg-gray-50 min-h-screen">
+        {error}
+      </div>
     );
   }
 
   return (
     <div className="flex bg-gray-50 min-h-screen text-gray-900">
-      {/* Sidebar */}
       <Sidebar light />
-      {/* Main */}
+
       <main className="flex-1">
-        {/* Dashboard Cards */}
         <section className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          
           <Card
-            title="Films évalués par le Jury"
+            title={t('admin.dashboard.cards.movies.title')}
             value={stats?.movies?.count ?? 0}
-            subtitle={`${stats?.movies?.today ?? 0} aujourd’hui`}
+            subtitle={t('admin.dashboard.cards.movies.subtitle', {
+              count: stats?.movies?.today ?? 0,
+            })}
             icon={Film}
           >
             <ProgressBar percent={stats?.movies?.progress ?? 0} light />
           </Card>
 
           <Card
-            title="Jurys ayant finalisé leur lots"
+            title={t('admin.dashboard.cards.jury.title')}
             value={stats?.jury?.finishedJury ?? 0}
             icon={Users}
           />
 
           <Card
-            title="Pays représentés"
+            title={t('admin.dashboard.cards.countries.title')}
             value={stats?.countries?.count ?? 0}
             icon={Globe}
           >
             <p className="text-sm text-gray-500 mt-1">
-              Zone dominante : {stats?.countries?.topZone ?? '—'}
+              {t('admin.dashboard.cards.countries.topZone')}:{' '}
+              {stats?.countries?.topZone ?? '—'}
             </p>
           </Card>
 
           <Card
-            title="Taux d'occupation workshops"
+            title={t('admin.dashboard.cards.workshops.title')}
             value={`${stats?.workshops?.occupancy ?? 0}%`}
             icon={Clipboard}
           >
@@ -83,9 +90,11 @@ export default function DashbordAdmin() {
           </Card>
 
           <Card
-            title="Nombres de Réalisateurs inscrits"
+            title={t('admin.dashboard.cards.directors.title')}
             value={stats?.directors?.activeCount ?? 0}
-            subtitle={`+${stats?.directors?.todayIncrease ?? 0} aujourd’hui`}
+            subtitle={t('admin.dashboard.cards.directors.subtitle', {
+              count: stats?.directors?.todayIncrease ?? 0,
+            })}
             icon={Users}
           />
         </section>

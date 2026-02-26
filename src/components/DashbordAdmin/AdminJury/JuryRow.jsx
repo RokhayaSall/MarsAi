@@ -1,21 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { Edit, Trash2 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
-// Affiche une ligne pour un jury
-// Props :
-// - jury : objet jury { id, firstname, lastname, email }
-// - onEdit : fonction pour éditer un jury (reçoit le jury en paramètre)
-// - onDelete : fonction pour supprimer un jury (reçoit l'id du jury en paramètre)
-// Affiche une confirmation avant de supprimer un jury
-
-// la je vais lié quand on clique sur jury on arrive sur leur dashbord et on peut voir les films qu'il a évalué et les notes
-// qu'il a donné, et on peut aussi supprimer le jury ou éditer ses infos (email, nom, prénom)
-// et aussi lui renvoyer un mail pour l'inviter à évaluer les films du mois
-
 export default function JuryRow({ jury, onEdit, onDelete }) {
+  const { t } = useTranslation();
+
   const handleDelete = () => {
     const ok = window.confirm(
-      `Supprimer le jury ${jury.firstname} ${jury.lastname} ?`
+      t('juryRow.confirmDelete', { firstname: jury.firstname, lastname: jury.lastname })
     );
     if (ok) {
       onDelete(jury.id);
@@ -74,14 +66,14 @@ export default function JuryRow({ jury, onEdit, onDelete }) {
           onClick={() => onEdit(jury)}
           className="flex items-center gap-1 px-3 py-1 bg-blue-50 text-blue-600 rounded-md hover:bg-blue-100 transition"
         >
-          <Edit size={16} /> Éditer
+          <Edit size={16} /> {t('juryRow.edit')}
         </button>
 
         <button
           onClick={handleDelete}
           className="flex items-center gap-1 px-3 py-1 bg-red-50 text-red-600 rounded-md hover:bg-red-100 transition"
         >
-          <Trash2 size={16} /> Supprimer
+          <Trash2 size={16} /> {t('juryRow.delete')}
         </button>
       </div>
     </div>

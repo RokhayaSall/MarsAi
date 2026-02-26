@@ -1,10 +1,13 @@
 import MovieCard from './MovieCard';
+import { useTranslation } from 'react-i18next';
 
 export default function MovieList({ movies, onEdit, onDelete }) {
+  const { t } = useTranslation();
+
   if (!movies.length) {
     return (
       <p className="text-gray-500 text-center py-10 bg-gray-50 rounded-xl shadow-sm">
-        Aucun film trouvé.
+        {t('movieList.noMovies')}
       </p>
     );
   }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { apiFetch } from '../../services/api';
 import {
   LayoutDashboard,
@@ -11,12 +12,13 @@ import {
 } from 'lucide-react';
 
 export default function Sidebar() {
+  const { t } = useTranslation();
+
   const [user, setUser] = useState({
     firstname: 'Admin',
     email: 'admin@festival.org',
   });
 
-  // Fetch de l'utilisateur connecté
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -26,11 +28,11 @@ export default function Sidebar() {
           email: data.email,
         });
       } catch (err) {
-        console.error("Impossible de récupérer l'admin :", err);
+        console.error(t('admin.errors.fetchUser'), err);
       }
     };
     fetchUser();
-  }, []);
+  }, [t]);
 
   const linkClass =
     'flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group';
@@ -40,6 +42,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-80 min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white p-8 flex flex-col border-r border-white/10">
+      
       {/* Profil */}
       <header className="flex items-center gap-4 mb-14">
         <div className="w-14 h-14 rounded-full bg-gray-300 flex items-center justify-center font-bold text-lg text-gray-900">
@@ -60,7 +63,7 @@ export default function Sidebar() {
           }
         >
           <LayoutDashboard size={20} />
-          Dashboard
+          {t('admin.sidebar.dashboard')}
         </NavLink>
 
         <NavLink
@@ -70,7 +73,7 @@ export default function Sidebar() {
           }
         >
           <Film size={20} />
-          Gestion Films
+          {t('admin.sidebar.films')}
         </NavLink>
 
         <NavLink
@@ -80,7 +83,7 @@ export default function Sidebar() {
           }
         >
           <Users size={20} />
-          Jury
+          {t('admin.sidebar.jury')}
         </NavLink>
 
         <NavLink
@@ -90,7 +93,7 @@ export default function Sidebar() {
           }
         >
           <Trophy size={20} />
-          Résultats
+          {t('admin.sidebar.results')}
         </NavLink>
 
         <NavLink
@@ -100,7 +103,7 @@ export default function Sidebar() {
           }
         >
           <Calendar size={20} />
-          Événements
+          {t('admin.sidebar.events')}
         </NavLink>
 
         <NavLink
@@ -110,12 +113,12 @@ export default function Sidebar() {
           }
         >
           <Settings size={20} />
-          Configuration
+          {t('admin.sidebar.config')}
         </NavLink>
       </nav>
 
       <div className="mt-auto pt-12 text-sm text-white/40">
-        MarsAI Admin v1.0
+        {t('admin.sidebar.version')}
       </div>
     </aside>
   );

@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function JuryEditModal({ jury, onClose, onUpdate }) {
+  const { t } = useTranslation();
+
   const [form, setForm] = useState({
     firstname: '',
     lastname: '',
@@ -31,7 +34,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
       );
 
       if (!res.ok) {
-        throw new Error('Erreur lors de la mise à jour');
+        throw new Error(t('juryModal.errorUpdate'));
       }
 
       const updatedJury = await res.json();
@@ -39,7 +42,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
       onClose();
     } catch (err) {
       console.error(err);
-      alert('Impossible de modifier le jury');
+      alert(t('juryModal.errorAlert'));
     }
   };
 
@@ -51,10 +54,10 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
         onSubmit={handleSubmit}
         className="bg-gray-50 rounded-xl p-6 w-full max-w-md shadow-lg"
       >
-        <h3 className="text-lg font-semibold mb-4">Modifier le jury</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('juryModal.title')}</h3>
 
         <label className="block mb-3">
-          Prénom
+          {t('juryModal.firstname')}
           <input
             className="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
             value={form.firstname}
@@ -64,7 +67,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
         </label>
 
         <label className="block mb-3">
-          Nom
+          {t('juryModal.lastname')}
           <input
             className="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
             value={form.lastname}
@@ -74,7 +77,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
         </label>
 
         <label className="block mb-3">
-          Email
+          {t('juryModal.email')}
           <input
             type="email"
             className="w-full border border-gray-300 rounded-lg p-3 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
@@ -90,13 +93,13 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
             onClick={onClose}
             className="px-4 py-2 rounded-lg text-gray-700 hover:bg-gray-200 transition"
           >
-            Annuler
+            {t('juryModal.cancel')}
           </button>
           <button
             type="submit"
             className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
           >
-            Enregistrer
+            {t('juryModal.save')}
           </button>
         </div>
       </form>

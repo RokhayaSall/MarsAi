@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 export default function Card({ title, value, subtitle, icon: Icon, children }) {
+  const { t } = useTranslation();
+
   return (
     <div
       className="
@@ -22,11 +26,16 @@ export default function Card({ title, value, subtitle, icon: Icon, children }) {
         </div>
       )}
 
-      <p className="text-sm text-black/60 font-medium tracking-wide">{title}</p>
+      {/* Title */}
+      <p className="text-sm text-black/60 font-medium tracking-wide">
+        {t(title)}
+      </p>
 
+      {/* Value */}
       <p className="text-3xl font-bold text-black mt-3">{value}</p>
 
-      {subtitle && <p className="text-xs text-black/40 mt-2">{subtitle}</p>}
+      {/* Subtitle */}
+      {subtitle && <p className="text-xs text-black/40 mt-2">{t(subtitle)}</p>}
 
       {children && <div className="mt-5">{children}</div>}
     </div>

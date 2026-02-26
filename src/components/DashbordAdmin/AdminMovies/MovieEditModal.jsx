@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function MovieEditModal({ movie, onClose, onUpdate }) {
+  const { t } = useTranslation();
+
   const [form, setForm] = useState({
     original_title: '',
     english_title: '',
@@ -37,18 +40,28 @@ export default function MovieEditModal({ movie, onClose, onUpdate }) {
         }
       );
 
-      if (!res.ok) throw new Error('Erreur lors de la mise à jour');
+      if (!res.ok) throw new Error(t('movieEditModal.updateError'));
 
       const updatedMovie = await res.json();
       onUpdate(updatedMovie);
       onClose();
     } catch (err) {
       console.error(err);
-      alert('Impossible de mettre à jour le film');
+      alert(t('movieEditModal.updateError'));
     }
   };
 
   if (!movie) return null;
+
+  const fields = [
+    { label: t('movieEditModal.originalTitle'), key: 'original_title' },
+    { label: t('movieEditModal.englishTitle'), key: 'english_title' },
+    { label: t('movieEditModal.youtubeUrl'), key: 'youtube_url' },
+    { label: t('movieEditModal.duration'), key: 'duration' },
+    { label: t('movieEditModal.language'), key: 'language' },
+    { label: t('movieEditModal.originalSynopsis'), key: 'original_synopsis' },
+    { label: t('movieEditModal.englishSynopsis'), key: 'english_synopsis' },
+  ];
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
@@ -56,17 +69,9 @@ export default function MovieEditModal({ movie, onClose, onUpdate }) {
         onSubmit={handleSubmit}
         className="bg-white rounded-xl p-6 w-full max-w-lg shadow-lg space-y-3 overflow-y-auto max-h-[90vh]"
       >
-        <h3 className="text-lg font-semibold mb-2">Modifier le film</h3>
+        <h3 className="text-lg font-semibold mb-2">{t('movieEditModal.title')}</h3>
 
-        {[
-          { label: 'Titre original', key: 'original_title' },
-          { label: 'Titre anglais', key: 'english_title' },
-          { label: 'URL YouTube', key: 'youtube_url' },
-          { label: 'Durée (min)', key: 'duration' },
-          { label: 'Langue', key: 'language' },
-          { label: 'Synopsis original', key: 'original_synopsis' },
-          { label: 'Synopsis anglais', key: 'english_synopsis' },
-        ].map(field => (
+        {fields.map(field => (
           <label key={field.key} className="block">
             {field.label}
             <input
@@ -85,13 +90,13 @@ export default function MovieEditModal({ movie, onClose, onUpdate }) {
             onClick={onClose}
             className="text-gray-600 px-3 py-1 rounded-md border"
           >
-            Annuler
+            {t('movieEditModal.cancel')}
           </button>
           <button
             type="submit"
             className="bg-blue-600 text-white px-4 py-2 rounded-md"
           >
-            Enregistrer
+            {t('movieEditModal.save')}
           </button>
         </div>
       </form>

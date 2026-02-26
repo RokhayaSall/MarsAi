@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
 import MovieList from '../../components/DashbordAdmin/AdminMovies/MovieList';
 import MovieEditModal from '../../components/DashbordAdmin/AdminMovies/MovieEditModal';
 import { apiFetch } from '../../services/api';
 
 export default function AdminMovies() {
+  const { t } = useTranslation();
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +31,7 @@ export default function AdminMovies() {
   const handleEdit = movie => setEditingMovie(movie);
 
   const handleDelete = async id => {
-    const ok = window.confirm('Supprimer ce film ?');
+    const ok = window.confirm(t('adminMovies.confirmDelete'));
     if (!ok) return;
     try {
       const res = await fetch(
@@ -40,7 +42,7 @@ export default function AdminMovies() {
       setMovies(prev => prev.filter(m => m.id !== id));
     } catch (err) {
       console.error(err);
-      alert('Impossible de supprimer le film');
+      alert(t('adminMovies.deleteError'));
     }
   };
 
@@ -50,7 +52,6 @@ export default function AdminMovies() {
     );
   };
 
-  // Pagination
   const totalPages = Math.ceil(movies.length / moviesPerPage);
   const currentMovies = movies.slice(
     (currentPage - 1) * moviesPerPage,
@@ -60,7 +61,7 @@ export default function AdminMovies() {
   if (loading)
     return (
       <p className="p-10 text-gray-500 animate-pulse">
-        Chargement des films...
+        {t('adminMovies.loading')}
       </p>
     );
 
@@ -70,7 +71,7 @@ export default function AdminMovies() {
 
       <main className="flex-1 p-6 max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 mb-6">
-          Gestion des Films
+          {t('adminMovies.title')}
         </h1>
 
         <MovieList

@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { FiFilm, FiX, FiVideo } from 'react-icons/fi';
 import { LuImagePlus } from 'react-icons/lu';
 import { useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 
 const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUpload }) => {
-  
-  // --- GESTION DES COLLABORATEURS ---
+  const { t } = useTranslation();
+
+  // --- COLLABORATEURS ---
   const ajouterCollaborateur = () =>
     updateCollabs([...collaborateurs, { nom: '', role: '' }]);
 
@@ -22,100 +24,69 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
     updateCollabs(newCollabs);
   };
 
-  // --- GESTION DE LA VIDÉO (MP4/MOV) ---
+  // --- VIDÉO ---
   const onDropVideo = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (!file) return;
-
-    // Mise à jour locale
     update({ video_file: file });
-    
-    // Notification au parent pour l'upload
-    if (handleUpload) {
-      handleUpload(file, 'video_file');
-    }
+    if (handleUpload) handleUpload(file, 'video_file');
   };
-
-  const removeVideo = (e) => {
-    e.stopPropagation();
-    update({ video_file: null });
-  };
-
+  const removeVideo = (e) => { e.stopPropagation(); update({ video_file: null }); };
   const { getRootProps: getRootVideo, getInputProps: getInputVideo } = useDropzone({
     onDrop: onDropVideo,
     accept: { 'video/*': ['.mp4', '.mov', '.avi'] },
     multiple: false,
   });
 
-  // --- GESTION DE LA VIGNETTE (THUMBNAIL) ---
+  // --- VIGNETTE ---
   const onDropVignette = (acceptedFiles) => {
     const file = acceptedFiles[0];
     if (!file) return;
-
-    const fileWithPreview = Object.assign(file, {
-      preview: URL.createObjectURL(file)
-    });
-
+    const fileWithPreview = Object.assign(file, { preview: URL.createObjectURL(file) });
     update({ thumbnail: fileWithPreview });
     if (handleUpload) handleUpload(fileWithPreview, 'thumbnail');
   };
-
   const removeVignette = (e) => {
     e.stopPropagation();
     if (formData.thumbnail?.preview) URL.revokeObjectURL(formData.thumbnail.preview);
     update({ thumbnail: null });
   };
-
   const { getRootProps: getRootVignette, getInputProps: getInputVignette } = useDropzone({
     onDrop: onDropVignette,
     accept: { 'image/*': ['.jpeg', '.jpg', '.png'] },
     multiple: false,
   });
 
-  // --- GESTION DE LA GALERIE ---
+  // --- GALERIE ---
   const onDropGallery = (acceptedFiles) => {
     const currentGallery = Array.isArray(formData.gallery) ? formData.gallery : [];
     const remainingSlots = 3 - currentGallery.length;
-    
     if (remainingSlots <= 0) return;
-
     const filesToAdd = acceptedFiles.slice(0, remainingSlots).map(file =>
-      Object.assign(file, {
-        preview: URL.createObjectURL(file)
-      })
+      Object.assign(file, { preview: URL.createObjectURL(file) })
     );
-
     update({ gallery: [...currentGallery, ...filesToAdd] });
-
-    filesToAdd.forEach(f => {
-      if (handleUpload) handleUpload(f, 'gallery');
-    });
+    filesToAdd.forEach(f => handleUpload && handleUpload(f, 'gallery'));
   };
-
   const removeGalleryImage = (e, index) => {
     e.stopPropagation();
     const currentGallery = Array.isArray(formData.gallery) ? formData.gallery : [];
     const newGallery = [...currentGallery];
     const removedFile = newGallery.splice(index, 1)[0];
-    
     if (removedFile?.preview) URL.revokeObjectURL(removedFile.preview);
     update({ gallery: newGallery });
   };
-
   const { getRootProps: getRootGallery, getInputProps: getInputGallery } = useDropzone({
     onDrop: onDropGallery,
     accept: { 'image/*': ['.jpeg', '.jpg', '.png'] },
     maxFiles: 3,
   });
 
-  // Nettoyage des URLs au démontage
   useEffect(() => {
     return () => {
       if (formData.thumbnail?.preview) URL.revokeObjectURL(formData.thumbnail.preview);
       if (Array.isArray(formData.gallery)) {
-        formData.gallery.forEach(file => {
-          if (file.preview) URL.revokeObjectURL(file.preview);
-        });
+        formData.gallery.forEach(file => file.preview && URL.revokeObjectURL(file.preview));
       }
     };
   }, [formData.thumbnail, formData.gallery]);
@@ -130,19 +101,15 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
             <FiFilm className="w-6 h-6 text-slate-700" />
           </div>
           <h2 className="text-xl font-bold tracking-tight text-slate-800 uppercase">
-            Étape 03. Livrables & Collaborateurs
+            {t('livrables.title')}
           </h2>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-10">
-          
-          {/* DÉPÔT VIDÉO (Remplace YouTube) */}
+          {/* VIDÉO */}
           <div className="flex flex-col md:col-span-3">
-            <label className={labelStyle}>Fichier du Film (MP4 / MOV)*</label>
-            <div
-              {...getRootVideo()}
-              className="bg-[#F1F3F6] rounded-xl p-10 border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-100 transition-all"
-            >
+            <label className={labelStyle}>{t('livrables.video.label')}</label>
+            <div {...getRootVideo()} className="bg-[#F1F3F6] rounded-xl p-10 border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:bg-slate-100 transition-all">
               <input {...getInputVideo()} />
               {formData.video_file ? (
                 <div className="flex items-center gap-4">
@@ -158,8 +125,8 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
               ) : (
                 <>
                   <FiVideo className="w-12 h-12 text-slate-400 mb-3" />
-                  <p className="text-slate-600 font-medium">Glissez votre film ici ou cliquez pour parcourir</p>
-                  <p className="text-xs text-slate-400 mt-1">MP4, MOV, AVI — Max 500 Mo (selon config serveur)</p>
+                  <p className="text-slate-600 font-medium">{t('livrables.video.placeholder')}</p>
+                  <p className="text-xs text-slate-400 mt-1">{t('livrables.video.info')}</p>
                 </>
               )}
             </div>
@@ -167,23 +134,18 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
 
           {/* SOUS-TITRES */}
           <div className="flex flex-col md:col-span-3">
-            <label className={labelStyle}>Sous-titres (.srt)</label>
+            <label className={labelStyle}>{t('livrables.subtitles.label')}</label>
             <div className="flex flex-col gap-2">
               <label className="flex items-center gap-2 text-sm cursor-pointer mb-2">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4"
-                  checked={formData.has_subs || false}
-                  onChange={e => update({ has_subs: e.target.checked })}
-                />
-                <span className="italic text-slate-600">Voix ou textes nécessitant des sous-titres</span>
+                <input type="checkbox" className="w-4 h-4" checked={formData.has_subs || false} onChange={e => update({ has_subs: e.target.checked })} />
+                <span className="italic text-slate-600">{t('livrables.subtitles.info')}</span>
               </label>
             </div>
           </div>
 
-          {/* VIGNETTE OFFICIELLE */}
+          {/* VIGNETTE */}
           <div className="flex flex-col md:col-span-1 mt-4">
-            <label className={labelStyle}>Vignette Officielle (16:9)</label>
+            <label className={labelStyle}>{t('livrables.thumbnail.label')}</label>
             <div {...getRootVignette()} className="bg-[#F1F3F6] rounded-lg h-40 relative flex flex-col items-center justify-center border-2 border-dashed border-transparent hover:border-slate-300 transition-all cursor-pointer overflow-hidden">
               <input {...getInputVignette()} />
               {formData.thumbnail ? (
@@ -196,15 +158,15 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
               ) : (
                 <>
                   <LuImagePlus className="w-12 h-12 text-slate-400 mb-2" />
-                  <span className="text-[10px] font-bold text-slate-400 uppercase text-center px-2">PNG ou JPG – Max 15 Mo</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase text-center px-2">{t('livrables.thumbnail.info')}</span>
                 </>
               )}
             </div>
           </div>
 
-          {/* GALERIE MÉDIAS */}
+          {/* GALERIE */}
           <div className="flex flex-col md:col-span-2 mt-4">
-            <label className={labelStyle}>Galerie Médias (Max 3)</label>
+            <label className={labelStyle}>{t('livrables.gallery.label')}</label>
             <div {...getRootGallery()} className="bg-[#F1F3F6] rounded-lg h-40 flex items-center justify-center gap-4 px-4 cursor-pointer hover:bg-[#ebedf0] transition-colors">
               <input {...getInputGallery()} />
               {!Array.isArray(formData.gallery) || formData.gallery.length === 0 ? (
@@ -235,26 +197,27 @@ const Livrables = ({ formData, update, collaborateurs, updateCollabs, handleUplo
 
           {/* COLLABORATEURS */}
           <div className="md:col-span-3 mt-4">
-            <label className={labelStyle}>Collaborateurs</label>
+            <label className={labelStyle}>{t('livrables.collaborateurs.label')}</label>
             {collaborateurs.map((collab, index) => (
               <div key={index} className="flex gap-4 mb-4">
                 <div className="flex-1">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase ml-1">Nom</span>
+                  <span className="text-[10px] font-bold text-slate-500 uppercase ml-1">{t('livrables.collaborateurs.nom')}</span>
                   <input name="nom" value={collab.nom} onChange={e => handleChangeCollaborateur(index, e)} className="w-full bg-[#F1F3F6] rounded-lg p-4 text-sm mt-1 outline-none focus:ring-1 focus:ring-slate-300" />
                 </div>
                 <div className="flex-1">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase ml-1">Rôle</span>
+                  <span className="text-[10px] font-bold text-slate-500 uppercase ml-1">{t('livrables.collaborateurs.role')}</span>
                   <input name="role" value={collab.role} onChange={e => handleChangeCollaborateur(index, e)} className="w-full bg-[#F1F3F6] rounded-lg p-4 text-sm mt-1 outline-none focus:ring-1 focus:ring-slate-300" />
                 </div>
               </div>
             ))}
             <div className="flex gap-3 mt-6">
-              <button type="button" onClick={ajouterCollaborateur} className="bg-[#2D6A4F] text-white px-6 py-2 rounded-md font-bold text-sm hover:bg-[#1B4332] transition-all shadow-sm">+ Ajouter</button>
+              <button type="button" onClick={ajouterCollaborateur} className="bg-[#2D6A4F] text-white px-6 py-2 rounded-md font-bold text-sm hover:bg-[#1B4332] transition-all shadow-sm">{t('livrables.collaborateurs.add')}</button>
               {collaborateurs.length > 1 && (
-                <button type="button" onClick={supprimerCollaborateur} className="bg-[#FF6B6B] text-white px-6 py-2 rounded-md font-bold text-sm hover:bg-[#EE5253] transition-all shadow-sm">Supprimer</button>
+                <button type="button" onClick={supprimerCollaborateur} className="bg-[#FF6B6B] text-white px-6 py-2 rounded-md font-bold text-sm hover:bg-[#EE5253] transition-all shadow-sm">{t('livrables.collaborateurs.remove')}</button>
               )}
             </div>
           </div>
+
         </div>
       </div>
     </section>

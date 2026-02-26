@@ -164,5 +164,594 @@
     "successLogin": "Successfully logged in",
     "successRegister": "Successfully registered",
     "registered": "Registration successful, you can login"
-  }
+  },
+  
+  "adminMovies": {
+    "title": "Movie Management",
+    "loading": "Loading movies...",
+    "confirmDelete": "Delete this movie?",
+    "deleteError": "Unable to delete the movie"
+  
+},
+
+"adminMoviesResult": {
+    "loading": "Loading movies...",
+    "noMovies": "No movies available",
+    "topScore": "Top Score",
+    "page": "Page {{currentPage}} of {{totalPages}}",
+    "authorUnknown": "Unknown author"
+  },
+
+  
+  "dashboardAdmin": {
+    "loading": "Loading dashboard…",
+    "error": "Unable to load dashboard",
+    "moviesEvaluated": "Movies evaluated by the Jury",
+    "today": "{{count}} today",
+    "juryFinished": "Juries who finished their lots",
+    "countriesRepresented": "Countries represented",
+    "dominantZone": "Dominant zone: {{zone}}",
+    "workshopsOccupancy": "Workshops occupancy rate",
+    "directorsRegistered": "Number of registered directors"
+  },
+
+
+  "adminJury": {
+    "title": "Jury Management",
+    "addButton": "+ Add a jury",
+    "deleteError": "Unable to delete jury",
+    "createError": "Unable to create jury",
+    "updateError": "Unable to update jury",
+    "loading": "Loading juries…"
+  },
+
+  
+  "adminEvents": {
+    "title": "Event Management",
+    "description": "Create, edit, and track festival events."
+  },
+
+  
+  "adminConfig": {
+    "title": "Dashboard Configuration",
+    "description": "General settings and administrative options."
+  },
+
+  "dashboardJury": {
+    "title": "Jury Dashboard",
+    "subtitle": "Tracking and managing juries"
+  },
+
+
+  "loadingMovie": "Loading the movie",
+  "backToGallery": "BACK TO ARCHIVES",
+  "projectId": "PROJECT ID: #{{id}}",
+  "storyAndIntelligence": "Story & Intelligence",
+  "specifications": "Specifications",
+  "runtime": "Runtime",
+  "minutes": "min",
+  "originalAudio": "Original Audio",
+  "status": "Status",
+  "verifiedSelection": "Verified Selection",
+  "shareThisMovie": "Share this movie",
+
+
+
+  "hero": {
+    "title1": "IMAGINE",
+    "title2": "DESIRABLE",
+    "title3": "FUTURES",
+    "description": "The 60-second short film festival made by AI. 2 days of immersion in the heart of Marseille."
+  },
+  "project": {
+    "title": "THE MARS.A.I PROJECT",
+    "description": "A unique hybrid event in France, bringing together the best of generative AI and cinematic creation."
+  },
+  "competition": {
+    "title1": "FILMS IN",
+    "title2": "COMPETITION",
+    "description": "Discover a selection of pioneering works exploring the new frontiers of AI-assisted imagination."
+  },
+  "goals": {
+    "title1": "FESTIVAL",
+    "title2": "GOALS"
+  },
+  "selection": {
+    "title": "Selection Format",
+    "subtitle": "Journey of the works"
+  },
+  "conferences": {
+    "title1": "Two days of",
+    "title2": "free",
+    "title3": "conferences"
+  },
+  "night": {
+    "title": "Mars.A.I night",
+    "description": "A night mixing AI and desirable futures. An immersive sound and visual experience."
+  },
+  "location": {
+    "title": "Location",
+    "name": "La plateforme",
+    "subtitle": "(Ex dock des suds)",
+    "description": "4,000 m² of modular spaces in the center of Marseille, in the heart of the digital ecosystem."
+  },
+  "numbers": {
+    "title1": "Projected",
+    "title2": "Numbers",
+    "description": "Based on the expertise of the Mobile Film Festival and the influence of La Plateforme."
+  },
+  "partners": {
+    "title": "Our partners",
+    "subtitle1": "They support",
+    "subtitle2": "the future"
+  },
+
+  
+  "juryModal": {
+    "title": "Edit Jury",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "email": "Email",
+    "cancel": "Cancel",
+    "save": "Save",
+    "errorUpdate": "Error updating jury",
+    "errorAlert": "Unable to edit jury"
+  },
+
+  
+  "juryForm": {
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "email": "Email",
+    "submit": "Submit",
+    "invalidEmail": "Please enter a valid email!",
+    "success": "Email sent successfully!",
+    "error": "Error sending email."
+  },
+
+  
+  "juryList": {
+    "noJury": "No jury members."
+  },
+
+  
+  "juryRow": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Delete jury {{firstname}} {{lastname}}?"
+  },
+
+  "movieCard": {
+    "englishTitle": "English title",
+    "duration": "Duration",
+    "minutes": "min",
+    "language": "Language",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+
+  "movieEditModal": {
+    "title": "Edit Movie",
+    "originalTitle": "Original title",
+    "englishTitle": "English title",
+    "youtubeUrl": "YouTube URL",
+    "duration": "Duration (min)",
+    "language": "Language",
+    "originalSynopsis": "Original synopsis",
+    "englishSynopsis": "English synopsis",
+    "cancel": "Cancel",
+    "save": "Save",
+    "updateError": "Unable to update the movie"
+  },
+
+
+  "movieList": {
+    "noMovies": "No movies found."
+  },
+
+  "leaderboard": {
+    "thumbnail": "Thumbnail",
+    "rank": "Rank",
+    "title": "Title",
+    "author": "Author",
+    "country": "Country",
+    "score": "Score",
+    "status": "Status",
+    "inProgress": "IN PROGRESS"
+  },
+
+  "search": {
+    "placeholder": "Search for a movie…"
+  }, 
+
+  "topScore": {
+    "bestScore": "TOP SCORE",
+    "by": "By"
+  },
+
+  "cards": {
+    "projects": "Projects",
+    "members": "Members",
+    "completed": "Completed",
+    "active": "Active"
+  },
+
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "movies": "Movie Management",
+    "jury": "Jury",
+    "results": "Results",
+    "events": "Events",
+    "configuration": "Settings",
+    "version": "MarsAI Admin v1.0",
+    "fetchError": "Unable to retrieve admin user"
+  },
+
+  "buttons": {
+    "participate": "Participate now",
+    "learnMore": "Learn more",
+    "viewSelection": "View full selection",
+    "logout": "Log out"
+  },
+
+  
+  "calendar": {
+    "date": "June 13",
+    "time": "Starting at 7 PM",
+    "cta": "Get my pass"
+  },
+  "place": {
+    "city": "Marseille, France",
+    "venue": "La Plateforme Event Center"
+  },
+  "cards": {
+    "movie_video_aria": "YouTube movie video"
+  },
+
+
+  "cards": {
+    "default_card_title": "Card Title",
+    "default_card_text": "Card description",
+    
+    "cardsData": {
+      "1": { "title": "1 MINUTE", "text": "Ultra-short format to maximize creative impact." },
+      "2": { "title": "FREE", "text": "Conferences and workshops accessible to everyone." },
+      "4": { "title": "FOR ALL", "text": "Professionals, students and curious minds." },
+      "5": { "title": "EXPERTISE", "text": "Meet the world leaders in AI." }
+    },
+
+    "cardsFestivalData": {
+      "1": { "title": "Human-centered", "text": "Place humans at the heart of AI-generated creations to preserve emotion." },
+      "2": { "title": "Creative challenge", "text": "Challenge participants' creativity with a very short 60-second format." },
+      "3": { "title": "Desirable futures", "text": "Leverage AI power to illustrate a theme: Imagine desirable futures." }
+    },
+
+    "cardsSelectionData": {
+      "1": { "title": "2 months", "text": "Call for projects", "description": "Applications open to creators worldwide." },
+      "2": { "title": "50 Films", "text": "Official selection", "description": "One-minute short films selected for the competition." },
+      "3": { "title": "Web & Social", "text": "Digital distribution", "description": "Global visibility through social networks and platforms." },
+      "4": { "title": "Festival", "text": "Cinema screenings", "description": "Projection on the big screen for full immersion." }
+    },
+
+    "cardsInfos": {
+      "1": { "title": "The heart of the festival", "text": "Engaging debates on ethics and the future." },
+      "2": { "title": "Screenings", "text": "Competition and non-competition films on the big screen." },
+      "3": { "title": "Workshops", "text": "Script, creation, and post-production with AI experts." },
+      "4": { "title": "Award ceremony", "text": "Filmmakers, actors and renowned creators to reward excellence." }
+    },
+
+    "cardsPlaces": {
+      "1": { "title": "Salle des sucres", "description": "Future conference and award ceremony hall of Mars.A.I. A majestic space combining heritage and technology." },
+      "2": { "title": "Salle plaza", "description": "Festival hub: reception, activities, workshops, and catering. The meeting point for all participants." }
+    },
+
+    "cardsNumber": {
+      "1": { "title": "+120", "text": "Countries represented" },
+      "2": { "title": "+600", "text": "Submitted films" }
+    }
+  },
+
+  "profileConnect": {
+    "loginPage": "Login Page",
+    "adminDashboard": "Admin Dashboard",
+    "juryDashboard": "Jury Dashboard",
+    "userDashboard": "User Dashboard"
+  },
+
+
+  "cards": {
+    "general": {
+      "minute": {
+        "title": "1 MINUTE",
+        "text": "Ultra-short format to maximize creative impact."
+      },
+      "gratuit": {
+        "title": "FREE",
+        "text": "Conferences and workshops open to everyone."
+      },
+      "pourTous": {
+        "title": "FOR ALL",
+        "text": "Professionals, students, and curious minds."
+      },
+      "expertise": {
+        "title": "EXPERTISE",
+        "text": "Meet the world leaders in AI."
+      }
+    },
+    "festival": {
+      "humain": {
+        "title": "Human at the Center",
+        "text": "Put humans at the heart of AI-generated works to preserve emotion."
+      },
+      "challenge": {
+        "title": "Creative Challenge",
+        "text": "Challenge participants' creativity with a very short 60-second format."
+      },
+      "futurs": {
+        "title": "Desirable Futures",
+        "text": "Leverage AI to illustrate a theme: Imagine desirable futures."
+      }
+    },
+    "selection": {
+      "2mois": {
+        "title": "2 Months",
+        "text": "Call for projects",
+        "description": "Applications open to creators worldwide."
+      },
+      "50films": {
+        "title": "50 Films",
+        "text": "Official Selection",
+        "description": "One-minute short films selected for competition."
+      },
+      "web": {
+        "title": "Web & Social Media",
+        "text": "Digital distribution",
+        "description": "Global visibility via networks and platforms."
+      },
+      "festival": {
+        "title": "Festival",
+        "text": "Cinema halls",
+        "description": "Big screen projection for full immersion."
+      }
+    },
+    "infos": {
+      "coeur": {
+        "title": "Festival Core",
+        "text": "Engaging debates on ethics and the future."
+      },
+      "projections": {
+        "title": "Screenings",
+        "text": "Competition and non-competition films on the big screen."
+      },
+      "workshops": {
+        "title": "Workshops",
+        "text": "Script, creation and post-production with AI experts."
+      },
+      "prix": {
+        "title": "Award Ceremony",
+        "text": "Filmmakers, actors, and creators recognized for excellence."
+      }
+    },
+    "places": {
+      "sucres": {
+        "title": "Salle des sucres",
+        "description": "Future conference and award room of Mars.A.I. A majestic space blending heritage and technology."
+      },
+      "plaza": {
+        "title": "Salle plaza",
+        "description": "Festival epicenter: reception, workshops, animations, and catering. Meeting point for all participants."
+      }
+    },
+    "numbers": {
+      "pays": {
+        "title": "+120",
+        "text": "Countries represented"
+      },
+      "films": {
+        "title": "+600",
+        "text": "Submitted films"
+      }
+    },
+    "partners": {
+      "plateforme": "Logo la plateforme",
+      "mobile": "Mobile festival logo",
+      "undp": "UNDP logo",
+      "psl": "PSL logo",
+      "cnc": "CNC logo",
+      "action": "Action campaign logo",
+      "unric": "UNRIC logo",
+      "sacd": "SACD logo",
+      "agence": "Court film agency logo",
+      "extra": "Extra court logo",
+      "unesco": "UNESCO logo",
+      "global": "Global Youth Biodiversity Network logo"
+    }
+  },
+
+  "livrables": {
+    "title": "Step 03. Deliverables & Collaborators",
+    "video": {
+      "label": "Film File (MP4 / MOV)*",
+      "placeholder": "Drag your film here or click to browse",
+      "info": "MP4, MOV, AVI — Max 500 MB (server config)"
+    },
+    "subtitles": {
+      "label": "Subtitles (.srt)",
+      "info": "Voices or text requiring subtitles"
+    },
+    "thumbnail": {
+      "label": "Official Thumbnail (16:9)",
+      "info": "PNG or JPG – Max 15 MB"
+    },
+    "gallery": {
+      "label": "Media Gallery (Max 3)"
+    },
+    "collaborateurs": {
+      "label": "Collaborators",
+      "nom": "Name",
+      "role": "Role",
+      "add": "+ Add",
+      "remove": "Remove"
+    }
+  },
+
+
+  "cards": {
+    "home": {
+      "minute": {
+        "title": "1 MINUTE",
+        "text": "Ultra-short format to maximize creative impact."
+      },
+      "free": {
+        "title": "FREE",
+        "text": "Conferences and workshops open to everyone."
+      },
+      "forAll": {
+        "title": "FOR ALL",
+        "text": "Professionals, students and curious minds."
+      },
+      "expertise": {
+        "title": "EXPERTISE",
+        "text": "Meet global leaders in AI."
+      }
+    },
+    "festival": {
+      "human": {
+        "title": "Human at the center",
+        "text": "Keeping humans at the heart of AI-generated creations to preserve emotion."
+      },
+      "challenge": {
+        "title": "Creative challenge",
+        "text": "Challenge participants' creativity with a 60-second format."
+      },
+      "future": {
+        "title": "Desirable futures",
+        "text": "Use AI power to imagine and illustrate desirable futures."
+      }
+    },
+    "selection": {
+      "call": {
+        "title": "2 months",
+        "text": "Call for projects",
+        "description": "Open submissions to creators worldwide."
+      },
+      "official": {
+        "title": "50 Films",
+        "text": "Official selection",
+        "description": "One-minute short films selected for competition."
+      },
+      "digital": {
+        "title": "Web & Social",
+        "text": "Digital broadcast",
+        "description": "Worldwide visibility through social platforms."
+      },
+      "cinema": {
+        "title": "Festival",
+        "text": "Cinema theaters",
+        "description": "Big screen screening for full immersion."
+      }
+    },
+    "infos": {
+      "heart": {
+        "title": "The heart of the festival",
+        "text": "Engaging debates on ethics and the future."
+      },
+      "screening": {
+        "title": "Screenings",
+        "text": "Competition and non-competition films on the big screen."
+      },
+      "workshop": {
+        "title": "Workshops",
+        "text": "Writing, creation and post-production with AI experts."
+      },
+      "award": {
+        "title": "Award ceremony",
+        "text": "Renowned filmmakers and creators celebrating excellence."
+      }
+    },
+    "places": {
+      "sucres": {
+        "title": "Salle des Sucres",
+        "description": "Future conference and award ceremony venue for Mars.A.I."
+      },
+      "plaza": {
+        "title": "Plaza Hall",
+        "description": "Festival epicenter: welcome area, workshops and catering."
+      }
+    },
+    "numbers": {
+      "countries": "Countries represented",
+      "films": "Films submitted"
+    }
+  },
+
+  
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "films": "Film Management",
+      "jury": "Jury",
+      "results": "Results",
+      "events": "Events",
+      "config": "Settings",
+      "version": "MarsAI Admin v1.0"
+    },
+    "errors": {
+      "fetchUser": "Unable to fetch admin:"
+    }
+  },
+
+
+  
+  "admin": {
+    "dashboard": {
+      "loading": "Loading dashboard…",
+      "errors": {
+        "load": "Unable to load dashboard"
+      },
+      "cards": {
+        "movies": {
+          "title": "Films reviewed by the jury",
+          "subtitle": "{{count}} today"
+        },
+        "jury": {
+          "title": "Juries who finalized their batches"
+        },
+        "countries": {
+          "title": "Countries represented",
+          "topZone": "Top region"
+        },
+        "workshops": {
+          "title": "Workshop occupancy rate"
+        },
+        "directors": {
+          "title": "Registered directors",
+          "subtitle": "+{{count}} today"
+        }
+      }
+    }
+  
 }
+
+
+
+
+
+
+}
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+

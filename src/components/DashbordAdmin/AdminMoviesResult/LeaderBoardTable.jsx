@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function LeaderboardTable({ movies }) {
-  // ⚡ Initialisation du state avec une fonction lazy pour calculer les fallback scores
+  const { t } = useTranslation();
+
   const [moviesWithScore] = useState(() =>
     movies.map(movie => ({
       ...movie,
@@ -15,49 +17,28 @@ export default function LeaderboardTable({ movies }) {
       <table className="min-w-full divide-y divide-gray-200">
         <thead className="bg-gray-50">
           <tr>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Miniature
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.thumbnail')}
             </th>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Rang
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.rank')}
             </th>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Titre
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.title')}
             </th>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Auteur
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.author')}
             </th>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Pays
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.country')}
             </th>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Score
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.score')}
             </th>
-            <th
-              scope="col"
-              className="px-4 py-2 text-left text-xs font-medium text-gray-500"
-            >
-              Statut
+            <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">
+              {t('leaderboard.status')}
             </th>
-            <th scope="col" className="px-4 py-2" />
+            <th className="px-4 py-2" />
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-100">
@@ -82,7 +63,7 @@ export default function LeaderboardTable({ movies }) {
               </td>
               <td className="px-4 py-2">
                 <span className="px-2 py-1 text-xs bg-yellow-100 text-yellow-700 rounded-full">
-                  {movie.status || 'EN COURS'}
+                  {movie.status || t('leaderboard.inProgress')}
                 </span>
               </td>
               <td className="px-4 py-2 text-gray-400 hover:text-gray-700">

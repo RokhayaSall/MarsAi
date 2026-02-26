@@ -1,210 +1,78 @@
-import { MdLocalMovies } from 'react-icons/md';
+import { MdLocalMovies, MdEventAvailable } from 'react-icons/md';
 import { BsPersonArmsUp } from 'react-icons/bs';
 import { GrUserExpert } from 'react-icons/gr';
-import { IoBook } from 'react-icons/io5';
+import { IoBook, IoFlashSharp, IoRocketSharp } from 'react-icons/io5';
 import { TbTargetArrow } from 'react-icons/tb';
-import { IoFlashSharp } from 'react-icons/io5';
-import { IoRocketSharp } from 'react-icons/io5';
-import { FaAward, FaHandHoldingHeart } from 'react-icons/fa';
-import { MdEventAvailable } from 'react-icons/md';
+import { FaAward, FaHandHoldingHeart, FaGlobe } from 'react-icons/fa';
 import { GiFilmSpool } from 'react-icons/gi';
-import { FaGlobe } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const images = import.meta.glob('../../assets/*.{png,jpg,jpeg,svg}', {
   eager: true,
 });
 
-export const cardsData = [
-  {
-    id: 1,
-    icon: MdLocalMovies,
-    title: '1 MINUTE',
-    text: "Format ultra-court pour maximiser l'impact créatif.",
-  },
-  {
-    id: 2,
-    icon: IoBook,
-    title: 'GRATUITÉ',
-    text: 'Conférences et workshops accessibles à tous.',
-  },
-  {
-    id: 4,
-    icon: BsPersonArmsUp,
-    title: 'POUR TOUS',
-    text: 'Professionnels, étudiants et curieux.',
-  },
-  {
-    id: 5,
-    icon: GrUserExpert,
-    title: 'EXPERTISE',
-    text: "Rencontrez les leaders mondiaux de l'IA.",
-  },
-];
+export const useCardsData = () => {
+  const { t } = useTranslation();
 
-export const cardsFestivalData = [
-  {
-    id: 1,
-    icon: TbTargetArrow,
-    title: "L'Humain au centre",
-    text: "Mettre l'humain au cœur de la création d'œuvres générées par IA pour ne pas perdre l'émotion.",
-  },
-  {
-    id: 2,
-    icon: IoFlashSharp,
-    title: 'Challenge créatif',
-    text: 'Challenger la créativité des participants grâce à un format très court de 60 secondes.',
-  },
-  {
-    id: 3,
-    icon: IoRocketSharp,
-    title: 'Futurs souhaitables',
-    text: "Mettre à profit la puissance de l'IA pour illustrer un thème : Imaginez des futurs souhaitables.",
-  },
-];
+  const cardsData = [
+    { id: 1, icon: MdLocalMovies, title: t('cards.home.minute.title'), text: t('cards.home.minute.text') },
+    { id: 2, icon: IoBook, title: t('cards.home.free.title'), text: t('cards.home.free.text') },
+    { id: 4, icon: BsPersonArmsUp, title: t('cards.home.forAll.title'), text: t('cards.home.forAll.text') },
+    { id: 5, icon: GrUserExpert, title: t('cards.home.expertise.title'), text: t('cards.home.expertise.text') },
+  ];
 
-export const cardsSelectionData = [
-  {
-    id: 1,
-    title: '2 mois',
-    text: 'Appel à projet',
-    description: 'Candidatures ouvertes aux créateurs du monde entier.',
-  },
-  {
-    id: 2,
-    title: '50 Films',
-    text: 'Sélection officielle',
-    description: "Courts-métrages d'une minute retenus pour la compétition.",
-  },
-  {
-    id: 3,
-    title: 'Web & RS',
-    text: 'Diffusion digitale',
-    description: 'Visibilité mondiale via les réseaux et plateformes.',
-  },
-  {
-    id: 4,
-    title: 'Festival',
-    text: 'Salles de cinéma',
-    description: 'Projection sur grand écran pour une immersion totale.',
-  },
-];
+  const cardsFestivalData = [
+    { id: 1, icon: TbTargetArrow, title: t('cards.festival.human.title'), text: t('cards.festival.human.text') },
+    { id: 2, icon: IoFlashSharp, title: t('cards.festival.challenge.title'), text: t('cards.festival.challenge.text') },
+    { id: 3, icon: IoRocketSharp, title: t('cards.festival.future.title'), text: t('cards.festival.future.text') },
+  ];
 
-export const cardsInfos = [
-  {
-    id: 1,
-    icon: FaHandHoldingHeart,
-    title: 'Le coeur du festival',
-    text: "Débats engagés sur l'éthique et le futur.",
-  },
-  {
-    id: 2,
-    icon: MdLocalMovies,
-    title: 'Projections',
-    text: 'Films en compétition et hors-compétition sur grand écran.',
-  },
-  {
-    id: 3,
-    icon: MdEventAvailable,
-    title: 'Workshops',
-    text: "Scénario, création et post-prod avec des experts de l'IA.",
-  },
-  {
-    id: 4,
-    icon: FaAward,
-    title: 'Remise des prix',
-    text: "Cinéastes, acteurs et créateurs renommés pour récompenser l'excellence.",
-  },
-];
+  const cardsSelectionData = [
+    { id: 1, title: t('cards.selection.call.title'), text: t('cards.selection.call.text'), description: t('cards.selection.call.description') },
+    { id: 2, title: t('cards.selection.official.title'), text: t('cards.selection.official.text'), description: t('cards.selection.official.description') },
+    { id: 3, title: t('cards.selection.digital.title'), text: t('cards.selection.digital.text'), description: t('cards.selection.digital.description') },
+    { id: 4, title: t('cards.selection.cinema.title'), text: t('cards.selection.cinema.text'), description: t('cards.selection.cinema.description') },
+  ];
 
-export const cardsPlaces = [
-  {
-    id: 1,
-    title: 'Salle des sucres',
-    description:
-      'Futur salle des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie.',
-  },
-  {
-    id: 2,
-    title: 'Salle plaza',
-    description:
-      "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants.",
-  },
-];
+  const cardsInfos = [
+    { id: 1, icon: FaHandHoldingHeart, title: t('cards.infos.heart.title'), text: t('cards.infos.heart.text') },
+    { id: 2, icon: MdLocalMovies, title: t('cards.infos.screening.title'), text: t('cards.infos.screening.text') },
+    { id: 3, icon: MdEventAvailable, title: t('cards.infos.workshop.title'), text: t('cards.infos.workshop.text') },
+    { id: 4, icon: FaAward, title: t('cards.infos.award.title'), text: t('cards.infos.award.text') },
+  ];
 
-export const cardsNumber = [
-  {
-    id: 1,
-    icon: FaGlobe,
-    title: '+120',
-    text: 'Pays représentés',
-  },
-  {
-    id: 2,
-    icon: GiFilmSpool,
-    title: '+600',
-    text: 'Films soumis',
-  },
-];
+  const cardsPlaces = [
+    { id: 1, title: t('cards.places.sucres.title'), description: t('cards.places.sucres.description') },
+    { id: 2, title: t('cards.places.plaza.title'), description: t('cards.places.plaza.description') },
+  ];
 
-export const cardsPartner = [
-  {
-    id: 1,
-    src: images['../../assets/plateforme.png'].default,
-    alt: 'Logo la plateforme',
-  },
-  {
-    id: 2,
-    src: images['../../assets/mobile.png'].default,
-    alt: 'Logo mobile festival',
-  },
-  {
-    id: 3,
-    src: images['../../assets/undp.png'].default,
-    alt: 'Logo undp',
-  },
-  {
-    id: 4,
-    src: images['../../assets/psl.png'].default,
-    alt: 'Logo psl',
-  },
-  {
-    id: 5,
-    src: images['../../assets/cnc.png'].default,
-    alt: 'Logo cnc',
-  },
-  {
-    id: 6,
-    src: images['../../assets/action.png'].default,
-    alt: 'Logo action campaign',
-  },
-  {
-    id: 7,
-    src: images['../../assets/unric.png'].default,
-    alt: 'Logo unric',
-  },
-  {
-    id: 8,
-    src: images['../../assets/sacd.png'].default,
-    alt: 'Logo sacd',
-  },
-  {
-    id: 9,
-    src: images['../../assets/agence.png'].default,
-    alt: "Logo l'agence cu court métrage",
-  },
-  {
-    id: 10,
-    src: images['../../assets/extra.png'].default,
-    alt: 'Logo extra court',
-  },
-  {
-    id: 11,
-    src: images['../../assets/unesco.jpg'].default,
-    alt: 'Logo unesco',
-  },
-  {
-    id: 12,
-    src: images['../../assets/global.png'].default,
-    alt: 'Logo global youth biodiversity network',
-  },
-];
+  const cardsNumber = [
+    { id: 1, icon: FaGlobe, title: '+120', text: t('cards.numbers.countries') },
+    { id: 2, icon: GiFilmSpool, title: '+600', text: t('cards.numbers.films') },
+  ];
+
+  const cardsPartner = [
+    { id: 1, src: images['../../assets/plateforme.png'].default, alt: 'Logo la plateforme' },
+    { id: 2, src: images['../../assets/mobile.png'].default, alt: 'Logo mobile festival' },
+    { id: 3, src: images['../../assets/undp.png'].default, alt: 'Logo undp' },
+    { id: 4, src: images['../../assets/psl.png'].default, alt: 'Logo psl' },
+    { id: 5, src: images['../../assets/cnc.png'].default, alt: 'Logo cnc' },
+    { id: 6, src: images['../../assets/action.png'].default, alt: 'Logo action campaign' },
+    { id: 7, src: images['../../assets/unric.png'].default, alt: 'Logo unric' },
+    { id: 8, src: images['../../assets/sacd.png'].default, alt: 'Logo sacd' },
+    { id: 9, src: images['../../assets/agence.png'].default, alt: "Logo l'agence du court métrage" },
+    { id: 10, src: images['../../assets/extra.png'].default, alt: 'Logo extra court' },
+    { id: 11, src: images['../../assets/unesco.jpg'].default, alt: 'Logo unesco' },
+    { id: 12, src: images['../../assets/global.png'].default, alt: 'Logo global youth biodiversity network' },
+  ];
+
+  return {
+    cardsData,
+    cardsFestivalData,
+    cardsSelectionData,
+    cardsInfos,
+    cardsPlaces,
+    cardsNumber,
+    cardsPartner,
+  };
+};

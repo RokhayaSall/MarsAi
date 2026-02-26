@@ -1,5 +1,5 @@
-// AdminMoviesResult.jsx
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
 import TopScoreCard from '../../components/DashbordAdmin/AdminMoviesResult/TopScoreCard';
 import SearchBar from '../../components/DashbordAdmin/AdminMoviesResult/SearchBar';
@@ -7,6 +7,7 @@ import LeaderboardTable from '../../components/DashbordAdmin/AdminMoviesResult/L
 import { apiFetch } from '../../services/api';
 
 export default function MovieResults() {
+  const { t } = useTranslation();
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,12 +18,10 @@ export default function MovieResults() {
     const fetchMovies = async () => {
       try {
         const result = await apiFetch('/api/admin/movies-result');
-
         const safeData = result.data.map(movie => ({
           ...movie,
           score: movie.score != null ? Number(movie.score) : 0,
         }));
-
         setMovies(safeData);
       } catch (err) {
         console.error('Erreur fetch movies:', err);
@@ -30,36 +29,26 @@ export default function MovieResults() {
         setLoading(false);
       }
     };
-
     fetchMovies();
   }, []);
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p className="text-gray-500 animate-pulse">Chargement des films...</p>
+        <p className="text-gray-500 animate-pulse">{t('adminMoviesResult.loading')}</p>
       </div>
     );
   }
 
-  // Filtrer par recherche
   const filteredMovies = movies.filter(movie =>
     movie.original_title?.toLowerCase().includes(search.toLowerCase())
   );
-
-  // Trier par score
   const sortedMovies = filteredMovies.sort((a, b) => b.score - a.score);
-
-  //  Meilleur film
   const topMovie = sortedMovies[0] || null;
-
-  // Ajouter le rang global
   const rankedMovies = sortedMovies.map((movie, index) => ({
     ...movie,
     rank: index + 1,
   }));
-
-  // Pagination
   const totalPages = Math.ceil(rankedMovies.length / moviesPerPage);
   const currentMovies = rankedMovies.slice(
     (currentPage - 1) * moviesPerPage,
@@ -70,24 +59,20 @@ export default function MovieResults() {
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar />
       <div className="flex-1 max-w-7xl mx-auto px-6 py-10 space-y-10">
-        {/* 🥇 Meilleure Note */}
         {topMovie ? (
           <TopScoreCard
             score={topMovie.score.toFixed(1)}
             title={topMovie.original_title}
-            author={topMovie.author || 'ca marche pas'}
+            author={topMovie.author || t('adminMoviesResult.authorUnknown')}
           />
         ) : (
-          <div className="text-center text-gray-400">Aucun film disponible</div>
+          <div className="text-center text-gray-400">{t('adminMoviesResult.noMovies')}</div>
         )}
 
-        {/* Recherche */}
         <SearchBar search={search} setSearch={setSearch} />
 
-        {/* Leaderboard */}
         <LeaderboardTable movies={currentMovies} />
 
-        {/* Pagination */}
         {totalPages > 1 && (
           <div className="mt-6 flex justify-center items-center gap-4">
             <button
@@ -103,7 +88,7 @@ export default function MovieResults() {
             </button>
 
             <span className="font-medium">
-              Page {currentPage} sur {totalPages}
+              {t('adminMoviesResult.page', { currentPage, totalPages })}
             </span>
 
             <button
