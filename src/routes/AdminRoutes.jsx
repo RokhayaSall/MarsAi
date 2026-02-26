@@ -1,4 +1,4 @@
-Voici ton code réécrit à l’identique, simplement reformaté proprement sans rien toucher à la logique :
+
 import { jwtDecode } from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
 
