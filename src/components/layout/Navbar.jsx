@@ -8,66 +8,81 @@ import LanguageSwitcher from '../ui/LanguageSwitcher';
 
 function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
-
-  const { t, i18n } = useTranslation();
-
+  const { t } = useTranslation();
 
   return (
-    <header className="px-8 py-6">
-      <nav
-        className="flex flex-col md:flex-row md:items-center justify-between"
-        aria-label="Menu de navigation"
-      >
-        <div className="flex justify-between items-center md:w-auto">
-          <Link
-            to="/"
-            className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center"
-          >
-            MARS.AI
-          </Link>
-          <button
-            className="text-3xl md:hidden"
-            aria-label="Bouton menu de navigation"
-            onClick={() => setIsNavOpen(!isNavOpen)}
-          >
-            {isNavOpen ? <RxCross2 /> : <RxHamburgerMenu />}
-          </button>
-        </div>
-
-        <ul
-          className={`${isNavOpen ? 'flex' : 'hidden'} flex-col md:flex md:flex-row md:items-center gap-4 mt-6 md:mt-0`}
+    <header className="border-b border-slate-200 bg-white">
+      <nav className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-2xl font-extrabold tracking-tight text-[#0f172a] hover:text-[#1e293b] transition-colors"
         >
-          <li className="font-bold text-[#282828]">
-            <Link to="/gallery" onClick={() => setIsNavOpen(false)}>
-              {t('nav.gallery')}{' '}
-              {/* <-- <-- C'est ici que j'utilise la fonction t pour traduire le texte du lien de navigation */}
-            </Link>
+          MARS<span className="text-slate-400">.</span>AI
+        </Link>
+
+        {/* Navigation Desktop (centrée) */}
+        <ul className="hidden md:flex items-center gap-10 font-semibold text-slate-700">
+          <li className="hover:text-[#0f172a] transition-colors">
+            <Link to="/gallery">{t('nav.gallery')}</Link>
           </li>
-          <li className="font-bold text-[#282828]">
-            <Link to="/" onClick={() => setIsNavOpen(false)}>
-              {t('nav.program')}
-            </Link>
+          <li className="hover:text-[#0f172a] transition-colors">
+            <Link to="/">{t('nav.program')}</Link>
           </li>
-          <li className="font-bold text-[#282828]">
-            <Link to="/jury" onClick={() => setIsNavOpen(false)}>
-              {t('nav.jury')}
-            </Link>
-          </li>
-          <li className="bg-[#2b71b1] text-white font-bold rounded py-2 px-6 text-center w-40 md:w-auto">
-            <Link to="/form-director" onClick={() => setIsNavOpen(false)}>
+          {/* <li className="hover:text-[#0f172a] transition-colors">
+            <Link to="/jury">{t('nav.jury')}</Link>
+          </li> */}
+          <li>
+            <Link
+              to="/form-director"
+              className="bg-[#0f172a] hover:bg-[#1e293b] text-white rounded-xl py-2 px-6 transition-colors shadow-sm"
+            >
               {t('nav.submit')}
             </Link>
           </li>
-          <ButtonLogOut />
-          <li className="flex gap-6 items-center">
-            {/* Icon du monde pour changer la langue!!!!!! */}
-              <li className="flex gap-6 items-center">
-                <LanguageSwitcher />
-              </li>
-            <ProfileConnect onClick={() => setIsNavOpen(false)} />
-          </li>
         </ul>
+
+        <div className="hidden md:flex items-center gap-6">
+          <LanguageSwitcher />
+          <ButtonLogOut />
+          <ProfileConnect />
+        </div>
+
+        <button
+          className="text-3xl md:hidden text-slate-700"
+          onClick={() => setIsNavOpen(!isNavOpen)}
+        >
+          {isNavOpen ? <RxCross2 /> : <RxHamburgerMenu />}
+        </button>
       </nav>
+
+      {/* Mobile menu */}
+      {isNavOpen && (
+        <div className="md:hidden px-8 pb-6 flex flex-col gap-6 font-semibold text-slate-700">
+          <Link to="/gallery" onClick={() => setIsNavOpen(false)}>
+            {t('nav.gallery')}
+          </Link>
+          <Link to="/" onClick={() => setIsNavOpen(false)}>
+            {t('nav.program')}
+          </Link>
+          {/* <Link to="/jury" onClick={() => setIsNavOpen(false)}>
+            {t('nav.jury')}
+          </Link> */}
+          <Link
+            to="/form-director"
+            onClick={() => setIsNavOpen(false)}
+            className="bg-[#0f172a] text-white rounded-xl py-2 px-6 text-center"
+          >
+            {t('nav.submit')}
+          </Link>
+
+          <div className="flex items-center gap-6 pt-4">
+            <LanguageSwitcher />
+            <ButtonLogOut />
+            <ProfileConnect />
+          </div>
+        </div>
+      )}
     </header>
   );
 }
