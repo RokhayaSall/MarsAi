@@ -2,7 +2,7 @@ import React from 'react';
 
 const VideoPlayer = ({ url, thumbnail }) => {
   // Détecter si c'est du YouTube
-  const getEmbedUrl = (videoUrl) => {
+  const getEmbedUrl = videoUrl => {
     if (!videoUrl) return null;
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -13,13 +13,13 @@ const VideoPlayer = ({ url, thumbnail }) => {
   };
 
   const embedUrl = getEmbedUrl(url);
-  
+
   // Détecter si c'est un fichier vidéo direct (Scaleway, MP4, etc.)
   // On vérifie si l'URL finit par une extension vidéo ou contient "s3" (Scaleway)
-  const isDirectVideo = url && (
-    url.match(/\.(mp4|webm|ogg|mov)$/i) || 
-    url.includes('s3.fr-par.scw.cloud')
-  );
+  const isDirectVideo =
+    url &&
+    (url.match(/\.(mp4|webm|ogg|mov)$/i) ||
+      url.includes('s3.fr-par.scw.cloud'));
 
   return (
     <div className="relative w-full aspect-video rounded-[2.5rem] overflow-hidden bg-black ring-1 ring-white/10">
@@ -33,9 +33,8 @@ const VideoPlayer = ({ url, thumbnail }) => {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>
-      ) 
-      /* CAS 2 : C'est un fichier vidéo direct (Scaleway) */
-      : isDirectVideo ? (
+      ) : /* CAS 2 : C'est un fichier vidéo direct (Scaleway) */
+      isDirectVideo ? (
         <video
           className="w-full h-full object-contain"
           controls
@@ -46,14 +45,13 @@ const VideoPlayer = ({ url, thumbnail }) => {
           <source src={url} type="video/quicktime" /> {/* Pour les .mov */}
           Votre navigateur ne supporte pas la lecture de vidéos.
         </video>
-      ) 
-      /* CAS 3 : Rien n'est chargé ou erreur */
-      : (
+      ) : (
+        /* CAS 3 : Rien n'est chargé ou erreur */
         <div className="relative w-full h-full flex items-center justify-center">
           {thumbnail && (
-            <img 
-              src={thumbnail} 
-              alt="Thumbnail" 
+            <img
+              src={thumbnail}
+              alt="Thumbnail"
               className="absolute inset-0 w-full h-full object-cover opacity-40 blur-sm"
             />
           )}

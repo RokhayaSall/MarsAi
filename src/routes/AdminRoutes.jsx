@@ -1,18 +1,20 @@
+
 import { jwtDecode } from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
-// ce comosant reçoit "children" les pages protéger
+
+// ce composant reçoit "children" : les pages protégées
 export default function AdminRoutes({ children }) {
  // récupère le token stocké dans le navigateur localStorage
  const token = localStorage.getItem('token');
- // eslint-disable-next-line react-hooks/purity
- const now = Date.now();
-// si y a pas de token c'est que l'utilisateur n'est pas connecté
-// redirige vers la page /home.
+// eslint-disable-next-line react-hooks/purity
+const now = Date.now();
+ // si y a pas de token c'est que l'utilisateur n'est pas connecté
+ // redirige vers la page /home.
  if (!token) {
-return <Navigate to="/auth" replace />;
+ return <Navigate to="/auth" replace />;
  }
-try {
-  // récupère le le payload du jwt
+ try {
+ // récupère le le payload du jwt
  const payload = jwtDecode(token);
  // vérifie l'expiration du token
  // payload.exp est en secondes, Date.now() est en millisecondes multiplié par 1000
@@ -20,7 +22,7 @@ try {
  // supprime le token s'il est expiré
  localStorage.removeItem('token');
  return <Navigate to="/auth" replace />;
-}
+ }
  // vérifie si l'utilisateur est un admin
  if (!payload.roles || !payload.roles.includes('Admin')) {
  return <Navigate to="/auth" replace />;
@@ -29,10 +31,13 @@ try {
  // affiche la page protégée DashboardAdmin
  return children;
  } catch (error) {
- // si ya une erreur affiche l'erreur dans la console
+// si ya  une erreur affiche l'erreur dans la console
  console.error('AdminRoute token erreur :', error);
  // supprime le token par sécurité et renvoie a home
  localStorage.removeItem('token');
  return <Navigate to="/auth" replace />;
  }
 }
+
+
+
