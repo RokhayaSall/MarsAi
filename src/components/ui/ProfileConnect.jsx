@@ -18,8 +18,13 @@ export default function ProfileConnect({ onClick }) {
   const label = !user ? 'Page de connexion' : 'Tableau de bord';
 
   return (
-    <Link to={destination} aria-label={label}>
-      <CgProfile className="text-[#2b71b1] w-11 h-11" onClick={onClick} />
+    <Link
+      to={destination}
+      aria-label={label}
+      onClick={onClick}
+      className="group"
+    >
+      <CgProfile className="w-10 h-10 text-slate-600 group-hover:text-[#0f172a] transition-colors duration-300" />
     </Link>
   );
 }
