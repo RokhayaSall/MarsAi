@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { CardMovie } from '../components/ui/Cards';
+import MoviesPage from './MoviesPage';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import SearchBar from '../components/ui/SearchBar';
 
 export default function GalerieFilms() {
   const { t } = useTranslation();
@@ -36,7 +35,6 @@ export default function GalerieFilms() {
           <span className="text-lg">←</span> {t('movies.back_home')}
         </button>
         <br />
-        <SearchBar />
         <br />
         <h1 className="text-7xl font-black text-[#282828] leading-[0.9] tracking-tighter mb-2">
           {t('movies.gallery_title').split('\n')[0]} <br />
@@ -48,16 +46,8 @@ export default function GalerieFilms() {
         <p>{t('movies.gallery_description')}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:mx-17">
-        {currentMovies.map((movie, index) => (
-          <CardMovie
-            key={`${currentPage}-${index}`}
-            title={movie.title}
-            director={movie.director}
-            country={movie.country}
-            duration={movie.duration}
-          />
-        ))}
+      <div>
+        <MoviesPage />
       </div>
 
       <div className="mt-20 flex flex-col items-center gap-6">

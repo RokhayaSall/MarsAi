@@ -10,7 +10,6 @@ const Livrables = ({
   updateCollabs,
   handleUpload,
 }) => {
-   
   // const { t } = useTranslation();
 
   const ajouterCollaborateur = () =>
