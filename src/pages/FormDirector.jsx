@@ -9,7 +9,7 @@ export default function FormDirector() {
   const navigate = useNavigate();
 
   // On récupère l'URL depuis les variables d'environnement de Vite
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
   const [formData, setFormData] = useState({
     nom: '',
@@ -49,21 +49,47 @@ export default function FormDirector() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    console.log("Tentative d'envoi...");
+
     try {
       const res = await fetch(`${API_BASE_URL}/api/form`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ formData, collaborateurs }),
       });
+
       const data = await res.json();
-      console.log(data);
-      alert(t('form.formulaire_envoye'));
+      console.log('Réponse brute du serveur :', data);
+
+      if (res.ok) {
+        // FORCE L'ID : On cherche toutes les sources possibles
+        const idFinal = data.id || data.insertId || data.directorId;
+
+        if (idFinal) {
+          // ON FORCE L'ÉCRITURE ICI
+          localStorage.setItem('currentDirectorId', idFinal.toString());
+
+          // ALERTE DE CONFIRMATION
+          alert('ID ' + idFinal + ' enregistré dans le navigateur !');
+
+          // On vérifie immédiatement dans la console
+          console.log(
+            'Vérification : ',
+            localStorage.getItem('currentDirectorId')
+          );
+        } else {
+          alert(
+            "Le serveur a dit OK mais n'a pas envoyé d'ID. Regardez la console."
+          );
+        }
+      } else {
+        alert('Erreur serveur : ' + res.status);
+      }
     } catch (err) {
-      console.error(err);
-      alert(t('form.erreur_envoi'));
+      console.error('Erreur :', err);
+      alert('Problème de connexion au serveur.');
     }
   };
-
   const inputClass =
     'w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase';
   const labelClass =
@@ -217,14 +243,14 @@ export default function FormDirector() {
           <button
             type="button"
             onClick={ajouterCollaborateur}
-            className="mt-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-blue-700 transition"
+            className="mt-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition"
           >
             {t('form.ajouter_collaborateur')}
           </button>
           <button
             type="button"
             onClick={supprimerCollaborateur}
-            className="mt-2 px-4 py-2 bg-red-400 text-white rounded-lg"
+            className="mt-2 px-4 py-2 bg-red-400 text-white bold rounded-lg hover:bg-red-500 transition"
           >
             {t('form.supprimer_collaborateur')}
           </button>
@@ -232,7 +258,7 @@ export default function FormDirector() {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+          className="w-full bg-[#1e293b] text-white py-3 rounded-lg font-semibold hover:bg-[#1e293ba0] transition"
         >
           {t('form.envoyer')}
         </button>
@@ -241,7 +267,7 @@ export default function FormDirector() {
           <button
             type="button"
             onClick={() => navigate('/submit-movie')}
-            className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-800 transition-colors shadow-lg"
+            className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-500 transition-colors shadow-lg"
           >
             {t('form.etape_suivante')}
           </button>

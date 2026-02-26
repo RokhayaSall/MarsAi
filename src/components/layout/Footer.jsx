@@ -19,7 +19,7 @@ function Footer() {
         <div aria-label={t('footer.infoAriaLabel')}>
           <Link
             to="/"
-            className="bg-[#2b71b1] font-bold rounded py-2 px-4 w-25"
+            className="text-black bg-[#fefefe] rounded-2xl p-3 px-6 font-bold"
           >
             MARS.A.I
           </Link>
@@ -71,7 +71,7 @@ function Footer() {
           </ul>
         </div>
 
-        <form className="text-center bg-[#333333] rounded-2xl border border-[#484848] p-10 mt-5 md:w-120 ">
+        <form className="text-center bg-[#333333] rounded-2xl border border-[#1e293b] p-10 mt-5 md:w-120 ">
           <h2 className="font-bold text-3xl">{t('footer.newsletterTitle')}</h2>
           <label htmlFor="email" className="invisible">
             {t('footer.newsletterLabel')}
@@ -81,10 +81,10 @@ function Footer() {
             id="email"
             name="email"
             placeholder={t('footer.newsletterPlaceholder')}
-            className="bg-[#3D3D3D] border border-[#484848] rounded-3xl p-3 m-6"
+            className="bg-[#fefefe]  text-black border border-[#484848] rounded-3xl p-3 m-6"
           />
           <button
-            className="bg-[#2b71b1] rounded-3xl p-3 px-17 font-bold cursor-pointer md:px-8"
+            className="text-black bg-[#fefefe] rounded-2xl p-3 px-6 font-bold cursor-pointer hover:bg-[#1e293b] hover:text-white transition"
             aria-label={t('footer.newsletterButton')}
           >
             {t('footer.newsletterButton')}
@@ -100,7 +100,9 @@ function Footer() {
           <Link to="/private-policy">{t('footer.privacyPolicy')}</Link>
         </li>
         <li>
-          <p>@2025 MARS.A.I</p>
+          <p className="text-black bg-[#fefefe] rounded-2xl p-3 px-6 font-bold">
+            @2025 MARS.A.I
+          </p>
         </li>
       </ul>
     </footer>

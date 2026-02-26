@@ -4,11 +4,14 @@ import { login, register } from '../services/authService';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { jwtDecode } from 'jwt-decode';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Auth() {
   const { t } = useTranslation();
 
   const [isLogin, setIsLogin] = useState(true);
+  const { loginUser } = useContext(AuthContext);
   const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [form, setForm] = useState({
@@ -33,6 +36,7 @@ export default function Auth() {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccess('');
 
     try {
       const payloadData = isLogin
@@ -48,52 +52,49 @@ export default function Auth() {
         return;
       }
 
-      // Si token reçu, on le stocke et redirige
       if (res.token) {
-        localStorage.setItem('token', res.token);
+        loginUser(res.token);
 
-        const payload = jwtDecode(res.token); // décode le token pour connaitre le role
+        const payload = jwtDecode(res.token);
+        const roles = Array.isArray(payload.roles) ? payload.roles : [];
 
-        if (payload.roles.includes('Jury'))
-          navigate('/dashboard/jury'); //redirige en fonction du role du user
-        else if (payload.roles.includes('Admin')) navigate('/admin');
-        else navigate('/'); // sinon va sur l'accueil
+        if (roles.includes('Admin')) {
+          navigate('/admin');
+        } else if (roles.includes('Jury')) {
+          navigate('/dashboard/jury');
+        } else {
+          navigate('/');
+        }
 
-        setSuccess(
-          isLogin ? t('auth.successLogin') : t('auth.successRegister')
-        );
-      } else {
-        setSuccess(t('auth.registered'));
-        setIsLogin(true);
+        setSuccess(t('auth.successLogin'));
+        return;
       }
 
-      // sinon, c’est une inscription → message succès
-      setSuccess(t('auth.registered'));
+      setSuccess(t('auth.successRegister'));
       setIsLogin(true);
     } catch (err) {
-      setError(err.message);
-      setSuccess('');
+      setError(err.message || 'Erreur');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center m-10 md:m-15 md:mb-30">
-      <div className="w-full max-w-md bg-gray-50 p-8 rounded shadow-sm border">
-        <h2 className="text-2xl font-semibold text-center mb-6 uppercase tracking-wide">
+    <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] px-6 py-12">
+      <div className="w-full max-w-md bg-white p-10 rounded-3xl shadow-xl border border-slate-200">
+        <h2 className="text-2xl font-bold text-center mb-8 uppercase tracking-widest text-[#1e293b]">
           {isLogin ? t('auth.loginTitle') : t('auth.registerTitle')}
         </h2>
 
         {success && (
-          <div className="mb-4 rounded-xl bg-gradient-to-r from-green-50 to-green-100 px-5 py-3 text-green-800 text-sm shadow-sm">
+          <div className="mb-4 rounded-2xl bg-gradient-to-r from-emerald-50 to-emerald-100 px-5 py-3 text-emerald-800 text-sm shadow-sm">
             {success}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
-            <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
+            <label className="block text-sm font-semibold mb-2 uppercase tracking-wider text-slate-700">
               {t('auth.email')}
             </label>
             <input
@@ -102,13 +103,13 @@ export default function Auth() {
               value={form.email}
               autoComplete="email"
               onChange={handleChange}
-              className="w-full p-3 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full p-3 border border-slate-200 rounded-xl bg-[#f1f5f9] focus:outline-none focus:ring-2 focus:ring-[#0f766e] focus:border-[#0f766e] transition"
               required
             />
           </div>
 
           <div className="mb-5">
-            <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
+            <label className="block text-sm font-semibold mb-2 uppercase tracking-wider text-slate-700">
               {t('auth.password')}
             </label>
 
@@ -118,7 +119,7 @@ export default function Auth() {
                 name="password"
                 value={form.password}
                 onChange={handleChange}
-                className="w-full p-3 pr-12 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full p-3 pr-12 border border-slate-200 rounded-xl bg-[#f1f5f9] focus:outline-none focus:ring-2 focus:ring-[#0f766e] focus:border-[#0f766e] transition"
                 required
                 autoComplete={isLogin ? 'current-password' : 'new-password'}
               />
@@ -127,7 +128,7 @@ export default function Auth() {
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 tabIndex={-1}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0f766e] transition"
                 aria-label={
                   showPassword ? t('auth.hidePassword') : t('auth.showPassword')
                 }
@@ -140,7 +141,7 @@ export default function Auth() {
           {!isLogin && (
             <>
               <div className="mb-5">
-                <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
+                <label className="block text-sm font-semibold mb-2 uppercase tracking-wider text-slate-700">
                   {t('auth.firstname')}
                 </label>
                 <input
@@ -148,13 +149,13 @@ export default function Auth() {
                   name="firstname"
                   value={form.firstname}
                   onChange={handleChange}
-                  className="w-full p-3 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full p-3 border border-slate-200 rounded-xl bg-[#f1f5f9] focus:outline-none focus:ring-2 focus:ring-[#0f766e] focus:border-[#0f766e] transition"
                   required
                 />
               </div>
 
               <div className="mb-5">
-                <label className="block text-sm font-medium mb-2 uppercase tracking-wide">
+                <label className="block text-sm font-semibold mb-2 uppercase tracking-wider text-slate-700">
                   {t('auth.lastname')}
                 </label>
                 <input
@@ -162,18 +163,20 @@ export default function Auth() {
                   name="lastname"
                   value={form.lastname}
                   onChange={handleChange}
-                  className="w-full p-3 border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full p-3 border border-slate-200 rounded-xl bg-[#f1f5f9] focus:outline-none focus:ring-2 focus:ring-[#0f766e] focus:border-[#0f766e] transition"
                   required
                 />
               </div>
             </>
           )}
 
-          {error && <p className="text-red-500 mb-4">{error}</p>}
+          {error && (
+            <p className="text-red-600 mb-4 text-sm font-medium">{error}</p>
+          )}
 
           <button
             type="submit"
-            className="w-full bg-gray-600 hover:bg-gray-700 text-white py-3 rounded transition"
+            className="w-full bg-[#1e293b] hover:bg-[#1e293bc8] text-white py-3 rounded-xl font-semibold tracking-wide shadow-md hover:shadow-lg transition duration-200"
             disabled={loading}
           >
             {loading
@@ -186,7 +189,7 @@ export default function Auth() {
 
         <button
           onClick={() => setIsLogin(!isLogin)}
-          className="mt-6 block text-center text-gray-600 hover:underline"
+          className="mt-6 block text-center text-[#1e293b] font-medium hover:underline transition"
         >
           {isLogin ? t('auth.noAccount') : t('auth.hasAccount')}
         </button>

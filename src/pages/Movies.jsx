@@ -30,7 +30,7 @@ export default function GalerieFilms() {
       <div className="mb-12 md:mx-17">
         <button
           onClick={() => navigate('/Home')}
-          className="text-[#3b82f6] text-xs font-black flex items-center gap-2 mb-6 uppercase tracking-widest hover:opacity-80"
+          className="text-[#1e293b] text-xs font-black flex items-center gap-2 mb-6 uppercase tracking-widest hover:opacity-80"
         >
           <span className="text-lg">←</span> {t('movies.back_home')}
         </button>
@@ -62,14 +62,14 @@ export default function GalerieFilms() {
 
           <button
             onClick={() => setCurrentPage(1)}
-            className={`w-12 h-12 rounded-xl font-bold transition-all ${currentPage === 1 ? 'bg-[#2D79F3] text-white shadow-lg' : 'bg-[#F2F4F7] text-gray-600'}`}
+            className={`w-12 h-12 rounded-xl font-bold transition-all ${currentPage === 1 ? 'bg-[#1e293b] text-white shadow-lg' : 'bg-[#F2F4F7] text-gray-600'}`}
           >
             1
           </button>
 
           <button
             onClick={() => setCurrentPage(2)}
-            className={`w-12 h-12 rounded-xl font-bold transition-all ${currentPage === 2 ? 'bg-[#2D79F3] text-white shadow-lg' : 'bg-[#F2F4F7] text-gray-600'}`}
+            className={`w-12 h-12 rounded-xl font-bold transition-all ${currentPage === 2 ? 'bg-[#1e293b] text-white shadow-lg' : 'bg-[#F2F4F7] text-gray-600'}`}
           >
             2
           </button>
@@ -83,7 +83,7 @@ export default function GalerieFilms() {
           </button>
         </div>
 
-        <p className="text-[11px] font-bold text-gray-400 uppercase tracking-[0.2em]">
+        <p className="text-[#1e293b]  text-[11px] font-bold uppercase tracking-[0.2em]">
           {t('movies.page_info', {
             currentPage,
             totalPages,

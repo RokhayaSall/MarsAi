@@ -17,31 +17,10 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
     }
   }, [jury]);
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/admin/jury/${jury.id}`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error('Erreur lors de la mise à jour');
-      }
-
-      const updatedJury = await res.json();
-      onUpdate(updatedJury);
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert('Impossible de modifier le jury');
-    }
-  };
+    const handleSubmit = async e => {
+      e.preventDefault();
+      onUpdate({ ...jury, ...form });
+    };
 
   if (!jury) return null;
 

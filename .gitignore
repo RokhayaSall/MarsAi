@@ -48,7 +48,7 @@ dist-ssr
 *.sln
 *.sw?
 
-
 .env
 .env.*
-api.jsx
+
+src/services/api.jsx
