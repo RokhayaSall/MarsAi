@@ -17,9 +17,10 @@ import DashboardJury from './pages/DashboardJury';
 import JuryRoutes from './routes/JuryRoutes';
 import { AuthProvider } from './context/AuthProvider';
 import MoviePage from './pages/MovieDetail';
+import JuryRating from './pages/JuryRating'
 
 import './App.css';
-import Ratings from './components/DashboardJury/Ratings';
+// import Ratings from './components/DashboardJury/Ratings';
 
 function App() {
   return (
@@ -46,15 +47,15 @@ function App() {
             />
             {/* //mettre la page notation avec film ect pas le composant ratings */}
             <Route path="/dashboard/jury/movies/:id"
-              element={ <JuryRoutes> <Ratings /> </JuryRoutes> } />
-            <Route
+              element={ <JuryRoutes> <JuryRating /> </JuryRoutes> } />
+            {/* <Route
               path="/dashboard/jury/:id"
               element={
                 <JuryRoutes>
                   <DashboardJury />
                 </JuryRoutes>
               }
-            />
+            /> */}
 
             {/* ROUTES ADMIN PROTÉGÉES */}
             <Route

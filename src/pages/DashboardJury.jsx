@@ -1,11 +1,10 @@
-import React from 'react';
-import Ratings from '../components/DashboardJury/Ratings';
+
 
 function DashboardJury() {
   return (
     <div>
-      <h1>test jury</h1>
-      <Ratings />
+      <h1 className="m-5 text-5xl">Dashboard jury</h1>
+   
     </div>
   );
 }

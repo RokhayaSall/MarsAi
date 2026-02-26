@@ -13,7 +13,7 @@ const MoviePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (!id || id === "undefined") return;
-    fetch(`http://localhost:3001/api/movies/${id}`)
+    fetch(`http://localhost:3000/api/movies/${id}`)
       .then(res => res.json())
       .then(data => {
         setMovieData(data);
