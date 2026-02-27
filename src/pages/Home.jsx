@@ -229,7 +229,7 @@ function Home() {
           <span className="text-[#2b71b1]"> le futur</span>
         </h2>
         <ul
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10 mt-15"
+          className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-10 mt-15"
           aria-label="Nos partenaires"
         >
           {cardsPartner.map(card => (

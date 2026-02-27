@@ -117,7 +117,7 @@ export function CardCalender() {
         à partir de 19h
       </p>
       <button
-        className="bg-[#2b71b1] text-white rounded-xl mt-6 p-3 font-bold uppercase text-base cursor-pointer md:p-2 md:px-5 md:text-sm"
+        className="bg-[#0f172a] text-white rounded-xl mt-6 p-3 font-bold uppercase text-base cursor-pointer md:p-2 md:px-5 md:text-sm"
         to="/gallery"
       >
         Prendre mon pass
@@ -141,7 +141,7 @@ export function CardPlace() {
 
 export function CardPartner({ src, alt }) {
   return (
-    <li className="bg-white border border-[#D5DAE1] rounded-4xl p-6 flex justify-center md:items-center aspect-square ">
+    <li className="bg-white border border-[#D5DAE1] rounded-4xl p-6 flex justify-center md:items-stretch aspect-square ">
       <img
         className="hover:grayscale duration-600 object-contain"
         src={src}

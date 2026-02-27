@@ -100,8 +100,8 @@ const SubmitMovie = () => {
       );
 
       if (response.status === 200 || response.status === 201) {
-        alert('✅ Film et médias enregistrés avec succès !');
-        navigate('/success');
+        // alert('✅ Film et médias enregistrés avec succès !');
+        navigate('/home');
       }
     } catch (error) {
       console.error('Erreur:', error);

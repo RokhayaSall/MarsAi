@@ -44,9 +44,9 @@ export default function Ratings() {
   if (error) return <h2 className="err-loading">Erreur : {error}</h2>;
 
   return (
-    <section className="bg-[#F2F3F5] rounded-4xl p-15 m-10 gap-0.5  border border-[#D5DAE1] flex flex-col items-center md:w-170 md:mx-auto  ">
+    <section className="bg-[#F2F3F5] rounded-4xl p-10 mt-5 gap-0.5  border border-[#D5DAE1] flex flex-col items-center md:w-full md:mx-auto  ">
       <h3 className="font-bold text-2xl text-[#1e293b]">Noter le film </h3>
-      <ul className="flex justify-center text-4xl mt-5 md:gap-3 ">
+      <ul className="flex justify-center text-4xl mt-5 md:gap-2 ">
         {[...Array(10)].map((_, index) => {
           //tableau de 10 étoiles
           return (
@@ -68,10 +68,10 @@ export default function Ratings() {
       <button
         type="submit"
         onClick={handleSubmit}
-        className=" bg-[#1e293b] hover:bg-[#29455e] transition-colors cursor-pointer md:w-50 text-white font-bold rounded-xl py-2 px-6 text-center m-4 "
+        className=" bg-[#1e293b] hover:bg-[#29455e] transition-colors cursor-pointer w-full md:w-50 text-white font-bold rounded-xl py-2 px-6 text-center m-4 "
       >
         VALIDER MA NOTE
-      </button>{' '}
+      </button>
     </section>
   );
 }

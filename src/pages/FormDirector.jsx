@@ -70,7 +70,7 @@ export default function FormDirector() {
           localStorage.setItem('currentDirectorId', idFinal.toString());
 
           // ALERTE DE CONFIRMATION
-          alert('ID ' + idFinal + ' enregistré dans le navigateur !');
+          // alert('ID ' + idFinal + ' enregistré dans le navigateur !');
 
           // On vérifie immédiatement dans la console
           console.log(
