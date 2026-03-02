@@ -31,7 +31,7 @@ const now = Date.now();
  // affiche la page protégée DashboardAdmin
  return children;
  } catch (error) {
-// si ya  une erreur affiche l'erreur dans la console
+// si ya une erreur affiche l'erreur dans la console
  console.error('AdminRoute token erreur :', error);
  // supprime le token par sécurité et renvoie a home
  localStorage.removeItem('token');

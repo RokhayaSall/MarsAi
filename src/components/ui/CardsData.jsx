@@ -15,30 +15,30 @@ export const useCardsData = () => {
   const { t } = useTranslation();
 
   const cardsData = [
-    { id: 1, icon: MdLocalMovies, title: t('cards.home.minute.title'), text: t('cards.home.minute.text') },
-    { id: 2, icon: IoBook, title: t('cards.home.free.title'), text: t('cards.home.free.text') },
-    { id: 4, icon: BsPersonArmsUp, title: t('cards.home.forAll.title'), text: t('cards.home.forAll.text') },
-    { id: 5, icon: GrUserExpert, title: t('cards.home.expertise.title'), text: t('cards.home.expertise.text') },
+    { id: 1, icon: MdLocalMovies, title: t('cards.general.minute.title'), text: t('cards.general.minute.text') },
+    { id: 2, icon: IoBook, title: t('cards.general.gratuit.title'), text: t('cards.general.gratuit.text') },
+    { id: 3, icon: BsPersonArmsUp, title: t('cards.general.pourTous.title'), text: t('cards.general.pourTous.text') },
+    { id: 4, icon: GrUserExpert, title: t('cards.general.expertise.title'), text: t('cards.general.expertise.text') },
   ];
 
   const cardsFestivalData = [
-    { id: 1, icon: TbTargetArrow, title: t('cards.festival.human.title'), text: t('cards.festival.human.text') },
+    { id: 1, icon: TbTargetArrow, title: t('cards.festival.humain.title'), text: t('cards.festival.humain.text') },
     { id: 2, icon: IoFlashSharp, title: t('cards.festival.challenge.title'), text: t('cards.festival.challenge.text') },
-    { id: 3, icon: IoRocketSharp, title: t('cards.festival.future.title'), text: t('cards.festival.future.text') },
+    { id: 3, icon: IoRocketSharp, title: t('cards.festival.futurs.title'), text: t('cards.festival.futurs.text') },
   ];
 
   const cardsSelectionData = [
-    { id: 1, title: t('cards.selection.call.title'), text: t('cards.selection.call.text'), description: t('cards.selection.call.description') },
-    { id: 2, title: t('cards.selection.official.title'), text: t('cards.selection.official.text'), description: t('cards.selection.official.description') },
-    { id: 3, title: t('cards.selection.digital.title'), text: t('cards.selection.digital.text'), description: t('cards.selection.digital.description') },
-    { id: 4, title: t('cards.selection.cinema.title'), text: t('cards.selection.cinema.text'), description: t('cards.selection.cinema.description') },
+    { id: 1, title: t('cards.selection.2mois.title'), text: t('cards.selection.2mois.text'), description: t('cards.selection.2mois.description') },
+    { id: 2, title: t('cards.selection.50films.title'), text: t('cards.selection.50films.text'), description: t('cards.selection.50films.description') },
+    { id: 3, title: t('cards.selection.web.title'), text: t('cards.selection.web.text'), description: t('cards.selection.web.description') },
+    { id: 4, title: t('cards.selection.festival.title'), text: t('cards.selection.festival.text'), description: t('cards.selection.festival.description') },
   ];
 
   const cardsInfos = [
-    { id: 1, icon: FaHandHoldingHeart, title: t('cards.infos.heart.title'), text: t('cards.infos.heart.text') },
-    { id: 2, icon: MdLocalMovies, title: t('cards.infos.screening.title'), text: t('cards.infos.screening.text') },
-    { id: 3, icon: MdEventAvailable, title: t('cards.infos.workshop.title'), text: t('cards.infos.workshop.text') },
-    { id: 4, icon: FaAward, title: t('cards.infos.award.title'), text: t('cards.infos.award.text') },
+    { id: 1, icon: FaHandHoldingHeart, title: t('cards.infos.coeur.title'), text: t('cards.infos.coeur.text') },
+    { id: 2, icon: MdLocalMovies, title: t('cards.infos.projections.title'), text: t('cards.infos.projections.text') },
+    { id: 3, icon: MdEventAvailable, title: t('cards.infos.workshops.title'), text: t('cards.infos.workshops.text') },
+    { id: 4, icon: FaAward, title: t('cards.infos.prix.title'), text: t('cards.infos.prix.text') },
   ];
 
   const cardsPlaces = [
@@ -47,8 +47,8 @@ export const useCardsData = () => {
   ];
 
   const cardsNumber = [
-    { id: 1, icon: FaGlobe, title: '+120', text: t('cards.numbers.countries') },
-    { id: 2, icon: GiFilmSpool, title: '+600', text: t('cards.numbers.films') },
+    { id: 1, icon: FaGlobe, title: t('cards.numbers.pays.title'), text: t('cards.numbers.pays.text') },
+    { id: 2, icon: GiFilmSpool, title: t('cards.numbers.films.title'), text: t('cards.numbers.films.text') },
   ];
 
   const cardsPartner = [

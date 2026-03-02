@@ -27,7 +27,7 @@ const FilmIdentityForm = ({ formData, update }) => {
               placeholder={t('film_identity.original_title_placeholder')}
               value={formData.original_title}
               onChange={e => update({ original_title: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase"
+              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all "
             />
           </div>
 
@@ -40,7 +40,7 @@ const FilmIdentityForm = ({ formData, update }) => {
               placeholder={t('film_identity.english_title_placeholder')}
               value={formData.english_title}
               onChange={e => update({ english_title: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase"
+              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all "
             />
           </div>
 
@@ -66,7 +66,7 @@ const FilmIdentityForm = ({ formData, update }) => {
               placeholder={t('film_identity.language_placeholder')}
               value={formData.language}
               onChange={e => update({ language: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase"
+              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all "
             />
           </div>
 
@@ -78,7 +78,7 @@ const FilmIdentityForm = ({ formData, update }) => {
               placeholder={t('film_identity.synopsis_original_placeholder')}
               value={formData.original_synopsis}
               onChange={e => update({ original_synopsis: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
+              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none  leading-relaxed"
             />
           </section>
 
@@ -90,7 +90,7 @@ const FilmIdentityForm = ({ formData, update }) => {
               placeholder={t('film_identity.synopsis_english_placeholder')}
               value={formData.english_synopsis}
               onChange={e => update({ english_synopsis: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
+              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none  leading-relaxed"
             />
           </section>
         </section>

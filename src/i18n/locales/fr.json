@@ -5,20 +5,17 @@
     "jury": "JURY",
     "submit": "SOUMETTRE"
   },
-
-
   "home": {
     "title": "IMAGINEZ DES FUTURS SOUHAITABLES",
     "subtitle": "Le festival de courts-métrages de 60 secondes réalisés par IA. 2 jours d'immersion au cœur de Marseille.",
-    "projectTitle": "LE PROJET MARS.A.I",
+    "projectTitle": "LE PROJET MARS.AI",
     "projectText": "Un événement hybride unique en France, réunissant la fine fleur de l'IA générative et de la création cinématographique.",
     "competitionTitle": "FILMS EN COMPÉTITION",
     "competitionText": "Découvrez une sélection d'œuvres pionnières qui explorent les nouvelles frontières de l'imaginaire assisté par l'Intelligence Artificielle.",
     "festivalGoalsTitle": "OBJECTIFS DU FESTIVAL",
     "selectionFormatTitle": "FORMAT DE LA SÉLECTION",
-    "selectionFormatText": "Le parcours des oeuvres"
+    "selectionFormatText": "Le parcours des œuvres"
   },
-
   "form": {
     "appel_projets_2026": "Appel à projets 2026",
     "formulaire_realisateur": "Formulaire du réalisateur",
@@ -46,9 +43,8 @@
     "envoyer": "Envoyer",
     "etape_suivante": "Étape suivante",
     "formulaire_envoye": "Formulaire envoyé ! 🚀",
-    "erreur_envoi": "Erreur lors de l’envoi du formulaire"
+    "erreur_envoi": "Erreur lors de l'envoi du formulaire"
   },
-
   "movies": {
     "back_home": "Retour Accueil",
     "gallery_title": "LA GALERIE\nDES FILMS",
@@ -56,11 +52,10 @@
     "gallery_description": "Explorez l'intégralité de la sélection officielle. Des visions uniques, des courts-métrages pionniers créés avec l'Intelligence Artificielle.",
     "page_info": "Page {{currentPage}} sur {{totalPages}} - {{totalMovies}} films trouvés"
   },
-
   "footer": {
     "ariaLabel": "Bas de page",
     "infoAriaLabel": "Information et réseaux sociaux",
-    "description": "Une co-création de l’école du numérique La Plateforme et le Mobile Film Festival. Ensemble pour dessiner les nouveaux horizons du cinéma.",
+    "description": "Une co-création de l'école du numérique La Plateforme et le Mobile Film Festival. Ensemble pour dessiner les nouveaux horizons du cinéma.",
     "facebook": "Lien Facebook",
     "instagram": "Lien Instagram",
     "youtube": "Lien Youtube",
@@ -72,7 +67,6 @@
     "legalNotice": "Mentions légales",
     "privacyPolicy": "Politique de confidentialité"
   },
-
   "auth": {
     "loginTitle": "Connexion",
     "registerTitle": "Inscription",
@@ -91,14 +85,12 @@
     "successRegister": "Vous êtes inscrit avec succès",
     "registered": "Inscription réussie, vous pouvez vous connecter"
   },
-
   "adminMovies": {
     "title": "Gestion des Films",
     "loading": "Chargement des films...",
     "confirmDelete": "Supprimer ce film ?",
     "deleteError": "Impossible de supprimer le film"
   },
-
   "adminMoviesResult": {
     "loading": "Chargement des films...",
     "noMovies": "Aucun film disponible",
@@ -106,20 +98,17 @@
     "page": "Page {{currentPage}} sur {{totalPages}}",
     "authorUnknown": "Auteur inconnu"
   },
-
-  
   "dashboardAdmin": {
     "loading": "Chargement du dashboard…",
     "error": "Impossible de charger le dashboard",
     "moviesEvaluated": "Films évalués par le Jury",
-    "today": "{{count}} aujourd’hui",
+    "today": "{{count}} aujourd'hui",
     "juryFinished": "Jurys ayant finalisé leur lots",
     "countriesRepresented": "Pays représentés",
     "dominantZone": "Zone dominante : {{zone}}",
     "workshopsOccupancy": "Taux d'occupation workshops",
     "directorsRegistered": "Nombre de Réalisateurs inscrits"
   },
-
   "adminJury": {
     "title": "Gestion des Jurys",
     "addButton": "+ Ajouter un jury",
@@ -128,24 +117,18 @@
     "updateError": "Impossible de mettre à jour le jury",
     "loading": "Chargement des jurys…"
   },
-
-  
   "adminEvents": {
     "title": "Gestion des Événements",
     "description": "Création, modification et suivi des événements du festival."
   },
-
   "adminConfig": {
     "title": "Configuration du Dashboard",
     "description": "Paramètres généraux et options administratives."
   },
-
   "dashboardJury": {
     "title": "Tableau de bord Jury",
     "subtitle": "Suivi et gestion des jurys"
   },
-
-  
   "loadingMovie": "Chargement de l'œuvre",
   "backToGallery": "RETOUR AUX ARCHIVES",
   "projectId": "PROJET ID: #{{id}}",
@@ -157,13 +140,6 @@
   "status": "Statut",
   "verifiedSelection": "Sélection vérifiée",
   "shareThisMovie": "Partager cette œuvre",
-
-
-
-
-
-
-  
   "hero": {
     "title1": "IMAGINEZ DES",
     "title2": "FUTURS",
@@ -171,7 +147,7 @@
     "description": "Le festival de courts-métrages de 60 secondes réalisés par IA. 2 jours d'immersion au cœur de Marseille."
   },
   "project": {
-    "title": "LE PROJET MARS.A.I",
+    "title": "LE PROJET MARS.AI",
     "description": "Un événement hybride unique en France, réunissant la fine fleur de l'IA générative et de la création cinématographique."
   },
   "competition": {
@@ -185,7 +161,7 @@
   },
   "selection": {
     "title": "Format de la sélection",
-    "subtitle": "Le parcours des oeuvres"
+    "subtitle": "Le parcours des œuvres"
   },
   "conferences": {
     "title1": "Deux journées de",
@@ -212,7 +188,6 @@
     "subtitle1": "Ils soutiennent",
     "subtitle2": "le futur"
   },
-
   "juryModal": {
     "title": "Modifier le jury",
     "firstname": "Prénom",
@@ -223,8 +198,6 @@
     "errorUpdate": "Erreur lors de la mise à jour",
     "errorAlert": "Impossible de modifier le jury"
   },
-
-  
   "juryForm": {
     "firstname": "Prénom",
     "lastname": "Nom",
@@ -234,20 +207,14 @@
     "success": "Mail envoyé avec succès !",
     "error": "Erreur lors de l'envoi du mail."
   },
-
-  
   "juryList": {
     "noJury": "Aucun juré."
   },
-
-  
   "juryRow": {
     "edit": "Éditer",
     "delete": "Supprimer",
     "confirmDelete": "Supprimer le jury {{firstname}} {{lastname}} ?"
   },
-
-  
   "movieCard": {
     "englishTitle": "Titre anglais",
     "duration": "Durée",
@@ -257,8 +224,6 @@
     "edit": "Éditer",
     "delete": "Supprimer"
   },
-
-
   "movieEditModal": {
     "title": "Modifier le film",
     "originalTitle": "Titre original",
@@ -272,11 +237,9 @@
     "save": "Enregistrer",
     "updateError": "Impossible de mettre à jour le film"
   },
-
   "movieList": {
     "noMovies": "Aucun film trouvé."
   },
-
   "leaderboard": {
     "thumbnail": "Miniature",
     "rank": "Rang",
@@ -287,23 +250,13 @@
     "status": "Statut",
     "inProgress": "EN COURS"
   },
-
   "search": {
     "placeholder": "Rechercher un film…"
   },
-
   "topScore": {
     "bestScore": "MEILLEURE NOTE",
     "by": "Par"
   },
-
-  "cards": {
-    "projects": "Projets",
-    "members": "Membres",
-    "completed": "Terminés",
-    "active": "Actifs"
-  },
-
   "sidebar": {
     "dashboard": "Dashboard",
     "movies": "Gestion Films",
@@ -314,80 +267,43 @@
     "version": "MarsAI Admin v1.0",
     "fetchError": "Impossible de récupérer l'administrateur"
   },
-
   "buttons": {
     "participate": "Participer maintenant",
     "learnMore": "En savoir plus",
     "viewSelection": "Voir toute la sélection",
     "logout": "Déconnexion"
   },
-
-
   "calendar": {
     "date": "13 Juin",
     "time": "À partir de 19h",
-    "cta": "Prendre mon pass"
+    "cta": "Prendre mon pass",
+    "icon_aria": "Icône calendrier"
   },
   "place": {
     "city": "Marseille, France",
     "venue": "Centre Événementiel La Plateforme"
   },
-  "cards": {
-    "movie_video_aria": "Vidéo YouTube du film"
-  },
-
-  "cards": {
-    "default_card_title": "Titre de la carte",
-    "default_card_text": "Description de la carte",
-    
-    "cardsData": {
-      "1": { "title": "1 MINUTE", "text": "Format ultra-court pour maximiser l'impact créatif." },
-      "2": { "title": "GRATUITÉ", "text": "Conférences et workshops accessibles à tous." },
-      "4": { "title": "POUR TOUS", "text": "Professionnels, étudiants et curieux." },
-      "5": { "title": "EXPERTISE", "text": "Rencontrez les leaders mondiaux de l'IA." }
-    },
-
-    "cardsFestivalData": {
-      "1": { "title": "L'Humain au centre", "text": "Mettre l'humain au cœur de la création d'œuvres générées par IA pour ne pas perdre l'émotion." },
-      "2": { "title": "Challenge créatif", "text": "Challenger la créativité des participants grâce à un format très court de 60 secondes." },
-      "3": { "title": "Futurs souhaitables", "text": "Mettre à profit la puissance de l'IA pour illustrer un thème : Imaginez des futurs souhaitables." }
-    },
-
-    "cardsSelectionData": {
-      "1": { "title": "2 mois", "text": "Appel à projet", "description": "Candidatures ouvertes aux créateurs du monde entier." },
-      "2": { "title": "50 Films", "text": "Sélection officielle", "description": "Courts-métrages d'une minute retenus pour la compétition." },
-      "3": { "title": "Web & RS", "text": "Diffusion digitale", "description": "Visibilité mondiale via les réseaux et plateformes." },
-      "4": { "title": "Festival", "text": "Salles de cinéma", "description": "Projection sur grand écran pour une immersion totale." }
-    },
-
-    "cardsInfos": {
-      "1": { "title": "Le coeur du festival", "text": "Débats engagés sur l'éthique et le futur." },
-      "2": { "title": "Projections", "text": "Films en compétition et hors-compétition sur grand écran." },
-      "3": { "title": "Workshops", "text": "Scénario, création et post-prod avec des experts de l'IA." },
-      "4": { "title": "Remise des prix", "text": "Cinéastes, acteurs et créateurs renommés pour récompenser l'excellence." }
-    },
-
-    "cardsPlaces": {
-      "1": { "title": "Salle des sucres", "description": "Futur salle des conférences et de la remise des prix de Mars.A.I. Un espace majestueux alliant patrimoine et technologie." },
-      "2": { "title": "Salle plaza", "description": "L'épicentre du festival : accueil, animations, workshops et restauration. Le point de rencontre de tous les participants." }
-    },
-
-    "cardsNumber": {
-      "1": { "title": "+120", "text": "Pays représentés" },
-      "2": { "title": "+600", "text": "Films soumis" }
-    }
-  },
-
-  
   "profileConnect": {
     "loginPage": "Page de connexion",
     "adminDashboard": "Tableau de bord Admin",
     "juryDashboard": "Tableau de bord Jury",
     "userDashboard": "Tableau de bord Utilisateur"
   },
-
-
   "cards": {
+    "default_card_title": "Titre de la carte",
+    "default_card_text": "Description de la carte",
+    "default_movie_title": "Titre du film",
+    "default_director_label": "Réalisateur",
+    "default_director_name": "Nom inconnu",
+    "default_country_label": "Pays",
+    "default_country_name": "Pays inconnu",
+    "default_festival_title": "Titre festival",
+    "default_festival_text": "Description festival",
+    "default_selection_title": "Titre sélection",
+    "default_selection_text": "Texte sélection",
+    "default_selection_description": "Description sélection",
+    "movie_video_aria": "Vidéo du film",
+    "globe_icon_aria": "Icône globe",
     "general": {
       "minute": {
         "title": "1 MINUTE",
@@ -481,28 +397,15 @@
       }
     },
     "partners": {
-      "plateforme": "Logo la plateforme",
-      "mobile": "Logo mobile festival",
-      "undp": "Logo undp",
-      "psl": "Logo psl",
-      "cnc": "Logo cnc",
-      "action": "Logo action campaign",
-      "unric": "Logo unric",
-      "sacd": "Logo sacd",
-      "agence": "Logo l'agence du court métrage",
-      "extra": "Logo extra court",
-      "unesco": "Logo unesco",
-      "global": "Logo global youth biodiversity network"
+      "default_alt": "Logo partenaire"
     }
   },
-
-
   "livrables": {
     "title": "Étape 03. Livrables & Collaborateurs",
     "video": {
       "label": "Fichier du Film (MP4 / MOV)*",
       "placeholder": "Glissez votre film ici ou cliquez pour parcourir",
-      "info": "MP4, MOV, AVI — Max 500 Mo (selon config serveur)"
+      "info": "MP4, MOV, AVI — Max 500 Mo"
     },
     "subtitles": {
       "label": "Sous-titres (.srt)",
@@ -523,147 +426,7 @@
       "remove": "Supprimer"
     }
   },
-
-  
-
-
-
-
-"cards": {
-    "home": {
-      "minute": {
-        "title": "1 MINUTE",
-        "text": "Format ultra-court pour maximiser l'impact créatif."
-      },
-      "free": {
-        "title": "GRATUITÉ",
-        "text": "Conférences et workshops accessibles à tous."
-      },
-      "forAll": {
-        "title": "POUR TOUS",
-        "text": "Professionnels, étudiants et curieux."
-      },
-      "expertise": {
-        "title": "EXPERTISE",
-        "text": "Rencontrez les leaders mondiaux de l'IA."
-      }
-    },
-    "festival": {
-      "human": {
-        "title": "L'Humain au centre",
-        "text": "Mettre l'humain au cœur de la création d'œuvres générées par IA pour ne pas perdre l'émotion."
-      },
-      "challenge": {
-        "title": "Challenge créatif",
-        "text": "Challenger la créativité des participants grâce à un format très court de 60 secondes."
-      },
-      "future": {
-        "title": "Futurs souhaitables",
-        "text": "Mettre à profit la puissance de l'IA pour illustrer un thème : Imaginez des futurs souhaitables."
-      }
-    },
-    "selection": {
-      "call": {
-        "title": "2 mois",
-        "text": "Appel à projet",
-        "description": "Candidatures ouvertes aux créateurs du monde entier."
-      },
-      "official": {
-        "title": "50 Films",
-        "text": "Sélection officielle",
-        "description": "Courts-métrages d'une minute retenus pour la compétition."
-      },
-      "digital": {
-        "title": "Web & RS",
-        "text": "Diffusion digitale",
-        "description": "Visibilité mondiale via les réseaux et plateformes."
-      },
-      "cinema": {
-        "title": "Festival",
-        "text": "Salles de cinéma",
-        "description": "Projection sur grand écran pour une immersion totale."
-      }
-    },
-    "infos": {
-      "heart": {
-        "title": "Le coeur du festival",
-        "text": "Débats engagés sur l'éthique et le futur."
-      },
-      "screening": {
-        "title": "Projections",
-        "text": "Films en compétition et hors-compétition sur grand écran."
-      },
-      "workshop": {
-        "title": "Workshops",
-        "text": "Scénario, création et post-prod avec des experts de l'IA."
-      },
-      "award": {
-        "title": "Remise des prix",
-        "text": "Cinéastes, acteurs et créateurs renommés pour récompenser l'excellence."
-      }
-    },
-    "places": {
-      "sucres": {
-        "title": "Salle des sucres",
-        "description": "Future salle des conférences et de la remise des prix de Mars.A.I."
-      },
-      "plaza": {
-        "title": "Salle plaza",
-        "description": "L'épicentre du festival : accueil, animations, workshops et restauration."
-      }
-    },
-    "numbers": {
-      "countries": "Pays représentés",
-      "films": "Films soumis"
-    }
-  },
-
-  
-  "admin": {
-    "sidebar": {
-      "dashboard": "Dashboard",
-      "films": "Gestion Films",
-      "jury": "Jury",
-      "results": "Résultats",
-      "events": "Événements",
-      "config": "Configuration",
-      "version": "MarsAI Admin v1.0"
-    },
-    "errors": {
-      "fetchUser": "Impossible de récupérer l'admin :"
-    }
-  },
-
-  
-  "admin": {
-    "dashboard": {
-      "loading": "Chargement du dashboard…",
-      "errors": {
-        "load": "Impossible de charger le dashboard"
-      },
-      "cards": {
-        "movies": {
-          "title": "Films évalués par le jury",
-          "subtitle": "{{count}} aujourd’hui"
-        },
-        "jury": {
-          "title": "Jurys ayant finalisé leurs lots"
-        },
-        "countries": {
-          "title": "Pays représentés",
-          "topZone": "Zone dominante"
-        },
-        "workshops": {
-          "title": "Taux d'occupation des workshops"
-        },
-        "directors": {
-          "title": "Nombre de réalisateurs inscrits",
-          "subtitle": "+{{count}} aujourd’hui"
-        }
-      }
-    },
-
-    "film_identity": {
+  "film_identity": {
     "step": "Étape",
     "title": "Identité du film",
     "original_title": "Titre original*",
@@ -678,27 +441,64 @@
     "synopsis_original_placeholder": "RÉSUMEZ L'INTENTION DE VOTRE FILM EN QUELQUES LIGNES...",
     "synopsis_english": "Synopsis anglais* (max. 300 caractères)",
     "synopsis_english_placeholder": "SUMMARIZE YOUR FILM'S INTENTION IN A FEW LINES..."
+  },
+  "ia_declaration": {
+    "step": "Étape",
+    "title": "Déclaration IA",
+    "classification_label": "Classification de l'œuvre*",
+    "hybrid": "Hybride (IA + Réel)",
+    "full_ia": "100% Généré par IA",
+    "tech_stack": "Stack technologique (Outils utilisés)*",
+    "tech_stack_placeholder": "EX: RUNWAY GEN-2, MIDJOURNEY, UDIO, ADOBE PREMIERE...",
+    "creative_methodology": "Méthodologie créative*",
+    "creative_methodology_placeholder": "EXPLIQUEZ BRÈVEMENT VOTRE PROCESSUS DE CRÉATION ET L'USAGE DE L'IA..."
+  },
+  "ownership": {
+    "title": "CERTIFICAT DE PROPRIÉTÉ",
+    "text": "JE CERTIFIE SUR L'HONNEUR ÊTRE LE DÉTENTEUR DES DROITS DE CETTE ŒUVRE ET AUTORISE LE FESTIVAL MARS.AI À DIFFUSER CE CONTENU DANS LE CADRE DE LA COMPÉTITION ET DE SA PROMOTION."
+  },
+  "submit_movie": {
+    "submit_film": "SOUMETTRE MON FILM",
+    "finalize_submission": "FINALISER MA SOUMISSION"
+  },
+  "admin": {
+    "sidebar": {
+      "dashboard": "Dashboard",
+      "films": "Gestion Films",
+      "jury": "Jury",
+      "results": "Résultats",
+      "events": "Événements",
+      "config": "Configuration",
+      "version": "MarsAI Admin v1.0"
+    },
+    "errors": {
+      "fetchUser": "Impossible de récupérer l'admin :"
+    },
+    "dashboard": {
+      "loading": "Chargement du dashboard…",
+      "errors": {
+        "load": "Impossible de charger le dashboard"
+      },
+      "cards": {
+        "movies": {
+          "title": "Films évalués par le jury",
+          "subtitle": "{{count}} aujourd'hui"
+        },
+        "jury": {
+          "title": "Jurys ayant finalisé leurs lots"
+        },
+        "countries": {
+          "title": "Pays représentés",
+          "topZone": "Zone dominante"
+        },
+        "workshops": {
+          "title": "Taux d'occupation des workshops"
+        },
+        "directors": {
+          "title": "Nombre de réalisateurs inscrits",
+          "subtitle": "+{{count}} aujourd'hui"
+        }
+      }
+    }
   }
-
-
-
-  
 }
-
-
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-

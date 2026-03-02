@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 const IaDeclaration = ({ formData, update }) => {
   const { t } = useTranslation();
 
-  const setClassification = value => update({ is_hybrid: value === 'hybride' });
+  // On compare explicitement à true/false pour éviter les bugs si la valeur est nulle
+  const isHybrid = formData.is_hybrid === true;
+  const isFullAi = formData.is_hybrid === false;
 
   return (
     <section className="flex justify-center items-center bg-gray-100 p-6">
@@ -28,18 +30,18 @@ const IaDeclaration = ({ formData, update }) => {
             <div className="flex gap-4">
               <button
                 type="button"
-                onClick={() => setClassification('hybride')}
-                className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all
-                  ${formData.is_hybrid ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+                onClick={() => update({ is_hybrid: true })}
+                className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all border-2 
+                  ${isHybrid ? 'bg-blue-500 text-white border-blue-500' : 'bg-gray-100 text-gray-600 border-transparent hover:bg-gray-200'}`}
               >
                 {t('ia_declaration.hybrid')}
               </button>
 
               <button
                 type="button"
-                onClick={() => setClassification('100ia')}
-                className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all
-                  ${!formData.is_hybrid ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+                onClick={() => update({ is_hybrid: false })}
+                className={`flex-1 p-4 rounded-xl text-sm uppercase font-bold transition-all border-2
+                  ${isFullAi ? 'bg-blue-500 text-white border-blue-500' : 'bg-gray-100 text-gray-600 border-transparent hover:bg-gray-200'}`}
               >
                 {t('ia_declaration.full_ia')}
               </button>
@@ -48,31 +50,27 @@ const IaDeclaration = ({ formData, update }) => {
 
           {/* Stack Technologie */}
           <section className="md:col-span-2 space-y-2">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
-                {t('ia_declaration.tech_stack')}
-              </label>
-            </div>
+            <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
+              {t('ia_declaration.tech_stack')}
+            </label>
             <textarea
               value={formData.ia_tools || ''}
               onChange={e => update({ ia_tools: e.target.value })}
               placeholder={t('ia_declaration.tech_stack_placeholder')}
-              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
+              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none  leading-relaxed text-slate-800"
             />
           </section>
 
           {/* Méthodologie créative */}
           <section className="md:col-span-2 space-y-2">
-            <div className="flex justify-between items-center">
-              <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
-                {t('ia_declaration.creative_methodology')}
-              </label>
-            </div>
+            <label className="text-sm font-bold tracking-wider text-slate-500 uppercase">
+              {t('ia_declaration.creative_methodology')}
+            </label>
             <textarea
               value={formData.creative_process || ''}
               onChange={e => update({ creative_process: e.target.value })}
               placeholder={t('ia_declaration.creative_methodology_placeholder')}
-              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none uppercase leading-relaxed"
+              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none  leading-relaxed text-slate-800"
             />
           </section>
         </section>
