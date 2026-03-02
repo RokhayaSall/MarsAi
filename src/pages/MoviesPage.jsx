@@ -17,9 +17,7 @@ export default function MoviesPage() {
       try {
         setLoading(true);
 
-        const response = await fetch(
-          `http://localhost:3000/api/movies-and-directors`
-        );
+        const response = await fetch(`http://localhost:3000/api/movies`);
         const data = await response.json();
 
         console.log(data);
@@ -72,8 +70,8 @@ export default function MoviesPage() {
 
   return (
     <div>
-      <div className="flex justify-end">
-        <div className="flex items-center bg-[#F2F3F5] p-1 pl-2 rounded-lg size-fit">
+      <div className="flex">
+        <div className="flex items-center bg-[#F2F3F5] p-1 pl-2 rounded-lg size-fit ml-12">
           <IoIosSearch className="text-[#94A3B8]" />
           <input
             type="text"
@@ -85,9 +83,15 @@ export default function MoviesPage() {
         </div>
       </div>
       <div className="grid grid-cols-3 p-10 gap-10">
-        {filtredMoviesWithDirectors.map(movie => (
-          <CardMovie key={movie.id} movie={movie} />
-        ))}
+        {filtredMoviesWithDirectors.length === 0 && searchTerm !== '' ? (
+          <p className="col-span-3 text-center text-gray-500">
+            Aucune donnée trouvée
+          </p>
+        ) : (
+          filtredMoviesWithDirectors.map(movie => (
+            <CardMovie key={movie.id} movie={movie} />
+          ))
+        )}
       </div>
     </div>
   );

@@ -23,11 +23,23 @@ export function CardMovie({ movie }) {
   if (movie)
     return (
       <article className="bg-[#F8F9FA] rounded-3xl overflow-hidden shadow-sm border border-gray-100 p-6">
+        <div>
+          <video
+            className="w-full h-[150px] object-cover mb-5 rounded-3xl"
+            src={movie.video_url}
+            controls
+            width="100%"
+            type="video/mp4"
+            poster={movie.cover_image || DEFAULT_POSTER}
+          >
+            {t('cards.video_not_supported')}
+          </video>
+        </div>
         <div className="flex justify-between">
           <h3 className="font-black text-[#282828] text-2xl uppercase tracking-tighter mb-2">
             {movie.original_title || t('cards.default_movie_title')}
           </h3>
-          <p className="w-15 text-center bg-[#EFE3E1] text-[#FF5845] font-bold rounded-xl flex items-center justify-center">
+          <p className="w-15 text-center bg-[#F2F3F5] text-[#282828] font-bold rounded-xl flex items-center justify-center">
             {movie.duration || t('cards.default_duration_time')}s
           </p>
         </div>

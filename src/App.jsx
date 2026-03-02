@@ -17,7 +17,6 @@ import DashboardJury from './pages/DashboardJury';
 import JuryRoutes from './routes/JuryRoutes';
 import { AuthProvider } from './context/AuthProvider';
 import MoviePage from './pages/MovieDetail';
-import MoviesPage from './pages/MoviesPage';
 
 import './App.css';
 
@@ -34,7 +33,6 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/submit-movie" element={<SubmitMovie />} />
             <Route path="/movie-detail/:id" element={<MoviePage />} />
-            <Route path="/moviespage" element={<MoviesPage />} />
 
             {/* ROUTES JURY PROTÉGÉES */}
             <Route

@@ -77,6 +77,9 @@ export default function FormDirector() {
             'Vérification : ',
             localStorage.getItem('currentDirectorId')
           );
+
+          // ✅ REDIRECTION AUTOMATIQUE AJOUTÉE ICI
+          navigate('/submit-movie');
         } else {
           alert(
             "Le serveur a dit OK mais n'a pas envoyé d'ID. Regardez la console."
@@ -90,8 +93,9 @@ export default function FormDirector() {
       alert('Problème de connexion au serveur.');
     }
   };
+
   const inputClass =
-    'w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all uppercase';
+    'w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all ';
   const labelClass =
     'text-sm font-bold tracking-wider text-slate-700 uppercase';
 
@@ -263,15 +267,7 @@ export default function FormDirector() {
           {t('form.envoyer')}
         </button>
 
-        <div className="flex justify-end mt-6">
-          <button
-            type="button"
-            onClick={() => navigate('/submit-movie')}
-            className="bg-slate-900 text-white px-8 py-3 rounded-full font-bold hover:bg-slate-500 transition-colors shadow-lg"
-          >
-            {t('form.etape_suivante')}
-          </button>
-        </div>
+        {/* ✅ BOUTON ÉTAPE SUIVANTE SUPPRIMÉ - REDIRECTION AUTO DANS LE SUBMIT */}
       </form>
     </div>
   );
