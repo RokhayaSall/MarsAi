@@ -17,10 +17,10 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
     }
   }, [jury]);
 
-    const handleSubmit = async e => {
-      e.preventDefault();
-      onUpdate({ ...jury, ...form });
-    };
+  const handleSubmit = async e => {
+    e.preventDefault();
+    onUpdate({ ...jury, ...form });
+  };
 
   if (!jury) return null;
 

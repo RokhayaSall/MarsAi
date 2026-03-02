@@ -17,29 +17,31 @@ export function Card({ icon: Icon, title, text, className }) {
     </article>
   );
 }
-
-export function CardMovie({ title, director, country }) {
+export function CardMovie({ movie }) {
   const { t } = useTranslation();
 
-  return (
-    <article className="bg-[#F8F9FA] rounded-3xl overflow-hidden shadow-sm border border-gray-100">
-      <figure className="relative aspect-video w-full">
-        <iframe
-          className="w-full h-full"
-          src="https://www.youtube.com/embed/4xq6bVbS-Pw?si=_twkdKn70p1y1UV-"
-          title={title || t('cards.default_movie_title')}
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-          aria-label="Vidéo youtube du film"
-        ></iframe>
-      </figure>
-
-      <figcaption className="p-6">
-        <div className="flex justify-between items-start mb-4">
-          <h3 className="font-black text-[#282828] text-2xl uppercase tracking-tighter">
-            {title || t('cards.default_movie_title')}
+  if (movie)
+    return (
+      <article className="bg-[#F8F9FA] rounded-3xl overflow-hidden shadow-sm border border-gray-100 p-6">
+        <div>
+          <video
+            className="w-full h-[150px] object-cover mb-5 rounded-3xl"
+            src={movie.video_url}
+            controls
+            width="100%"
+            type="video/mp4"
+            poster={movie.cover_image || DEFAULT_POSTER}
+          >
+            {t('cards.video_not_supported')}
+          </video>
+        </div>
+        <div className="flex justify-between">
+          <h3 className="font-black text-[#282828] text-2xl uppercase tracking-tighter mb-2">
+            {movie.original_title || t('cards.default_movie_title')}
           </h3>
+          <p className="w-15 text-center bg-[#F2F3F5] text-[#282828] font-bold rounded-xl flex items-center justify-center">
+            {movie.duration || t('cards.default_duration_time')}s
+          </p>
         </div>
         <div className="flex justify-between items-end uppercase">
           <div>
@@ -47,7 +49,7 @@ export function CardMovie({ title, director, country }) {
               {t('cards.default_director_label')}
             </p>
             <p className="text-sm font-black text-[#282828]">
-              {director || t('cards.default_director_name')}
+              {movie.director_name || t('cards.default_director_name')}
             </p>
           </div>
 
@@ -62,14 +64,13 @@ export function CardMovie({ title, director, country }) {
                 aria-label="Icone de globe"
               />
               <p className="text-sm font-black text-[#282828]">
-                {country || t('cards.default_country_name')}
+                {movie.country || t('cards.default_country_name')}
               </p>
             </div>
           </div>
         </div>
-      </figcaption>
-    </article>
-  );
+      </article>
+    );
 }
 
 export function CardFestival({ icon: Icon, title, text }) {
