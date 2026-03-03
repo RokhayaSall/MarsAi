@@ -12,7 +12,6 @@ export default function AdminMovies() {
   const [editingMovie, setEditingMovie] = useState(null);
   const moviesPerPage = 6;
 
-  // 🔥 STATE PARTAGÉ pour Sidebar
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
@@ -35,12 +34,26 @@ export default function AdminMovies() {
   const handleDelete = async id => {
     const ok = window.confirm('Supprimer ce film ?');
     if (!ok) return;
+
     try {
+      const token = localStorage.getItem('token');
+
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/admin/movies/${id}`,
-        { method: 'DELETE' }
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      if (!res.ok) throw new Error('Erreur suppression');
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error('Erreur backend:', errorText);
+        throw new Error('Erreur suppression');
+      }
+
       setMovies(prev => prev.filter(m => m.id !== id));
     } catch (err) {
       console.error(err);
