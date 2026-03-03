@@ -2,7 +2,7 @@ import { Edit, Trash2, Youtube } from 'lucide-react';
 
 export default function MovieCard({ movie, onEdit, onDelete }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6 w-full sm:w-80 mx-auto flex flex-col justify-between transition hover:shadow-md">
+    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6 w-full mx-auto flex flex-col justify-between transition hover:shadow-md">
       {/* Titre et infos */}
       <div className="mb-4">
         <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
