@@ -30,7 +30,7 @@ export function CardMovie({ movie }) {
             controls
             width="100%"
             type="video/mp4"
-            poster={movie.cover_image || DEFAULT_POSTER}
+            poster={movie.cover_image}
           >
             {t('cards.video_not_supported')}
           </video>
