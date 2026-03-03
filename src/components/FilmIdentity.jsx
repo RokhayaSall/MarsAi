@@ -2,7 +2,7 @@ import React from 'react';
 import { FiFilm } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next';
 
-const FilmIdentityForm = ({ formData, update }) => {
+const FilmIdentityForm = ({ register, errors }) => {
   const { t } = useTranslation();
 
   return (
@@ -18,79 +18,75 @@ const FilmIdentityForm = ({ formData, update }) => {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
+          {/* TITRE ORIGINAL */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.original_title')}
             </label>
             <input
               type="text"
-              placeholder={t('film_identity.original_title_placeholder')}
-              value={formData.original_title}
-              onChange={e => update({ original_title: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all "
+              {...register("original_title", { required: true })}
+              className={`w-full bg-gray-100 border-none rounded-xl p-4 text-sm focus:ring-2 outline-none transition-all ${errors.original_title ? 'ring-2 ring-red-400' : 'focus:ring-blue-400'}`}
             />
           </div>
 
+          {/* TITRE ANGLAIS */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.english_title')}
             </label>
             <input
               type="text"
-              placeholder={t('film_identity.english_title_placeholder')}
-              value={formData.english_title}
-              onChange={e => update({ english_title: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all "
+              {...register("english_title", { required: true })}
+              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all"
             />
           </div>
 
+          {/* DUREE */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.duration')}
             </label>
             <input
-              type="text"
-              placeholder={t('film_identity.duration_placeholder')}
-              value={formData.duration || ''}
-              onChange={e => update({ duration: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all"
+              type="number"
+              {...register("duration", { required: true })}
+              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all"
             />
           </div>
 
+          {/* LANGUE - ICI ON RÉGLE TON BUG SQL */}
           <div className="space-y-2">
             <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
               {t('film_identity.language')}
             </label>
             <input
               type="text"
-              placeholder={t('film_identity.language_placeholder')}
-              value={formData.language}
-              onChange={e => update({ language: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all "
+              {...register("language", { 
+                required: true, 
+                maxLength: 20,
+                // On s'assure que c'est propre avant l'envoi
+                setValueAs: v => v.toUpperCase().trim() 
+              })}
+              className={`w-full bg-gray-100 border-none rounded-xl p-4 text-sm focus:ring-2 outline-none transition-all ${errors.language ? 'ring-2 ring-red-400' : 'focus:ring-blue-400'}`}
             />
+            {errors.language?.type === 'maxLength' && <p className="text-red-500 text-[10px]">Maximum 20 caractères</p>}
           </div>
 
+          {/* SYNOPSIS ORIGINAL */}
           <section className="md:col-span-2 space-y-2">
-            <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
-              {t('film_identity.synopsis_original')}
-            </label>
+            <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">{t('film_identity.synopsis_original')}</label>
             <textarea
-              placeholder={t('film_identity.synopsis_original_placeholder')}
-              value={formData.original_synopsis}
-              onChange={e => update({ original_synopsis: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none  leading-relaxed"
+              {...register("original_synopsis", { required: true })}
+              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none"
             />
           </section>
 
+          {/* SYNOPSIS ANGLAIS */}
           <section className="md:col-span-2 space-y-2">
-            <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">
-              {t('film_identity.synopsis_english')}
-            </label>
+            <label className="text-sm font-bold tracking-wider text-slate-700 uppercase">{t('film_identity.synopsis_english')}</label>
             <textarea
-              placeholder={t('film_identity.synopsis_english_placeholder')}
-              value={formData.english_synopsis}
-              onChange={e => update({ english_synopsis: e.target.value })}
-              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none  leading-relaxed"
+              {...register("english_synopsis", { required: true })}
+              className="w-full bg-gray-100 border-none rounded-2xl p-4 h-32 text-sm focus:ring-2 focus:ring-blue-400 outline-none transition-all resize-none"
             />
           </section>
         </section>
