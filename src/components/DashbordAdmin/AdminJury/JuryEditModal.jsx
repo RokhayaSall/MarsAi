@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 
 export default function JuryEditModal({ jury, onClose, onUpdate }) {
   const [form, setForm] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
+    firstname: jury?.firstname || '',
+    lastname: jury?.lastname || '',
+    email: jury?.email || '',
   });
 
   useEffect(() => {
@@ -17,39 +17,19 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
     }
   }, [jury]);
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/admin/jury/${jury.id}`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error('Erreur lors de la mise à jour');
-      }
-
-      const updatedJury = await res.json();
-      onUpdate(updatedJury);
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert('Impossible de modifier le jury');
-    }
-  };
-
   if (!jury) return null;
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    onUpdate({ ...jury, ...form });
+  };
+
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 px-4">
       <form
+        key={jury.id}
         onSubmit={handleSubmit}
-        className="bg-gray-50 rounded-xl p-6 w-full max-w-md shadow-lg"
+        className="bg-gray-50 rounded-xl p-5 sm:p-6 w-full max-w-md shadow-lg max-h-[90vh] overflow-y-auto"
       >
         <h3 className="text-lg font-semibold mb-4">Modifier le jury</h3>
 
@@ -84,7 +64,7 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
           />
         </label>
 
-        <div className="flex justify-end gap-3 mt-4">
+        <div className="flex flex-col sm:flex-row justify-end gap-3 mt-5">
           <button
             type="button"
             onClick={onClose}
@@ -92,9 +72,10 @@ export default function JuryEditModal({ jury, onClose, onUpdate }) {
           >
             Annuler
           </button>
+
           <button
             type="submit"
-            className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition"
+            className="bg-blue-900 text-white px-5 py-2 rounded-lg hover:bg-blue-800 transition"
           >
             Enregistrer
           </button>

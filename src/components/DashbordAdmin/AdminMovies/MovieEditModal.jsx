@@ -27,12 +27,18 @@ export default function MovieEditModal({ movie, onClose, onUpdate }) {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
     try {
+      const token = localStorage.getItem('token');
+
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/admin/movies/${movie.id}`,
         {
           method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
           body: JSON.stringify(form),
         }
       );
