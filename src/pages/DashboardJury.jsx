@@ -1,10 +1,8 @@
-import React from 'react';
-
 function DashboardJury() {
   return (
-    <div>
-      <h1>test jury</h1>
-    </div>
+    <section>
+      <h1 className="m-5 text-5xl">Dashboard jury</h1>
+    </section>
   );
 }
 
