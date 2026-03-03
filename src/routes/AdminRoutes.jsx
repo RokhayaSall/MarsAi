@@ -1,4 +1,3 @@
-
 import { jwtDecode } from 'jwt-decode';
 import { Navigate } from 'react-router-dom';
 
@@ -36,7 +35,6 @@ export default function AdminRoutes({ children }) {
     // si tout est bon : token valide, non expiré, bon rôle
     // affiche la page protégée DashboardAdmin
     return children;
-
   } catch (error) {
     // si ya une erreur affiche l'erreur dans la console
     console.error('AdminRoute token erreur :', error);
@@ -46,6 +44,3 @@ export default function AdminRoutes({ children }) {
     return <Navigate to="/auth" replace />;
   }
 }
-
-
-
