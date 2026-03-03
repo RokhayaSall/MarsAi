@@ -5,52 +5,64 @@ import { useTranslation } from 'react-i18next';
 import ButtonLogOut from '../ui/Buttons';
 import ProfileConnect from '../ui/ProfileConnect';
 import LanguageSwitcher from '../ui/LanguageSwitcher';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-function Header() {
+function Header({ isSidebarOpen, setIsSidebarOpen }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const { t } = useTranslation();
 
   return (
     <header className="border-b border-slate-200 bg-white">
       <nav className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+        {/* Chevron Sidebar (admin) */}
+        <button
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          className="md:hidden text-slate-700 mr-4"
+        >
+          {isSidebarOpen ? (
+            <ChevronLeft size={26} />
+          ) : (
+            <ChevronRight size={26} />
+          )}
+        </button>
+
         {/* Logo */}
         <Link
           to="/"
-          className="text-2xl font-extrabold tracking-tight text-[#0f172a] hover:text-[#1e293b] transition-colors"
+          className="text-2xl font-extrabold tracking-tight text-[#0f172a]"
         >
           MARS<span className="text-slate-400">.</span>AI
         </Link>
 
-        {/* Navigation Desktop (centrée) */}
+        {/* Desktop Navigation */}
         <ul className="hidden md:flex items-center gap-10 font-semibold text-slate-700">
-          <li className="hover:text-[#0f172a] transition-colors">
+          <li>
             <Link to="/gallery">{t('nav.gallery')}</Link>
           </li>
-          <li className="hover:text-[#0f172a] transition-colors">
+          <li>
             <Link to="/">{t('nav.program')}</Link>
           </li>
-          {/* <li className="hover:text-[#0f172a] transition-colors">
-            <Link to="/jury">{t('nav.jury')}</Link>
-          </li> */}
           <li>
             <Link
               to="/form-director"
-              className="bg-[#0f172a] hover:bg-[#1e293b] text-white rounded-xl py-2 px-6 transition-colors shadow-sm"
+              className="bg-[#0f172a] text-white rounded-xl py-2 px-6"
             >
               {t('nav.submit')}
             </Link>
           </li>
         </ul>
 
+        {/* Desktop Right Section */}
         <div className="hidden md:flex items-center gap-6">
           <LanguageSwitcher />
           <ButtonLogOut />
           <ProfileConnect />
         </div>
 
+        {/* Mobile burger */}
         <button
-          className="text-3xl md:hidden text-slate-700"
-          onClick={() => setIsNavOpen(!isNavOpen)}
+          className="md:hidden ml-4 text-2xl"
+          onClick={() => setIsNavOpen(prev => !prev)}
         >
           {isNavOpen ? <RxCross2 /> : <RxHamburgerMenu />}
         </button>
@@ -65,9 +77,6 @@ function Header() {
           <Link to="/" onClick={() => setIsNavOpen(false)}>
             {t('nav.program')}
           </Link>
-          {/* <Link to="/jury" onClick={() => setIsNavOpen(false)}>
-            {t('nav.jury')}
-          </Link> */}
           <Link
             to="/form-director"
             onClick={() => setIsNavOpen(false)}
