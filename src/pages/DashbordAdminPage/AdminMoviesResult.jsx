@@ -1,17 +1,16 @@
-// AdminMoviesResult.jsx
 import { useState, useEffect } from 'react';
 import Sidebar from '../../components/DashbordAdmin/Sidebar';
+import Header from '../../components/layout/Navbar';
 import TopScoreCard from '../../components/DashbordAdmin/AdminMoviesResult/TopScoreCard';
 import SearchBar from '../../components/DashbordAdmin/AdminMoviesResult/SearchBar';
 import LeaderboardTable from '../../components/DashbordAdmin/AdminMoviesResult/LeaderBoardTable';
 import { apiFetch } from '../../services/api';
 
-export default function MovieResults() {
+export default function AdminMoviesResult() {
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const moviesPerPage = 10;
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -36,89 +35,55 @@ export default function MovieResults() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-gray-50">
         <p className="text-gray-500 animate-pulse">Chargement des films...</p>
       </div>
     );
   }
 
-  // Filtrer par recherche
   const filteredMovies = movies.filter(movie =>
     movie.original_title?.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Trier par score
-  const sortedMovies = filteredMovies.sort((a, b) => b.score - a.score);
+  const sortedMovies = [...filteredMovies].sort((a, b) => b.score - a.score);
 
-  //  Meilleur film
-  const topMovie = sortedMovies[0] || null;
-
-  // Ajouter le rang global
   const rankedMovies = sortedMovies.map((movie, index) => ({
     ...movie,
     rank: index + 1,
   }));
 
-  // Pagination
-  const totalPages = Math.ceil(rankedMovies.length / moviesPerPage);
-  const currentMovies = rankedMovies.slice(
-    (currentPage - 1) * moviesPerPage,
-    currentPage * moviesPerPage
-  );
+  const topMovie = rankedMovies[0] || null;
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <Sidebar />
-      <div className="flex-1 max-w-7xl mx-auto px-6 py-10 space-y-10">
-        {/* 🥇 Meilleure Note */}
-        {topMovie ? (
-          <TopScoreCard
-            score={topMovie.score.toFixed(1)}
-            title={topMovie.original_title}
-            author={topMovie.author || 'ca marche pas'}
-          />
-        ) : (
-          <div className="text-center text-gray-400">Aucun film disponible</div>
-        )}
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
-        {/* Recherche */}
-        <SearchBar search={search} setSearch={setSearch} />
+      <div className="flex-1 flex flex-col">
+        <Header
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
 
-        {/* Leaderboard */}
-        <LeaderboardTable movies={currentMovies} />
+        <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          {topMovie ? (
+            <TopScoreCard
+              score={topMovie.score.toFixed(1)}
+              title={topMovie.original_title}
+              author={topMovie.author || 'Auteur inconnu'}
+            />
+          ) : (
+            <div className="text-center text-gray-400">
+              Aucun film disponible
+            </div>
+          )}
 
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="mt-6 flex justify-center items-center gap-4">
-            <button
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage(prev => prev - 1)}
-              className={`px-4 py-2 rounded-full border ${
-                currentPage === 1
-                  ? 'opacity-30 cursor-not-allowed'
-                  : 'hover:bg-gray-100'
-              }`}
-            >
-              ←
-            </button>
+          <SearchBar search={search} setSearch={setSearch} />
 
-            <span className="font-medium">
-              Page {currentPage} sur {totalPages}
-            </span>
-
-            <button
-              disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage(prev => prev + 1)}
-              className={`px-4 py-2 rounded-full border ${
-                currentPage === totalPages
-                  ? 'opacity-30 cursor-not-allowed'
-                  : 'hover:bg-gray-100'
-              }`}
-            >
-              →
-            </button>
+          {/* Tableau avec scroll conservé */}
+          <div className="mt-6 border border-gray-200 rounded-2xl shadow-lg max-h-[400px] overflow-y-auto">
+            <LeaderboardTable movies={rankedMovies} />
           </div>
-        )}
+        </main>
       </div>
     </div>
   );
