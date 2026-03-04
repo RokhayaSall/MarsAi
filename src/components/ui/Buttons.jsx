@@ -52,7 +52,7 @@ export function ButtonMore({ className }) {
       `}
     >
       En savoir plus
-      <span className="text-[#fd4e3a] text-2xl md:text-xl"> +</span>
+      <span className="text-[#d62b18] text-2xl md:text-xl"> +</span>
     </a>
   );
 }

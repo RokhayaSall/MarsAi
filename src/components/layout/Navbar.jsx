@@ -32,7 +32,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           to="/"
           className="text-2xl font-extrabold tracking-tight text-[#0f172a]"
         >
-          MARS<span className="text-slate-400">.</span>AI
+          MARS.AI
         </Link>
 
         {/* Desktop Navigation */}

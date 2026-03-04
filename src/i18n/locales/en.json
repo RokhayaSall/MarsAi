@@ -131,16 +131,13 @@
     "text": "By submitting this file, you certify on your honor that you are the original author of the work and hold all distribution rights. You agree that MARS.A.I may use these materials for festival promotion."
   },
 
-  "footer": {
-    "ariaLabel": "Footer",
-    "infoAriaLabel": "Information and social networks",
+  "footer": {    
     "description": "A co-creation of La Plateforme digital school and the Mobile Film Festival. Together to shape the new horizons of cinema.",
     "facebook": "Facebook link",
     "instagram": "Instagram link",
     "youtube": "Youtube link",
     "x": "X link",
     "newsletterTitle": "Stay connected",
-    "newsletterLabel": "Newsletter subscription",
     "newsletterPlaceholder": "Your@email.com",
     "newsletterButton": "Subscribe",
     "legalNotice": "Legal Notice",

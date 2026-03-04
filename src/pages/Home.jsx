@@ -52,7 +52,6 @@ function Home() {
         </p>
         <div
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10  "
-          aria-label="Description projet MarsAI"
         >
           {cardsData.map(card => (
             <Card
@@ -78,7 +77,6 @@ function Home() {
         </p>
         <div
           className="grid grid-cols-1 md:flex justify-between gap-10 mb-10 mt-10"
-          aria-label="Aperçu de film"
         >
           <CardMovie />
           <CardMovie />
@@ -94,7 +92,6 @@ function Home() {
         </h2>
         <div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 mt-10 "
-          aria-label="Obectifs du festival"
         >
           {cardsFestivalData.map(card => (
             <CardFestival
@@ -116,7 +113,6 @@ function Home() {
         </p>
         <div
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10  "
-          aria-label="Format de la sélection"
         >
           {cardsSelectionData.map(card => (
             <CardSelection
@@ -137,7 +133,6 @@ function Home() {
         </h2>
         <div
           className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10 mt-10  "
-          aria-label="Le coeur du festival"
         >
           {cardsInfos.map(card => (
             <CardFestival
@@ -151,7 +146,8 @@ function Home() {
       </section>
 
       <section className="relative bg-[url(src/assets/marsai-night.avif)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">
-        <div className="" aria-label="Prendre mon pass">
+        <div 
+        >
           <h2 className="text-white font-bold text-4xl text-shadow-lg/70  uppercase w-70 md:text-7xl">
             Mars.A.I night
           </h2>
@@ -181,7 +177,6 @@ function Home() {
         </p>
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 mt-10 md:mb-5  "
-          aria-label="Salles du centre la plateforme"
         >
           {cardsPlaces.map(card => (
             <CardSelection
@@ -195,7 +190,8 @@ function Home() {
       </section>
 
       <section className="bg-white p-15  flex flex-col md:flex-row md:items-center md:justify-around ">
-        <div aria-label="Chiffres projetés ">
+        <div 
+        >
           <h2 className="text- font-bold text-4xl uppercase w-70 ">
             Chiffres <span className="text-[#2b71b1]">projetés</span>
           </h2>
@@ -207,7 +203,6 @@ function Home() {
 
         <div
           className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10    "
-          aria-label="Chiffres projetés"
         >
           {cardsNumber.map(card => (
             <Card
@@ -231,7 +226,6 @@ function Home() {
         </h2>
         <ul
           className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-10 mt-15"
-          aria-label="Nos partenaires"
         >
           {cardsPartner.map(card => (
             <CardPartner key={card.id} src={card.src} alt={card.alt} />
