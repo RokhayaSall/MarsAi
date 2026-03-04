@@ -50,13 +50,13 @@ function Layout() {
             }
           />
           <Route
-              path="/dashboard/jury/movies/:id"
-              element={
-                <JuryRoutes>
-                  <JuryRating />
-                </JuryRoutes>
-              }
-            />
+            path="/dashboard/jury/movies/:id"
+            element={
+              <JuryRoutes>
+                <JuryRating />
+              </JuryRoutes>
+            }
+          />
 
           {/* Admin */}
           <Route

@@ -18,7 +18,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="md:hidden text-slate-700 mr-4"
-          aria-label='Sidebar'
+          aria-label="Sidebar"
         >
           {isSidebarOpen ? (
             <ChevronLeft size={26} />
@@ -65,7 +65,11 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           className="md:hidden ml-4 text-2xl"
           onClick={() => setIsNavOpen(prev => !prev)}
         >
-          {isNavOpen ? <RxCross2 /> : <RxHamburgerMenu aria-label='Menu burger' />}
+          {isNavOpen ? (
+            <RxCross2 />
+          ) : (
+            <RxHamburgerMenu aria-label="Menu burger" />
+          )}
         </button>
       </nav>
 

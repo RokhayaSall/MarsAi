@@ -60,7 +60,7 @@ export default function AdminJury() {
       console.error('Erreur mise à jour jury:', err.message);
     }
   };
-window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}

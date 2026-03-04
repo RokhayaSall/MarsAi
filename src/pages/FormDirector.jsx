@@ -98,7 +98,7 @@ export default function FormDirector() {
     'w-full bg-gray-100 border-none rounded-xl p-4 text-sm placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400 outline-none transition-all ';
   const labelClass =
     'text-sm font-bold tracking-wider text-slate-700 uppercase';
-window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
   return (
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">

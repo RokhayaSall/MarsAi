@@ -24,7 +24,7 @@ export default function GalerieFilms() {
 
   const currentMovies = currentPage === 1 ? moviesPage1 : moviesPage2;
   const totalPages = 2;
-window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
   return (
     <div className="max-w-7xl mx-auto px-6 py-10 font-sans">
       <div className="mb-12 md:mx-17">
