@@ -60,7 +60,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
       <aside
         className={`
           fixed top-0 left-0
-          h-screen w-72 md:relative
+          h-screen w-72 md:relative md:h-auto
           bg-gradient-to-b from-[#0f172a] to-[#1e293b]
           text-white
           px-6 py-8

@@ -17,7 +17,9 @@ export default function MoviesPage() {
       try {
         setLoading(true);
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/movies`);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/movies`
+        );
         const data = await response.json();
 
         console.log(data);

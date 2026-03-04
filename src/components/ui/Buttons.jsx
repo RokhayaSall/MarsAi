@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { logout } from '../../utils/token';
 
 /* ===============================
    BOUTON PRINCIPAL
@@ -15,13 +14,12 @@ export function ButtonParticipate({ className }) {
         bg-[#0f172a] text-white
         rounded-4xl
         p-4 px-8
-        font-bold text-2xl
+       font-semibold text-2xl
         m-4 mt-10 mb-10
         cursor-pointer
         md:p-3 md:px-5 md:text-lg
-        border-2 border-[#181a1a]
         shadow-md
-        hover:bg-[#1e2020]
+        hover:bg-[#1e293b]
         hover:shadow-lg
         transition-all duration-300
         ${className}
@@ -44,17 +42,17 @@ export function ButtonMore({ className }) {
         text-[#000000]
         rounded-4xl
         p-4 px-8
-        font-bold text-2xl
+        font-semibold text-2xl
         m-10
         cursor-pointer
+        hover:bg-[#c3c6ca]
         md:p-3 md:px-5 md:m-1 md:text-lg
-        border-2 border-[#000000]
         transition-all duration-300
         ${className}
       `}
     >
       En savoir plus
-      <span className="text-[#FB923C] text-2xl md:text-xl"> +</span>
+      <span className="text-[#fd4e3a] text-2xl md:text-xl"> +</span>
     </a>
   );
 }
@@ -71,9 +69,10 @@ export function ButtonGalery({ className }) {
         bg-[#0f172a] text-white
         rounded-4xl
         p-4 px-8
-        font-bold text-2xl
+        font-semibold text-2xl
         cursor-pointer
         md:p-3 md:px-5 md:text-lg
+        hover:bg-[#1e293b]
         border-2 border-[#000000]
         shadow-md
         hover:shadow-lg
@@ -96,7 +95,7 @@ export default function ButtonLogOut({ className }) {
   if (!context || !context.user) return null;
 
   const handleLogout = () => {
-    logout();
+    context.logoutUser();
     navigate('/home');
   };
 
@@ -105,9 +104,9 @@ export default function ButtonLogOut({ className }) {
       onClick={handleLogout}
       className={`
         bg-[#0f172a] text-white
-        font-bold
+        font-semibold
         rounded-4xl
-        py-2 px-6
+        py-1.5 px-5
         w-40 md:w-auto
         cursor-pointer
         border-2 border-[#000000]

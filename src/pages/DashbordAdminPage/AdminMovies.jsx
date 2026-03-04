@@ -125,7 +125,7 @@ export default function AdminMovies() {
                   onClick={() => setCurrentPage(i + 1)}
                   className={`w-10 h-10 rounded-lg font-bold transition-all ${
                     currentPage === i + 1
-                      ? 'bg-blue-900 text-white shadow-lg'
+                      ? 'bg-[#1E293B] text-white shadow-lg'
                       : 'bg-gray-100 text-gray-700'
                   }`}
                 >

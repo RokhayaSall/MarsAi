@@ -12,12 +12,13 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
   const { t } = useTranslation();
 
   return (
-    <header className="border-b border-slate-200 bg-white">
-      <nav className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+    <header className="border-b border-slate-200 bg-white sticky top-0 z-50">
+      <nav className=" px-6 py-6 flex items-center justify-between">
         {/* Chevron Sidebar (admin) */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className="md:hidden text-slate-700 mr-4"
+          aria-label="Sidebar"
         >
           {isSidebarOpen ? (
             <ChevronLeft size={26} />
@@ -45,7 +46,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           <li>
             <Link
               to="/form-director"
-              className="bg-[#0f172a] text-white rounded-xl py-2 px-6"
+              className="bg-[#0f172a] text-white rounded-4xl py-2 px-6 hover:bg-[#1e293b] transition-all duration-300"
             >
               {t('nav.submit')}
             </Link>
@@ -64,7 +65,11 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           className="md:hidden ml-4 text-2xl"
           onClick={() => setIsNavOpen(prev => !prev)}
         >
-          {isNavOpen ? <RxCross2 /> : <RxHamburgerMenu />}
+          {isNavOpen ? (
+            <RxCross2 />
+          ) : (
+            <RxHamburgerMenu aria-label="Menu burger" />
+          )}
         </button>
       </nav>
 

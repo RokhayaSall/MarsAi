@@ -110,7 +110,7 @@ const SubmitMovie = () => {
       setIsSubmitting(false);
     }
   };
-
+  window.scrollTo(0, 0);
   return (
     <div className="min-h-screen bg-slate-100 py-12 px-4">
       <div className="max-w-4xl mx-auto mb-8 text-center">

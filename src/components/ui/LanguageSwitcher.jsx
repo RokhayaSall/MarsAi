@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
             : 'text-slate-600 hover:text-[#0f172a]'
         }`}
       >
-        ENG
+        EN
       </button>
 
       <button
