@@ -38,6 +38,7 @@ export default function MovieDetail() {
   // Message d'erreur
   if (loading) return <h2 className="text-2xl m-5">Chargement...</h2>;
   if (error) return <h2 className="text-2xl m-5">Erreur : {error}</h2>;
+window.scrollTo(0, 0);
 
   return (
     <section className=" m-8 p-8 rounded-4xl border border-[#1c2430] flex flex-col md:w-160 md:mx-auto">

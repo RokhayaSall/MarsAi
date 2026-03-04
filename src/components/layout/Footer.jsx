@@ -92,7 +92,7 @@ function Footer() {
         </form>
       </div>
 
-      <ul className="flex flex-col gap-10 mt-15 md:flex-row justify-center md:mt-20 ">
+      <ul className="flex flex-col items-center gap-10 mt-15 md:flex-row justify-center md:mt-20 ">
         <li>
           <Link to="/legal-notice">{t('footer.legalNotice')}</Link>
         </li>

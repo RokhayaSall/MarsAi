@@ -25,6 +25,7 @@ import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaHandshakeSimple } from 'react-icons/fa6';
 
 function Home() {
+  window.scrollTo(0, 0);
   return (
     <>
       <section className="relative text-center bg-[url(src/assets/ville.jpg)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-35">
