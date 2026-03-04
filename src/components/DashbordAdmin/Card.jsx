@@ -14,8 +14,6 @@ export default function Card({ title, value, subtitle, icon: Icon, children }) {
         hover:bg-white/10
         hover:shadow-2xl
         hover:-translate-y-1
-        w-full
-        sm:w-80
       "
     >
       {/* Icon à gauche */}
