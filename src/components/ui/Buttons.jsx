@@ -1,7 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { logout } from '../../utils/token';
 
 /* ===============================
    BOUTON PRINCIPAL
@@ -96,7 +95,7 @@ export default function ButtonLogOut({ className }) {
   if (!context || !context.user) return null;
 
   const handleLogout = () => {
-    logout();
+    context.logoutUser();
     navigate('/home');
   };
 
@@ -105,9 +104,9 @@ export default function ButtonLogOut({ className }) {
       onClick={handleLogout}
       className={`
         bg-[#0f172a] text-white
-        font-bold
-        rounded-4xl
-        py-2 px-6
+        font-semibold
+        rounded-xl
+        py-1.5 px-5
         w-40 md:w-auto
         cursor-pointer
         border-2 border-[#000000]

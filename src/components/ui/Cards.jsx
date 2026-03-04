@@ -40,7 +40,7 @@ export function CardMovie({ movie }) {
             {movie.original_title || t('cards.default_movie_title')}
           </h3>
           <p className="w-15 text-center bg-[#F2F3F5] text-[#282828] font-bold rounded-xl flex items-center justify-center">
-            {movie.duration || t('cards.default_duration_time')}s
+            {movie.duration || t('cards.default_duration_time')}
           </p>
         </div>
         <div className="flex justify-between items-end uppercase">

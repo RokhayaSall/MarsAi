@@ -46,7 +46,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           <li>
             <Link
               to="/form-director"
-              className="bg-[#0f172a] text-white rounded-xl py-2 px-6"
+              className="bg-[#0f172a] text-white rounded-xl py-2 px-6 hover:bg-[#1e293b]"
             >
               {t('nav.submit')}
             </Link>
