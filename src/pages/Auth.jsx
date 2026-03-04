@@ -78,7 +78,7 @@ export default function Auth() {
       setLoading(false);
     }
   };
-
+  window.scrollTo(0, 0);
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] px-6 py-12">
       <div className="w-full max-w-md bg-white p-10 rounded-3xl shadow-xl border border-slate-200">

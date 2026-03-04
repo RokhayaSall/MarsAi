@@ -13,7 +13,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
 
   return (
     <header className="border-b border-slate-200 bg-white sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-8 py-6 flex items-center justify-between">
+      <nav className=" px-6 py-6 flex items-center justify-between">
         {/* Chevron Sidebar (admin) */}
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
@@ -46,7 +46,7 @@ function Header({ isSidebarOpen, setIsSidebarOpen }) {
           <li>
             <Link
               to="/form-director"
-              className="bg-[#0f172a] text-white rounded-xl py-2 px-6 hover:bg-[#1e293b]"
+              className="bg-[#0f172a] text-white rounded-4xl py-2 px-6 hover:bg-[#1e293b] transition-all duration-300"
             >
               {t('nav.submit')}
             </Link>

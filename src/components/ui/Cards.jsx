@@ -118,7 +118,7 @@ export function CardCalender() {
         à partir de 19h
       </p>
       <button
-        className="bg-[#0f172a] text-white rounded-xl mt-6 p-3 font-bold uppercase text-base cursor-pointer md:p-2 md:px-5 md:text-sm"
+        className="bg-[#0f172a] text-white rounded-4xl mt-6 p-3 font-semibold uppercase text-base cursor-pointer md:p-2 md:px-5 md:text-sm hover:bg-[#1e293b] transition-all duration-300"
         to="/gallery"
       >
         Prendre mon pass
