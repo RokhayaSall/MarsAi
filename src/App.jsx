@@ -13,7 +13,7 @@ import AdminEvents from './pages/DashbordAdminPage/AdminEvents';
 import AdminMovies from './pages/DashbordAdminPage/AdminMovies';
 import AdminMoviesResult from './pages/DashbordAdminPage/AdminMoviesResult';
 import SubmitMovie from './pages/SubmitMovie';
-import DashboardJury from './pages/DashboardJury';
+import DashboardJury from './pages/DashboardJuryPage/DashboardJury';
 import JuryRoutes from './routes/JuryRoutes';
 import { AuthProvider } from './context/AuthProvider';
 import MoviePage from './pages/MovieDetail';
