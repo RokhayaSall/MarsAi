@@ -129,7 +129,7 @@ export function CardCalender() {
 
 export function CardPlace() {
   return (
-    <article className="relative bg-[url(src/assets/port-marseille.jpg)] bg-cover bg-center bg-gray-400 bg-blend-multiply rounded-4xl p-10 pt-60 flex flex-col ">
+    <article className="relative bg-[url(src/assets/port-marseille.webp)] bg-cover bg-center bg-gray-400 bg-blend-multiply rounded-4xl p-10 pt-60 flex flex-col ">
       <p className="text-white text-xl font-semibold mb-3 uppercase text-shadow-lg/90 md:w-100">
         Marseille, France
       </p>

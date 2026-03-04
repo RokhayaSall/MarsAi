@@ -28,7 +28,7 @@ function Home() {
   window.scrollTo(0, 0);
   return (
     <>
-      <section className="relative text-center bg-[url(src/assets/ville.jpg)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-35">
+      <section className="relative text-center bg-[url(src/assets/ville.webp)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-35">
         <h1 className="text-white font-bold text-5xl text-shadow-lg/70  uppercase md:w-full ">
           IMAGINEZ DES
           <span className="text-[#ff5845] "> FUTURS</span> SOUHAITABLES
@@ -145,7 +145,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative bg-[url(src/assets/marsai-night.avif)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">
+      <section className="relative bg-[url(src/assets/marsai-night.webp)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">
         <div 
         >
           <h2 className="text-white font-bold text-4xl text-shadow-lg/70  uppercase w-70 md:text-7xl">

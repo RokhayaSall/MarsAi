@@ -10,7 +10,7 @@ import { MdEventAvailable } from 'react-icons/md';
 import { GiFilmSpool } from 'react-icons/gi';
 import { FaGlobe } from 'react-icons/fa';
 
-const images = import.meta.glob('../../assets/*.{png,jpg,jpeg,svg}', {
+const images = import.meta.glob('../../assets/*.{png,jpg,jpeg,svg,webp}', {
   eager: true,
 });
 
@@ -149,62 +149,62 @@ export const cardsNumber = [
 export const cardsPartner = [
   {
     id: 1,
-    src: images['../../assets/plateforme.png'].default,
+    src: images['../../assets/plateforme.webp'].default,
     alt: 'Logo la plateforme',
   },
   {
     id: 2,
-    src: images['../../assets/mobile.png'].default,
+    src: images['../../assets/mobile.webp'].default,
     alt: 'Logo mobile festival',
   },
   {
     id: 3,
-    src: images['../../assets/undp.png'].default,
+    src: images['../../assets/undp.webp'].default,
     alt: 'Logo undp',
   },
   {
     id: 4,
-    src: images['../../assets/psl.png'].default,
+    src: images['../../assets/psl.webp'].default,
     alt: 'Logo psl',
   },
   {
     id: 5,
-    src: images['../../assets/cnc.png'].default,
+    src: images['../../assets/cnc.webp'].default,
     alt: 'Logo cnc',
   },
   {
     id: 6,
-    src: images['../../assets/action.png'].default,
+    src: images['../../assets/action.webp'].default,
     alt: 'Logo action campaign',
   },
   {
     id: 7,
-    src: images['../../assets/unric.png'].default,
+    src: images['../../assets/unric.webp'].default,
     alt: 'Logo unric',
   },
   {
     id: 8,
-    src: images['../../assets/sacd.png'].default,
+    src: images['../../assets/sacd.webp'].default,
     alt: 'Logo sacd',
   },
   {
     id: 9,
-    src: images['../../assets/agence.png'].default,
+    src: images['../../assets/agence.webp'].default,
     alt: "Logo l'agence cu court métrage",
   },
   {
     id: 10,
-    src: images['../../assets/extra.png'].default,
+    src: images['../../assets/extra.webp'].default,
     alt: 'Logo extra court',
   },
   {
     id: 11,
-    src: images['../../assets/unesco.jpg'].default,
+    src: images['../../assets/unesco.webp'].default,
     alt: 'Logo unesco',
   },
   {
     id: 12,
-    src: images['../../assets/global.png'].default,
+    src: images['../../assets/global.webp'].default,
     alt: 'Logo global youth biodiversity network',
   },
 ];
