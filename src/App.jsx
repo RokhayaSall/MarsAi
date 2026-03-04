@@ -42,7 +42,7 @@ function Layout() {
 
           {/* Jury */}
           <Route
-            path="/dashboard/jury"
+            path="/dashboard/jury/:id"
             element={
               <JuryRoutes>
                 <DashboardJury />
