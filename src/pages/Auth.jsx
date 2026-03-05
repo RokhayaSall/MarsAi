@@ -64,11 +64,11 @@ export default function Auth() {
 
         // 🔹 Navigation selon le rôle
         if (roles.includes('Admin')) {
-          navigate('/admin', { state: { userId } });
+          navigate('/admin');
         } else if (roles.includes('Jury')) {
-          navigate('/dashboard/jury', { state: { userId } });
+          navigate(`/dashboard/jury/${userId}`); // <-- ici on met l'ID dans l'URL
         } else {
-          navigate('/', { state: { userId } });
+          navigate('/');
         }
 
         setSuccess(t('auth.successLogin'));
