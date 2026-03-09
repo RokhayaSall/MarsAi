@@ -32,14 +32,18 @@ function Home() {
   window.scrollTo(0, 0);
   return (
     <>
-      <section className="relative overflow-hidden text-center p-10 pt-30 pb-30 md:px-35 bg-gray-500  "
-      >
+      <section className="relative overflow-hidden text-center p-10 pt-30 pb-30 md:px-35 bg-gray-500  ">
         <picture>
-          <source srcSet={hero} type='image/webp'/>
-          <img src={heroFallBack} alt="Marseille avec une église, un arbre et l'eau."  fetchPriority="high" 
-          width="1920" height="1080" className="absolute inset-0 object-cover mix-blend-multiply w-full h-full" 
-      />
-      </picture>
+          <source srcSet={hero} type="image/webp" />
+          <img
+            src={heroFallBack}
+            alt="Image de Marseille avec une église, un arbre et l'eau."
+            fetchPriority="high"
+            width="1920"
+            height="1080"
+            className="absolute inset-0 object-cover mix-blend-multiply w-full h-full"
+          />
+        </picture>
         <h1 className="relative z-10 text-white font-bold text-5xl text-shadow-lg/70  uppercase md:w-full ">
           IMAGINEZ DES
           <span className="text-[#ff5845] "> FUTURS</span> SOUHAITABLES
@@ -50,7 +54,7 @@ function Home() {
           d&apos;immersion au cœur de Marseille.
         </p>
         <ButtonParticipate className={`relative z-10`} />
-        <ButtonMore className={`relative z-10`}/>
+        <ButtonMore className={`relative z-10`} />
       </section>
 
       <section className="p-15 bg-[#EFEFEF] ">
@@ -61,9 +65,7 @@ function Home() {
           Un événement hybride unique en France, réunissant la fine fleur de
           l&apos;IA générative et de la création cinématographique.
         </p>
-        <div
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10  "
-        >
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10  ">
           {cardsData.map(card => (
             <Card
               key={card.id}
@@ -86,9 +88,7 @@ function Home() {
           nouvelles frontières de l&apos;imaginaire assisté par
           l&apos;Intelligence Artificielle.
         </p>
-        <div
-          className="grid grid-cols-1 md:flex justify-between gap-10 mb-10 mt-10"
-        >
+        <div className="grid grid-cols-1 md:flex justify-between gap-10 mb-10 mt-10">
           <CardMovie />
           <CardMovie />
           <CardMovie />
@@ -101,9 +101,7 @@ function Home() {
           OBJECTIFS DU
           <span className="text-[#FF5845]"> FESTIVAL</span>
         </h2>
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 mt-10 "
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10 mt-10 ">
           {cardsFestivalData.map(card => (
             <CardFestival
               key={card.id}
@@ -122,9 +120,7 @@ function Home() {
         <p className="text-center uppercase  text-[#6B6B6B]">
           Le parcours des oeuvres
         </p>
-        <div
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10  "
-        >
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-10  ">
           {cardsSelectionData.map(card => (
             <CardSelection
               key={card.id}
@@ -142,9 +138,7 @@ function Home() {
           Deux journées de
           <span className="text-[#FF5845]"> conférences</span> gratuites
         </h2>
-        <div
-          className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10 mt-10  "
-        >
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10 mt-10  ">
           {cardsInfos.map(card => (
             <CardFestival
               key={card.id}
@@ -156,14 +150,17 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative rounded-4xl bg-gray-500 m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">         
+      <section className="relative rounded-4xl bg-gray-500 m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">
         <picture>
-          <source srcSet={bgCalender} type='image/webp'/>
-          <img src={bgCalenderFallBack} alt="Image d'une soirée" loading='lazy' className="absolute inset-0 object-cover mix-blend-multiply w-full h-full rounded-4xl " 
-      />
-      </picture>
-        <div 
-        >
+          <source srcSet={bgCalender} type="image/webp" />
+          <img
+            src={bgCalenderFallBack}
+            alt="Image d'une soirée"
+            loading="lazy"
+            className="absolute inset-0 object-cover mix-blend-multiply w-full h-full rounded-4xl "
+          />
+        </picture>
+        <div>
           <h2 className="relative z-10 text-white font-bold text-4xl text-shadow-lg/70  uppercase w-70 md:text-7xl">
             Mars.A.I night
           </h2>
@@ -191,9 +188,7 @@ function Home() {
           4 000 m² d&apos;espaces modulables dans le centre de Marseille, au
           cœur de l&apos;écosystème numérique.
         </p>
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 mt-10 md:mb-5  "
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10 mt-10 md:mb-5  ">
           {cardsPlaces.map(card => (
             <CardSelection
               key={card.id}
@@ -206,8 +201,7 @@ function Home() {
       </section>
 
       <section className="bg-white p-15  flex flex-col md:flex-row md:items-center md:justify-around ">
-        <div 
-        >
+        <div>
           <h2 className="text- font-bold text-4xl uppercase w-70 ">
             Chiffres <span className="text-[#2b71b1]">projetés</span>
           </h2>
@@ -217,9 +211,7 @@ function Home() {
           </p>
         </div>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10    "
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10    ">
           {cardsNumber.map(card => (
             <Card
               key={card.id}
@@ -240,11 +232,14 @@ function Home() {
           Ils soutiennent
           <span className="text-[#2b71b1]"> le futur</span>
         </h2>
-        <ul
-          className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-10 mt-15"
-        >
+        <ul className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-10 mt-15">
           {cardsPartner.map(card => (
-            <CardPartner key={card.id} src={card.src} srcFallBack={card.srcFallBack} alt={card.alt} />
+            <CardPartner
+              key={card.id}
+              src={card.src}
+              srcFallBack={card.srcFallBack}
+              alt={card.alt}
+            />
           ))}
         </ul>
       </section>

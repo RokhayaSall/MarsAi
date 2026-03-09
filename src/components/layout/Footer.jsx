@@ -12,12 +12,8 @@ function Footer() {
 
   return (
     <footer className=" bg-[#282828] p-15 text-white">
-      <div
-        className="flex flex-col md:flex-row justify-between gap-10 items-center"
-      >
-        <div 
-        > 
-          
+      <div className="flex flex-col md:flex-row justify-between gap-10 items-center">
+        <div>
           <Link
             to="/"
             className="text-black bg-[#fefefe] rounded-2xl p-3 px-6 font-bold"
@@ -84,9 +80,7 @@ function Footer() {
             placeholder={t('footer.newsletterPlaceholder')}
             className="bg-[#fefefe]  text-black border border-[#484848] rounded-3xl p-3 m-6"
           />
-          <button
-            className="text-black bg-[#fefefe] rounded-2xl p-3 px-6 font-bold cursor-pointer hover:bg-[#1e293b] hover:text-white transition"
-          >
+          <button className="text-black bg-[#fefefe] rounded-2xl p-3 px-6 font-bold cursor-pointer hover:bg-[#1e293b] hover:text-white transition">
             {t('footer.newsletterButton')}
           </button>
         </form>
