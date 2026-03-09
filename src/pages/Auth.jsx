@@ -47,21 +47,26 @@ export default function Auth() {
         ? await login(payloadData)
         : await register(payloadData);
 
+      // 🔹 Si l'utilisateur doit changer son mot de passe
       if (res.mustChangePassword) {
         navigate('/change-password', { state: { userId: res.userId } });
         return;
       }
 
+      // 🔹 Si on a reçu un token
       if (res.token) {
-        loginUser(res.token);
-
         const payload = jwtDecode(res.token);
+        const userId = payload.id;
         const roles = Array.isArray(payload.roles) ? payload.roles : [];
 
+        // 🔹 Stockage du token + ID dans le contexte
+        loginUser(res.token, userId);
+
+        // 🔹 Navigation selon le rôle
         if (roles.includes('Admin')) {
           navigate('/admin');
         } else if (roles.includes('Jury')) {
-          navigate('/dashboard/jury');
+          navigate(`/dashboard/jury/${userId}`); // <-- ici on met l'ID dans l'URL
         } else {
           navigate('/');
         }
@@ -70,8 +75,10 @@ export default function Auth() {
         return;
       }
 
-      setSuccess(t('auth.successRegister'));
-      setIsLogin(true);
+      if (!isLogin) {
+        setSuccess(t('auth.successRegister'));
+        setIsLogin(true);
+      }
     } catch (err) {
       setError(err.message || 'Erreur');
     } finally {
