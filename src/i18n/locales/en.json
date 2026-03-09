@@ -132,15 +132,12 @@
   },
 
   "footer": {
-    "ariaLabel": "Footer",
-    "infoAriaLabel": "Information and social networks",
     "description": "A co-creation of La Plateforme digital school and the Mobile Film Festival. Together to shape the new horizons of cinema.",
     "facebook": "Facebook link",
     "instagram": "Instagram link",
     "youtube": "Youtube link",
     "x": "X link",
     "newsletterTitle": "Stay connected",
-    "newsletterLabel": "Newsletter subscription",
     "newsletterPlaceholder": "Your@email.com",
     "newsletterButton": "Subscribe",
     "legalNotice": "Legal Notice",

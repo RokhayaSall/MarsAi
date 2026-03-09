@@ -15,7 +15,7 @@ export function ButtonParticipate({ className }) {
         rounded-4xl
         p-4 px-8
        font-semibold text-2xl
-        m-4 mt-10 mb-10
+        m-4
         cursor-pointer
         md:p-3 md:px-5 md:text-lg
         shadow-md
@@ -52,7 +52,7 @@ export function ButtonMore({ className }) {
       `}
     >
       En savoir plus
-      <span className="text-[#fd4e3a] text-2xl md:text-xl"> +</span>
+      <span className="text-[#d62b18] text-2xl md:text-xl"> +</span>
     </a>
   );
 }

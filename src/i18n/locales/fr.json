@@ -132,15 +132,12 @@
   },
 
   "footer": {
-    "ariaLabel": "Bas de page",
-    "infoAriaLabel": "Information et réseaux sociaux",
     "description": "Une co-création de l’école du numérique La Plateforme et le Mobile Film Festival. Ensemble pour dessiner les nouveaux horizons du cinéma.",
     "facebook": "Lien Facebook",
     "instagram": "Lien Instagram",
     "youtube": "Lien Youtube",
     "x": "Lien X",
     "newsletterTitle": "Restez connectés",
-    "newsletterLabel": "Inscription newsletter",
     "newsletterPlaceholder": "Votre@email.com",
     "newsletterButton": "S'inscrire",
     "legalNotice": "Mentions légales",

@@ -9,10 +9,10 @@
 
 // export default DashboardJury;
 
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 function DashboardJury() {
-  const { id } = useParams();
+  // const { id } = useParams();
 
   window.scrollTo(0, 0);
   return (
