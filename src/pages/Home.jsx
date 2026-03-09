@@ -23,23 +23,34 @@ import {
 } from '../components/ui/CardsData.jsx';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { FaHandshakeSimple } from 'react-icons/fa6';
+import hero from '../assets/ville.webp';
+import heroFallBack from '../assets/ville-fallback.jpg';
+import bgCalender from '../assets/marsai-night.webp';
+import bgCalenderFallBack from '../assets/marsai-night-fallback.jpg';
 
 function Home() {
   window.scrollTo(0, 0);
   return (
     <>
-      <section className="relative text-center bg-[url(src/assets/ville.webp)] bg-cover bg-center bg-gray-500 bg-blend-multiply p-10 pt-30 pb-30 md:p-35">
-        <h1 className="text-white font-bold text-5xl text-shadow-lg/70  uppercase md:w-full ">
+      <section className="relative overflow-hidden text-center p-10 pt-30 pb-30 md:px-35 bg-gray-500  "
+      >
+        <picture>
+          <source srcSet={hero} type='image/webp'/>
+          <img src={heroFallBack} alt="Marseille avec une église, un arbre et l'eau."  fetchPriority="high" 
+          width="1920" height="1080" className="absolute inset-0 object-cover mix-blend-multiply w-full h-full" 
+      />
+      </picture>
+        <h1 className="relative z-10 text-white font-bold text-5xl text-shadow-lg/70  uppercase md:w-full ">
           IMAGINEZ DES
           <span className="text-[#ff5845] "> FUTURS</span> SOUHAITABLES
         </h1>
 
-        <p className="text-white text-xl font-semibold text-shadow-lg/90 mt-8 mb-15 md:mb-6 md:text-2xl">
+        <p className="relative z-10 text-white text-xl font-semibold text-shadow-lg/90 mt-8 mb-15 md:mb-6 md:text-2xl">
           Le festival de courts-métrages de 60 secondes réalisés par IA. 2 jours
           d&apos;immersion au cœur de Marseille.
         </p>
-        <ButtonParticipate />
-        <ButtonMore />
+        <ButtonParticipate className={`relative z-10`} />
+        <ButtonMore className={`relative z-10`}/>
       </section>
 
       <section className="p-15 bg-[#EFEFEF] ">
@@ -145,18 +156,23 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative bg-[url(src/assets/marsai-night.webp)] bg-cover bg-center bg-gray-600 bg-blend-multiply rounded-4xl m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">
+      <section className="relative rounded-4xl bg-gray-500 m-15 mt-15 p-10 pt-20 pb-20 flex flex-col md:flex-row md:items-center md:justify-around md:p-15 ">         
+        <picture>
+          <source srcSet={bgCalender} type='image/webp'/>
+          <img src={bgCalenderFallBack} alt="Image d'une soirée" loading='lazy' className="absolute inset-0 object-cover mix-blend-multiply w-full h-full rounded-4xl " 
+      />
+      </picture>
         <div 
         >
-          <h2 className="text-white font-bold text-4xl text-shadow-lg/70  uppercase w-70 md:text-7xl">
+          <h2 className="relative z-10 text-white font-bold text-4xl text-shadow-lg/70  uppercase w-70 md:text-7xl">
             Mars.A.I night
           </h2>
-          <p className="text-white text-xl text-shadow-lg/70  mt-5 mb-15 md:w-100 md:mb-6">
+          <p className="relative z-10 text-white text-xl text-shadow-lg/70  mt-5 mb-15 md:w-100 md:mb-6">
             Fête mêlant IA et futurs souhaitables. Une expérience immersive
             sonore et visuelle.
           </p>
         </div>
-        <CardCalender />
+        <CardCalender className={`relative z-10`} />
       </section>
 
       <section className="p-15 bg-[#EFEFEF] ">
@@ -228,7 +244,7 @@ function Home() {
           className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-10 mt-15"
         >
           {cardsPartner.map(card => (
-            <CardPartner key={card.id} src={card.src} alt={card.alt} />
+            <CardPartner key={card.id} src={card.src} srcFallBack={card.srcFallBack} alt={card.alt} />
           ))}
         </ul>
       </section>
