@@ -5,6 +5,7 @@ import JuryList from '../../components/DashbordAdmin/AdminJury/JuryList';
 import JuryForm from '../../components/DashbordAdmin/AdminJury/JuryForm';
 import JuryEditModal from '../../components/DashbordAdmin/AdminJury/JuryEditModal';
 import DistributionsPanel from '../../components/DashbordAdmin/AdminJury/DistributionsPanel';
+import ConfirmPopup from '../../components/ui/ConfirmPopup';
 import {
   getJury,
   createJury,
@@ -18,7 +19,11 @@ export default function AdminJury() {
   const [editingJury, setEditingJury] = useState(null);
   const [distributions, setDistributions] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('jurys'); // 🔹 onglet actif
+  const [activeTab, setActiveTab] = useState('jurys');
+  const [showDistributePopup, setShowDistributePopup] = useState(false);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+  const [juryToDelete, setJuryToDelete] = useState(null);
 
   /* ================= FETCH ================= */
 
@@ -89,14 +94,26 @@ export default function AdminJury() {
     }
   };
 
+  const confirmDelete = async () => {
+    if (!juryToDelete) return;
+
+    try {
+      await deleteJury(juryToDelete);
+      await fetchJury();
+      setJuryToDelete(null);
+    } catch (err) {
+      console.error(err);
+      setShowErrorPopup(true);
+    }
+  };
+
   /* ================= DISTRIBUTION ================= */
 
   const handleDistribute = async () => {
-    if (!window.confirm('Distribuer les films équitablement ?')) return;
-
     const token = localStorage.getItem('token');
+
     if (!token) {
-      alert('Vous devez être connecté.');
+      setShowErrorPopup(true);
       return;
     }
 
@@ -116,10 +133,10 @@ export default function AdminJury() {
 
       await fetchDistributions();
       setActiveTab('distributions');
-      alert('Distribution réussie !');
+      setShowSuccessPopup(true);
     } catch (err) {
       console.error(err);
-      alert('Erreur distribution');
+      setShowErrorPopup(true);
     }
   };
 
@@ -155,7 +172,7 @@ export default function AdminJury() {
               </button>
 
               <button
-                onClick={handleDistribute}
+                onClick={() => setShowDistributePopup(true)}
                 className="bg-[#244b66] text-white px-5 py-2.5 rounded-lg hover:bg-[#1e3d52]"
               >
                 Distribuer
@@ -201,8 +218,9 @@ export default function AdminJury() {
 
               <JuryList
                 jury={jury}
-                onDelete={handleDelete}
+                onDelete={setJuryToDelete}
                 onEdit={setEditingJury}
+                className="flex items-center gap-1 px-3 py-2 bg-red-50 text-red-600 rounded-md hover:bg-red-100"
               />
 
               {editingJury && (
@@ -218,6 +236,51 @@ export default function AdminJury() {
           {activeTab === 'distributions' && (
             <DistributionsPanel distributions={distributions} />
           )}
+
+          {/* CONFIRM DISTRIBUTION */}
+          <ConfirmPopup
+            isOpen={showDistributePopup}
+            title="Distribuer les films"
+            message="Voulez-vous distribuer les films équitablement aux jurys ?"
+            confirmText="Distribuer"
+            cancelText="Annuler"
+            onCancel={() => setShowDistributePopup(false)}
+            onConfirm={() => {
+              setShowDistributePopup(false);
+              handleDistribute();
+            }}
+          />
+
+          {/* SUCCESS */}
+          <ConfirmPopup
+            isOpen={showSuccessPopup}
+            title="Distribution réussie"
+            message="Les films ont été distribués aux jurys."
+            confirmText="OK"
+            onConfirm={() => setShowSuccessPopup(false)}
+            onCancel={() => setShowSuccessPopup(false)}
+          />
+
+          {/* ERROR */}
+          <ConfirmPopup
+            isOpen={showErrorPopup}
+            title="Erreur"
+            message="Une erreur est survenue."
+            confirmText="OK"
+            onConfirm={() => setShowErrorPopup(false)}
+            onCancel={() => setShowErrorPopup(false)}
+          />
+
+          {/* DELETE CONFIRM */}
+          <ConfirmPopup
+            isOpen={!!juryToDelete}
+            title="Supprimer le jury"
+            message="Êtes-vous sûr de vouloir supprimer ce jury ? Cette action est irréversible."
+            confirmText="Supprimer"
+            cancelText="Annuler"
+            onCancel={() => setJuryToDelete(null)}
+            onConfirm={confirmDelete}
+          />
         </main>
       </div>
     </div>

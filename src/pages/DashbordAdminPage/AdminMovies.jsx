@@ -3,6 +3,7 @@ import Sidebar from '../../components/DashbordAdmin/Sidebar';
 import Header from '../../components/layout/Navbar';
 import MovieList from '../../components/DashbordAdmin/AdminMovies/MovieList';
 import MovieEditModal from '../../components/DashbordAdmin/AdminMovies/MovieEditModal';
+import ConfirmPopup from '../../components/ui/ConfirmPopup';
 import { apiFetch } from '../../services/api';
 
 export default function AdminMovies() {
@@ -10,6 +11,8 @@ export default function AdminMovies() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [editingMovie, setEditingMovie] = useState(null);
+  const [movieToDelete, setMovieToDelete] = useState(null);
+  const [showErrorPopup, setShowErrorPopup] = useState(false);
   const moviesPerPage = 6;
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -61,6 +64,32 @@ export default function AdminMovies() {
     }
   };
 
+  const confirmDelete = async () => {
+    if (!movieToDelete) return;
+
+    try {
+      const token = localStorage.getItem('token');
+
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/admin/movies/${movieToDelete}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) throw new Error('Erreur suppression');
+
+      setMovies(prev => prev.filter(m => m.id !== movieToDelete));
+      setMovieToDelete(null);
+    } catch (err) {
+      console.error(err);
+      setShowErrorPopup(true);
+    }
+  };
+
   const handleUpdate = updatedMovie => {
     setMovies(prev =>
       prev.map(m => (m.id === updatedMovie.id ? updatedMovie : m))
@@ -94,14 +123,14 @@ export default function AdminMovies() {
         />
 
         <main className="flex-1 p-6 max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl font-semibold text-slate-800 mb-6">
             Gestion des Films
-          </h1>
+          </h2>
 
           <MovieList
             movies={currentMovies}
             onEdit={handleEdit}
-            onDelete={handleDelete}
+            onDelete={setMovieToDelete}
           />
 
           {/* Pagination */}
@@ -154,6 +183,27 @@ export default function AdminMovies() {
               onUpdate={handleUpdate}
             />
           )}
+
+          {/* DELETE MOVIE */}
+          <ConfirmPopup
+            isOpen={!!movieToDelete}
+            title="Supprimer le film"
+            message="Êtes-vous sûr de vouloir supprimer ce film ? Cette action est irréversible."
+            confirmText="Supprimer"
+            cancelText="Annuler"
+            onCancel={() => setMovieToDelete(null)}
+            onConfirm={confirmDelete}
+          />
+
+          {/* ERROR */}
+          <ConfirmPopup
+            isOpen={showErrorPopup}
+            title="Erreur"
+            message="Impossible de supprimer le film."
+            confirmText="OK"
+            onConfirm={() => setShowErrorPopup(false)}
+            onCancel={() => setShowErrorPopup(false)}
+          />
         </main>
       </div>
     </div>
