@@ -65,14 +65,6 @@ export default function AdminJury() {
 
   /* ================= CRUD ================= */
 
-  const handleDelete = async id => {
-    try {
-      await deleteJury(id);
-      await fetchJury();
-    } catch (err) {
-      console.error(err);
-    }
-  };
 
   const handleCreate = async newJury => {
     try {
