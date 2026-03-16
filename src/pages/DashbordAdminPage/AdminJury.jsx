@@ -65,7 +65,6 @@ export default function AdminJury() {
 
   /* ================= CRUD ================= */
 
-
   const handleCreate = async newJury => {
     try {
       await createJury(newJury);

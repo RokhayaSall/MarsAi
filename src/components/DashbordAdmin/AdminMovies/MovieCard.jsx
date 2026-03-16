@@ -1,52 +1,52 @@
-import { Edit, Trash2, Youtube } from 'lucide-react';
-
-export default function MovieCard({ movie, onEdit, onDelete }) {
+export default function MovieCard({
+  movie,
+  onEdit,
+  onDelete,
+  onToggleVisibility,
+  isListView,
+}) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 sm:p-6 w-full mx-auto flex flex-col justify-between transition hover:shadow-md">
-      {/* Titre et infos */}
-      <div className="mb-4">
-        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1">
+    <div
+      className={`flex items-center p-5 transition hover:bg-gray-50 ${
+        isListView ? 'flex-row justify-between' : 'flex-col gap-4'
+      }`}
+    >
+      {/* Colonne Titre */}
+      <div className="flex-1 min-w-[500px]">
+        <p className="font-semibold text-gray-900 text-lg">
           {movie.original_title}
-        </h3>
-        <p className="text-gray-500 text-sm sm:text-base">
-          Titre anglais: {movie.english_title}
         </p>
-        <p className="text-gray-500 text-sm sm:text-base">
-          Durée: {movie.duration} min
-        </p>
-        <p className="text-gray-500 text-sm sm:text-base">
-          Langue: {movie.language}
-        </p>
-        <p className="text-gray-500 text-sm sm:text-base mt-1 line-clamp-3">
-          {movie.original_synopsis}
-        </p>
+        <p className="text-gray-500 text-sm">{movie.english_title}</p>
+      </div>
+
+      {/* Colonne Durée / Langue */}
+      <div className="flex-1 min-w-[300px] text-gray-500 text-sm">
+        {movie.duration} min / {movie.language}
       </div>
 
       {/* Actions */}
-      <div className="flex flex-wrap gap-2 sm:gap-3 mt-auto justify-center sm:justify-start">
-        {movie.youtube_url && (
-          <a
-            href={movie.youtube_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 px-3 py-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 text-sm sm:text-base transition"
-          >
-            <Youtube size={16} /> Voir
-          </a>
-        )}
-
+      <div className="w-80 flex gap-4 justify-center">
         <button
           onClick={() => onEdit(movie)}
-          className="flex items-center gap-1 px-3 py-2 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100 text-sm sm:text-base transition"
+          className="px-4 py-2 bg-blue-50 text-blue-600 rounded-md font-medium"
         >
-          <Edit size={16} /> Éditer
+          Éditer
         </button>
-
         <button
           onClick={() => onDelete(movie.id)}
-          className="flex items-center gap-1 px-3 py-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100 text-sm sm:text-base transition"
+          className="px-4 py-2 bg-red-50 text-red-600 rounded-md font-medium"
         >
-          <Trash2 size={16} /> Supprimer
+          Supprimer
+        </button>
+        <button
+          onClick={() => onToggleVisibility(movie.id)}
+          className={`px-4 py-2 rounded-md font-medium ${
+            movie.is_visible
+              ? 'bg-green-50 text-green-600'
+              : 'bg-gray-50 text-gray-600'
+          }`}
+        >
+          {movie.is_visible ? 'Visible' : 'Masqué'}
         </button>
       </div>
     </div>

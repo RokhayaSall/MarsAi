@@ -47,16 +47,16 @@ export default function MoviesPage() {
 
   //barre de nav toutes en miniscules.
   const filtredMoviesWithDirectors = movies.filter(movieWithDirectors => {
+    const search = searchTerm.toLowerCase();
+
     return (
-      movieWithDirectors.original_title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      movieWithDirectors.english_title
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()) ||
-      movieWithDirectors.director_name
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+      (movieWithDirectors.original_title?.toLowerCase() || '').includes(
+        search
+      ) ||
+      (movieWithDirectors.english_title?.toLowerCase() || '').includes(
+        search
+      ) ||
+      (movieWithDirectors.director_name?.toLowerCase() || '').includes(search)
     );
   });
 
