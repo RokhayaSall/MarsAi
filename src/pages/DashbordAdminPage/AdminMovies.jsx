@@ -34,33 +34,35 @@ export default function AdminMovies() {
 
   const handleEdit = movie => setEditingMovie(movie);
 
-  const handleDelete = async id => {
-    const ok = window.confirm('Supprimer ce film ?');
-    if (!ok) return;
-
+  const toggleVisibility = async movieId => {
     try {
       const token = localStorage.getItem('token');
 
       const res = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/admin/movies/${id}`,
+        `${import.meta.env.VITE_API_URL}/api/admin/movies/${movieId}/visibility`,
         {
-          method: 'DELETE',
+          method: 'PUT',
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error('Erreur backend:', errorText);
-        throw new Error('Erreur suppression');
-      }
+      const data = await res.json();
 
-      setMovies(prev => prev.filter(m => m.id !== id));
+      if (res.ok) {
+        // Met à jour le state local pour refléter le changement
+        setMovies(prev =>
+          prev.map(m =>
+            m.id === movieId ? { ...m, is_visible: m.is_visible ? 0 : 1 } : m
+          )
+        );
+      } else {
+        alert(data.error || 'Impossible de modifier la visibilité');
+      }
     } catch (err) {
       console.error(err);
-      alert('Impossible de supprimer le film');
+      alert('Erreur serveur');
     }
   };
 
@@ -131,6 +133,7 @@ export default function AdminMovies() {
             movies={currentMovies}
             onEdit={handleEdit}
             onDelete={setMovieToDelete}
+            toggleVisibility={toggleVisibility}
           />
 
           {/* Pagination */}
